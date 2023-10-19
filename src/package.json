@@ -1,0 +1,31 @@
+{
+  "name": "myhealthrecord",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.6.2",
+    "atob": "^2.1.2",
+    "axios": "^0.24.0",
+    "bcrypt": "^5.0.1",
+    "chalk": "^2.4.1",
+    "fur": "^7.0.7",
+    "http-message-parser": "^0.0.32",
+    "https": "^1.0.0",
+    "jszip": "^3.2.2",
+    "libxmljs": "^0.19.7",
+    "memfs": "^2.15.5",
+    "moment": "^2.22.2",
+    "ora": "^5.4.1",
+    "request": "^2.88.2",
+    "uuid": "^8.3.2",
+    "ws.js": "^2.0.23",
+    "xml-crypto": "^1.1.1",
+    "xml2js": "^0.4.19"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "pdf",
+  "version": "0.0.1",
+  "description": "",
+  "dependencies": {
+    "moment": "^2.24.0",
+    "pdfkit": "^0.11.0"
+  }
+}
