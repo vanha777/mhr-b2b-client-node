@@ -28,7 +28,7 @@ module.exports = function(){
 		patient,
 		{
 			serviceStopTimeTo: 		new Date(),
-			serviceStopTimeFrom:	new Date(2010,01,01),
+			serviceStopTimeFrom:	new Date(2020,'01','01'),
 			documentTypes: [
 				'60591-5^^LOINC',
 				'57133-1^^LOINC',

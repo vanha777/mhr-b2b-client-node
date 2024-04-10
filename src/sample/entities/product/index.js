@@ -16,9 +16,9 @@ const platform = require('process').platform;
 
 
 module.exports =  {
-	vendor:"ADHA",
-	name: "Test Harness",
+	vendor:"StrongRoom AI",
+	name: "‘StrongCare",
 	version: "1.0",
 	platform: platform,
-	clientSystemType: "CIS"
+	clientSystemType: "HPIO"
 };

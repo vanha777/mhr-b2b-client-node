@@ -2,7 +2,7 @@ const	guid = require('uuid').v4;
 const	moment = require('moment');
 const	SignedXml = require('xml-crypto').SignedXml;
 const	fs = require('fs');
-const	endpoint = "b2b.ehealthvendortest.health.gov.au";
+const	endpoint = "services.svt.gw.myhealthrecord.gov.au";
 const	request = require('request');
 const 	flattenName = require('../cda/common-cda').flattenName;
 
@@ -10,6 +10,7 @@ const https = require('https');
 const axios = require('axios');
 
 let signRequest = (payload, organisation) => {
+	// console.log("this is payload: ",payload);
 	let sig = new SignedXml();
 	sig.addReference("/*[local-name()='Envelope']/*[local-name()='Body']");
 	sig.addReference("/*[local-name()='Envelope']/*[local-name()='Header']/*[local-name()='PCEHRHeader']");
@@ -77,9 +78,11 @@ let executeRequest = (organisation, urlPath, payload, responseHandler, options) 
 		cert: organisation.publicPem,
 		key: organisation.privatePem,
 		ca: organisation.ca
-		//,rejectUnauthorized: false
+		// ,rejectUnauthorized: false
 	});
-
+	// Debug
+	// console.log("",payload);
+	// end.
 //	https.Agent({  })
 
 

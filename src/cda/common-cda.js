@@ -19,7 +19,7 @@ let addLogo = documentDetails => {
 		<entry>
 			<observationMedia ID="LOGO" classCode="OBS" moodCode="EVN">
 			<id root="${documentDetails.authorOrganisation.logo.id ? documentDetails.authorOrganisation.logo.id : guid()}" />
-			<value mediaType="${documentDetails.authorOrganisation.logo.mediaType ? documentDetails.authorOrganisation.logo.mediaType : 'image/png'}" integrityCheckAlgorithm="SHA-1" integrityCheck="${crypto.createHash('sha1').update(documentDetails.authorOrganisation.logo.buffer).digest('base64')}">
+			<value mediaType="${documentDetails.authorOrganisation.logo.mediaType ? documentDetails.authorOrganisation.logo.mediaType : 'image/png'}" integrityCheckAlgorithm="SHA-256" integrityCheck="${crypto.createHash('sha256').update(documentDetails.authorOrganisation.logo.buffer).digest('base64')}">
 				<reference value="${documentDetails.authorOrganisation.logo.filename}" />
 			</value>
 			</observationMedia>

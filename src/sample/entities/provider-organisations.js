@@ -14,7 +14,7 @@
 
 const fs = require('fs');
 
-let hpio = "8003623233362614";
+let hpio = "8003628233372588";
 
 let privatePem 	= fs.readFileSync("./sample/entities/certificates/fac_sign_nash_org_with_attributes.private.pem");
 let publicPem 	= fs.readFileSync("./sample/entities/certificates/fac_sign_nash_org_with_attributes.public.pem");
@@ -33,13 +33,13 @@ let pharmacyOrganisation = {
    practiceSetting:	{ code: '4271-1',
 	  codeSystem: 'ANZSIC',
 	  displayName: 'Pharmacy, retail, operation' },
-	name: "Sample Pharmacy",
+	name: "Strong Room",
 	"medicarePharmacyApproval": {
-		number: "1234567892",
+		number: "8003628233372588",
 		"duration": 1
 	},
 	wholeOrganisationName: {
-		name: "Sample Pharmacies Australia",
+		name: "StrongRoom AI",
 		type: "ORGL"
 	},
 	electronicCommunincation: [{

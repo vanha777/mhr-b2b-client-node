@@ -35,30 +35,30 @@ let testRun = [
 		name: "gain Access", 
 		service: gainAccessClientSample
 	},
-	{
-		name: "Get Document List", 
-		service: getDocumentListClientSample
-	},
-	{
-		name: "Get Document", 
-		service: getDocumentClientSample
-	},
-	{
-		name: "getDiagnosticImagingViewClientSample",
-		service: getDiagnosticImagingViewClientSample
-	},
-	{
-		name: "getMedicareOverviewClientSample",
-		service: getMedicareOverviewClientSample
-	},
-	{
-		name: "getPathologyViewClientSample",
-		service: getPathologyViewClientSample
-	},
-	{
-		name: "getPrescriptionAndDispenseViewClientSample",
-		service: getPrescriptionAndDispenseViewClientSample
-	}
+	// {
+	// 	name: "Get Document List", 
+	// 	service: getDocumentListClientSample
+	// },
+	// {
+	// 	name: "Get Document", 
+	// 	service: getDocumentClientSample
+	// },
+	// {
+	// 	name: "getDiagnosticImagingViewClientSample",
+	// 	service: getDiagnosticImagingViewClientSample
+	// },
+	// {
+	// 	name: "getMedicareOverviewClientSample",
+	// 	service: getMedicareOverviewClientSample
+	// },
+	// {
+	// 	name: "getPathologyViewClientSample",
+	// 	service: getPathologyViewClientSample
+	// },
+	// {
+	// 	name: "getPrescriptionAndDispenseViewClientSample",
+	// 	service: getPrescriptionAndDispenseViewClientSample
+	// }
 ];
 
 async.series(testRun.map(webService => {

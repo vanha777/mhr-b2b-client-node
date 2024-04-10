@@ -14,7 +14,7 @@
 
 
 module.exports = {
-	IdType: "LocalSystemIdentifier",
+	IdType: "HPII",
 	id: 	"Phil-Farman",
 	name: [
 		{

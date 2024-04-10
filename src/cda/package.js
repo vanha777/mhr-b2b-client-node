@@ -1,4 +1,4 @@
-const	shasum = require('crypto').createHash('sha1');
+const	shasum = require('crypto').createHash('sha256');
 let		guid = require('uuid').v4;
 let		moment = require('moment');
 const	SignedXml = require('xml-crypto').SignedXml;
@@ -15,7 +15,7 @@ let package = (document, organisation, individual, attachments) => {
 				shasum.update(document);
 				let signedPayloadDataId = "Id_" + guid();
 			
-				let xmlSign = `<signedPayload xmlns="http://ns.electronichealth.net.au/xsp/xsd/SignedPayload/2010"><signatures></signatures><signedPayloadData id="${signedPayloadDataId}"><q1:eSignature xmlns:q1="http://ns.electronichealth.net.au/cdaPackage/xsd/eSignature/2012"><Manifest xmlns="http://www.w3.org/2000/09/xmldsig#"><Reference URI="CDA_ROOT.XML"><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>${shasum.digest('base64')}</DigestValue></Reference></Manifest><q1:signingTime>${moment() .format("YYYY-MM-DDTHH:mm:ss.SSSZ")}</q1:signingTime><q1:approver><q1:personId>http://ns.electronichealth.net.au/id/hi/hpii/1.0/${individual.hpii}</q1:personId><q1:personName>${individual.name[0].nameTitle ? individual.name[0].nameTitle.map(title => `<q1:nameTitle>${title}</q1:nameTitle>`).reduce(concat) : ""}${individual.name[0].given ? individual.name[0].given.map(title => `<q1:givenName>${title}</q1:givenName>`).reduce(concat) : ""}<q1:familyName>${individual.name[0].family}</q1:familyName>${individual.name[0].suffix ? individual.name[0].suffix.map(title => `<q1:nameSuffix>${title}</q1:nameSuffix>`).reduce(concat) : ""}</q1:personName></q1:approver></q1:eSignature></signedPayloadData></signedPayload>`;
+				let xmlSign = `<signedPayload xmlns="http://ns.electronichealth.net.au/xsp/xsd/SignedPayload/2010"><signatures></signatures><signedPayloadData id="${signedPayloadDataId}"><q1:eSignature xmlns:q1="http://ns.electronichealth.net.au/cdaPackage/xsd/eSignature/2012"><Manifest xmlns="http://www.w3.org/2000/09/xmldsig#"><Reference URI="CDA_ROOT.XML"><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256"/><DigestValue>${shasum.digest('base64')}</DigestValue></Reference></Manifest><q1:signingTime>${moment() .format("YYYY-MM-DDTHH:mm:ss.SSSZ")}</q1:signingTime><q1:approver><q1:personId>http://ns.electronichealth.net.au/id/hi/hpii/1.0/${individual.hpii}</q1:personId><q1:personName>${individual.name[0].nameTitle ? individual.name[0].nameTitle.map(title => `<q1:nameTitle>${title}</q1:nameTitle>`).reduce(concat) : ""}${individual.name[0].given ? individual.name[0].given.map(title => `<q1:givenName>${title}</q1:givenName>`).reduce(concat) : ""}<q1:familyName>${individual.name[0].family}</q1:familyName>${individual.name[0].suffix ? individual.name[0].suffix.map(title => `<q1:nameSuffix>${title}</q1:nameSuffix>`).reduce(concat) : ""}</q1:personName></q1:approver></q1:eSignature></signedPayloadData></signedPayload>`;
 
 				let sig = new SignedXml();
 				sig.signingKey = organisation.privatePem;
