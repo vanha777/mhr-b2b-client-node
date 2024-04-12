@@ -39,7 +39,7 @@ let gainAccess = ({ product, user, organisation }, patient, accessType = "standa
 		if (accessType === "EmergencyAccess") {
 			accessPayload = "<authorisationDetails><accessType>EmergencyAccess</accessType></authorisationDetails>";
 		} else if (accessType === "accessCode") {
-			accessPayload = "<authorisationDetails><accessType>AccessCode</accessType><accessCode>${accessCode}</accessCode></authorisationDetails>";
+			accessPayload = `<authorisationDetails><accessType>AccessCode</accessType><accessCode>${accessCode}</accessCode></authorisationDetails>`;
 		} else {
 			if (!((accessType !== "standard") || (accessType !== "noAccessCode") || (accessType !== "noCode"))) {
 				resolve(new Error("invalid AccessType"));
