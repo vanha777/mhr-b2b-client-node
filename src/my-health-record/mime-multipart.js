@@ -34,43 +34,52 @@ let getAttachment = function(httpResponse, body) {
 		offset = nextOffset;
 	}
 
-	return (
-		parts.reduce((accumulator, currentPart) => {
-			let mimeValues = [];
-			let remainingPart = Buffer.from(currentPart);
-			let binaryPayload, currentChunk;
-			while (remainingPart.length > 0){
-				currentChunk = remainingPart.slice(0, remainingPart.indexOf("\n", 1 ));
-				remainingPart = remainingPart.slice(remainingPart.indexOf("\n")+1);
+	console.log(parts);
 
-				if (currentChunk.toString().trim().length === 0){
-					if (mimeValues.length > 0 ){
-						binaryPayload = remainingPart;
-						break;
-					}
-				}else{
-					if (currentChunk.indexOf(":") !== -1){
-						mimeValues.push({
-							attribute: 	currentChunk.toString().trim().substr(0, currentChunk.toString().trim().indexOf(":")),
-							value: 		currentChunk.toString().trim().substr(currentChunk.toString().trim().indexOf(":")+1).trim()
-						});
-					}
+	parts_result = parts.reduce((accumulator, currentPart) => {
+		let mimeValues = [];
+		let remainingPart = Buffer.from(currentPart);
+		let binaryPayload, currentChunk;
+		while (remainingPart.length > 0){
+			currentChunk = remainingPart.slice(0, remainingPart.indexOf("\n", 1 ));
+			remainingPart = remainingPart.slice(remainingPart.indexOf("\n")+1);
+
+			// console.log(currentChunk);
+			// console.log(remainingPart);
+
+			if (currentChunk.toString().trim().length === 0){
+				console.log("current chunk el")
+				if (mimeValues.length > 0 ){
+					binaryPayload = remainingPart;
+					console.log('break while');
+					// break;
+				}
+			}else{
+				if (currentChunk.indexOf(":") !== -1){
+					mimeValues.push({
+						attribute: 	currentChunk.toString().trim().substr(0, currentChunk.toString().trim().indexOf(":")),
+						value: 		currentChunk.toString().trim().substr(currentChunk.toString().trim().indexOf(":")+1).trim()
+					});
 				}
 			}
+		}
 
 
-			if (mimeValues.some(element => (
-				(	element.value === "application/zip" || 
-					element.value === "application/octet-stream"
-				)
-				 &&
-				(element.attribute === "Content-Type")))){
-					return {...accumulator, package: binaryPayload};
-			}else{
-				return accumulator;
-			}
-		}, {})
-	);
+		if (mimeValues.some(element => (
+			(	
+				element.value === "application/zip" || 
+				element.value === "application/octet-stream"
+			)
+			 &&
+			(element.attribute === "Content-Type")))){
+				return {...accumulator, package: binaryPayload};
+		}else{
+			return accumulator;
+		}
+	}, {});
+
+	console.log(parts_result)
+	return parts_result;
 };
 
 
@@ -112,7 +121,6 @@ let xop = function(httpResponse, body) {
 					}
 				}
 			}
-
 
 			if (mimeValues.some(element => 
 				(
