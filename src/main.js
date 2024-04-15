@@ -2,6 +2,7 @@ const services = require('./index.js');
 const fs = require('fs');
 
 let hpio = "8003623233372670";
+// let hpio = "8003624900038396";
 let privatePem = fs.readFileSync("./sample/entities/certificates/fac_sign_nash_org_with_attributes.private.pem");
 let publicPem = fs.readFileSync("./sample/entities/certificates/fac_sign_nash_org_with_attributes.public.pem");
 let ca = fs.readFileSync("./sample/entities/certificates/certificate_authorities//certificates_chain.pem");
@@ -10,7 +11,7 @@ let ca = fs.readFileSync("./sample/entities/certificates/certificate_authorities
 
 async function runServices() {
   try {
-    const existResult = await services.myHealthRecord.getDocumentList({
+    const existResult = await services.myHealthRecord.getView({
       product: {
         vendor: "StrongRoom AI",
         name: "StrongCare",
@@ -32,6 +33,7 @@ async function runServices() {
           }
         ],
         hpii: "8003611566713495"
+        // hpio: ""
       },
       organisation: {
         name: "Strong Room",
@@ -43,14 +45,58 @@ async function runServices() {
         hpio,
       }
     },
-      // this is patient 
-      {
-        id: "patient-001",
-        medicareNumber: "8003604570631431",
-        name: "John Doe",
-        dob: "1990-01-01",
-        ihi: "8003608166980706"
-      },
+    // patient
+    {
+      id: "patient-001",
+      medicareNumber: "8003604570631431",
+      name: "John Doe",
+      dob: "1990-01-01",
+      ihi: "8003608166980706"
+    },
+    // -----------
+    // access code
+    // -----------
+    // "accessCode",
+    // "12345678",
+    
+    // -----------
+    // options for get document list
+    // -----------
+    // {
+    //   // serviceStopTimeTo: new Date(),
+    //   // serviceStopTimeFrom: new Date(2024,'01','01'),
+    //   documentTypes: [
+    //     '100.32044^^NCTIS Data Components',
+    //     '100.32047^^NCTIS Data Components',
+    //     '100.32046^^NCTIS Data Components',
+    //     '100.32049^^NCTIS Data Components',
+    //   ]
+    // },
+
+    // -----------
+    // view options
+    // -----------
+    {
+      from_date: new Date(2012,'01','01'),
+      end_date: new Date(2024,'04','01'),
+      view: "pathology",
+      version: "1.0",
+    },
+
+    // -----------
+    // remove document
+    // -----------
+    // '1.2.36.1241829446.42762.17357.45721.16782558161291',
+    // '1.3.16.2.38818.9999999999999999999999999999999',
+    // 'Withdrawn',
+
+
+
+
+
+
+
+
       //this is single document
       // {
       //   "creationTime": "20240313053310",
@@ -101,20 +147,20 @@ async function runServices() {
       // }      
 
       //Options to query document List
-      {
-        serviceStopTimeTo: 		new Date(),
-        serviceStopTimeFrom:	new Date(2024,'01','01'),
-        // documentTypes: [
-        //   '60591-5^^LOINC',
-        //   '57133-1^^LOINC',
-        //   '51852-2^^LOINC',
-        //   '18842-5^^LOINC',
-        //   '34133-9^^LOINC',
-        //   '100.17042^^NCTIS'
-        // ]
-      }
+      // {
+      //   serviceStopTimeTo: 		new Date(),
+      //   serviceStopTimeFrom:	new Date(2024,'01','01'),
+      //   // documentTypes: [
+      //   //   '60591-5^^LOINC',
+      //   //   '57133-1^^LOINC',
+      //   //   '51852-2^^LOINC',
+      //   //   '18842-5^^LOINC',
+      //   //   '34133-9^^LOINC',
+      //   //   '100.17042^^NCTIS'
+      //   // ]
+      // }
     );
-    console.log('doesPCEHRExist result:', existResult);
+    console.log('Result:', existResult);
 
     // const accessResult = await services.gainAccess(/* parameters */);
     // console.log('gainAccess result:', accessResult);

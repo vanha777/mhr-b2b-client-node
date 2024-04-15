@@ -88,30 +88,29 @@ let executeRequest = (organisation, urlPath, payload, responseHandler, options) 
 
 request({...fixedOptions, ...options}, responseHandler);
 
-/*request({...fixedOptions, ...options}, (error, response, body) => {
+// request({...fixedOptions, ...options}, (error, response, body) => {
 
-	console.log("payload");
-	console.log(payload);
+// 	// console.log("payload");
+// 	// console.log(payload);
 	
-	console.log("error");
-	console.log(error);
+// 	console.log("error");
+// 	console.log(error);
 
-	console.log("response");
-	console.log(response);
+// 	console.log("response");
+// 	console.log(response);
 	
-	console.log("body");
-	console.log(body);
+// 	console.log("body");
+// 	console.log(body);
 
-});
+// });
 
 
-	axios.get(fixedOptions.url, { httpsAgent }).then(result => {
-		console.log(result);
-	})
-	.catch(error => {
-		console.error(error.toJSON())
-	});
-*/
+// 	axios.get(fixedOptions.url, { httpsAgent }).then(result => {
+// 		console.log(result);
+// 	})
+// 	.catch(error => {
+// 		console.error(error.toJSON())
+// 	});
 
 }
 

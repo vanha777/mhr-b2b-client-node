@@ -88,15 +88,35 @@ let getDocumentList = ({ product, user, organisation }, patient, options) => {
 				),
 				(error, response, body) => {
 					//DEBUG
-					console.log(response.request.body);
+					let xmlDoc = libxmljs.parseXml(body);
+					if(xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='AdhocQueryResponse']").getAttribute('status').value() === "urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Failure") {
+						resolve({
+							response: {
+								code: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='AdhocQueryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute('errorCode').value(),
+								message: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='AdhocQueryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute('codeContext').value(),
+							},
+						})
+					}
+
+					const fs = require('fs');
+					fs.writeFile("C:\\Users\\EricAlforque\\Desktop\\testcases\\Test 133 Request.xml", response.request.body.replace('\n', '').replace('\r', ''), function(err) {
+						if(err) {
+							return console.log(err);
+						}
+						// console.log("The file was saved!");
+					}); 
+
+					fs.writeFile("C:\\Users\\EricAlforque\\Desktop\\testcases\\Test 133 Response.xml", response.body.replace('\n', '').replace('\r', ''), function(err) {
+						if(err) {
+							return console.log(err);
+						}
+						// console.log("The file was saved!");
+					}); 
 					//end.
 					if (error) {
 						reject(error);
 					} else {
-						let xmlDoc = libxmljs.parseXml(body, { noblanks: true });
-
-
-
+						let xmlDoc = libxmljs.parseXml(body, { preserveWhitespace: true });
 
 						resolve(
 							xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='AdhocQueryResponse']/*[local-name()='RegistryObjectList']")
@@ -134,37 +154,37 @@ let getDocumentList = ({ product, user, organisation }, patient, options) => {
 													} else if (currentNode.name() === "Classification") {
 														//Template for XDSDocumentEntry.author
 
-														let classificationScheme = currentNode.attr("classificationScheme").value();
-														if (currentNode.attr("classificationScheme").value() === "urn:uuid:93606bcf-9494-43ec-9b4e-a7748d1a838d") {
+														// let classificationScheme = currentNode.attr("classificationScheme").value();
+														if (currentNode.getAttribute("classificationScheme").value() === "urn:uuid:93606bcf-9494-43ec-9b4e-a7748d1a838d") {
 															for (node of currentNode.childNodes()) {
 																if (node.name() === "Slot") {
-																	if (node.attr("name").value() === "authorInstitution") {
+																	if (node.getAttribute("name").value() === "authorInstitution") {
 																		document["authorInstitution"] = processHL7DataType("XON", node.child(0).child(0).text());
 
 
-																	} else if (node.attr("name").value() === "authorPerson") {
+																	} else if (node.getAttribute("name").value() === "authorPerson") {
 																		document["authorPerson"] = processHL7DataType("XCN", node.child(0).child(0).text());
 
 
-																	} else if (node.attr("name").value() === "authorSpecialty") {
+																	} else if (node.getAttribute("name").value() === "authorSpecialty") {
 																		document["authorSpecialty"] = node.child(0).child(0).text();
 																	}
 																} else {
 																}
 															}
 															//Template : XDSDocumentEntry.classCode
-														} else if (currentNode.attr("classificationScheme").value() === "urn:uuid:41a5887f-8865-4c09-adf7-e362475b143a") {
+														} else if (currentNode.getAttribute("classificationScheme").value() === "urn:uuid:41a5887f-8865-4c09-adf7-e362475b143a") {
 
 															document["class"] = {};
-															document["class"]["code"] = currentNode.attr("nodeRepresentation").value();
+															document["class"]["code"] = currentNode.getAttribute("nodeRepresentation").value();
 															for (node of currentNode.childNodes()) {
 																if (node.name() === "Slot") {
-																	if (node.attr("name").value() === "codingScheme") {
+																	if (node.getAttribute("name").value() === "codingScheme") {
 																		document["class"]["codingScheme"] = node.child(0).child(0).text();
 																	}
 																} else if (node.name() === "Name") {
 																	if (node.child(0).name() === "LocalizedString") {
-																		document["class"]["displayName"] = node.child(0).attr("value").value();
+																		document["class"]["displayName"] = node.child(0).getAttribute("value").value();
 																	} else {
 																		console.log("did not find LocalizedString");
 
@@ -173,18 +193,18 @@ let getDocumentList = ({ product, user, organisation }, patient, options) => {
 																}
 															}
 															//Template : XDSDocuemtnEntry.formatCode
-														} else if (currentNode.attr("classificationScheme").value() === "urn:uuid:a09d5840-386c-46f2-b5ad-9c3699a4309d") {
+														} else if (currentNode.getAttribute("classificationScheme").value() === "urn:uuid:a09d5840-386c-46f2-b5ad-9c3699a4309d") {
 															document["format"] = {};
-															document["class"]["code"] = currentNode.attr("nodeRepresentation").value();
+															document["class"]["code"] = currentNode.getAttribute("nodeRepresentation").value();
 
 															for (node of currentNode.childNodes()) {
 																if (node.name() === "Slot") {
-																	if (node.attr("name").value() === "codingScheme") {
+																	if (node.getAttribute("name").value() === "codingScheme") {
 																		document["format"]["codingScheme"] = node.child(0).child(0).text();
 																	}
 																} else if (node.name() === "Name") {
 																	if (node.child(0).name() === "LocalizedString") {
-																		document["format"]["displayName"] = node.child(0).attr("value").value();
+																		document["format"]["displayName"] = node.child(0).getAttribute("value").value();
 																	} else {
 																		console.log(chalk.red("did not find LocalizedString"));
 
@@ -194,18 +214,18 @@ let getDocumentList = ({ product, user, organisation }, patient, options) => {
 															}
 
 															//Template : XDSDocumentEntry.healthcareFacilityTypeCode
-														} else if (currentNode.attr("classificationScheme").value() === "urn:uuid:f33fb8ac-18af-42cc-ae0e-ed0b0bdb91e1") {
+														} else if (currentNode.getAttribute("classificationScheme").value() === "urn:uuid:f33fb8ac-18af-42cc-ae0e-ed0b0bdb91e1") {
 
 															document["healthcareFacilityType"] = {};
-															document["healthcareFacilityType"]["code"] = currentNode.attr("nodeRepresentation").value();
+															document["healthcareFacilityType"]["code"] = currentNode.getAttribute("nodeRepresentation").value();
 															for (node of currentNode.childNodes()) {
 																if (node.name() === "Slot") {
-																	if (node.attr("name").value() === "codingScheme") {
+																	if (node.getAttribute("name").value() === "codingScheme") {
 																		document["healthcareFacilityType"]["codingScheme"] = node.child(0).child(0).text();
 																	}
 																} else if (node.name() === "Name") {
 																	if (node.child(0).name() === "LocalizedString") {
-																		document["healthcareFacilityType"]["displayName"] = node.child(0).attr("value").value();
+																		document["healthcareFacilityType"]["displayName"] = node.child(0).getAttribute("value").value();
 																	} else {
 																		console.log(chalk.red("did not find LocalizedString"));
 																	}
@@ -213,17 +233,17 @@ let getDocumentList = ({ product, user, organisation }, patient, options) => {
 																}
 															}
 															//Template : XDSDocumentEntry.practiceSettingCode
-														} else if (currentNode.attr("classificationScheme").value() === "urn:uuid:cccf5598-8b07-4b77-a05e-ae952c785ead") {
+														} else if (currentNode.getAttribute("classificationScheme").value() === "urn:uuid:cccf5598-8b07-4b77-a05e-ae952c785ead") {
 															document["practiceSetting"] = {};
-															document["practiceSetting"]["code"] = currentNode.attr("nodeRepresentation").value();
+															document["practiceSetting"]["code"] = currentNode.getAttribute("nodeRepresentation").value();
 															for (node of currentNode.childNodes()) {
 																if (node.name() === "Slot") {
-																	if (node.attr("name").value() === "codingScheme") {
+																	if (node.getAttribute("name").value() === "codingScheme") {
 																		document["practiceSetting"].codeSystem = node.child(0).child(0).text();
 																	}
 																} else if (node.name() === "Name") {
 																	if (node.child(0).name() === "LocalizedString") {
-																		document["practiceSetting"].displayName = node.child(0).attr("value").value();
+																		document["practiceSetting"].displayName = node.child(0).getAttribute("value").value();
 																	} else {
 																		console.log(chalk.red("did not find LocalizedString"));
 																	}
@@ -231,18 +251,18 @@ let getDocumentList = ({ product, user, organisation }, patient, options) => {
 																}
 															}
 															//Template : XDSDocumentEntry.typeCode
-														} else if (currentNode.attr("classificationScheme").value() === "urn:uuid:f0306f51-975f-434e-a61c-c59651d33983") {
+														} else if (currentNode.getAttribute("classificationScheme").value() === "urn:uuid:f0306f51-975f-434e-a61c-c59651d33983") {
 
 															document["type"] = {};
-															document["type"]["code"] = currentNode.attr("nodeRepresentation").value();
+															document["type"]["code"] = currentNode.getAttribute("nodeRepresentation").value();
 															for (node of currentNode.childNodes()) {
 																if (node.name() === "Slot") {
-																	if (node.attr("name").value() === "codingScheme") {
+																	if (node.getAttribute("name").value() === "codingScheme") {
 																		document["type"]["codingScheme"] = node.child(0).child(0).text();
 																	}
 																} else if (node.name() === "Name") {
 																	if (node.child(0).name() === "LocalizedString") {
-																		document["type"]["displayName"] = node.child(0).attr("value").value();
+																		document["type"]["displayName"] = node.child(0).getAttribute("value").value();
 																	} else {
 																		console.log(chalk.red("did not find LocalizedString"));
 																	}
@@ -250,13 +270,13 @@ let getDocumentList = ({ product, user, organisation }, patient, options) => {
 																}
 															}
 														} else {
-															console.log(chalk.cyan(currentNode.attr("classificationScheme").value()));
+															console.log(chalk.cyan(currentNode.getAttribute("classificationScheme").value()));
 														}
 													} else if (currentNode.name() === "ExternalIdentifier") {
-														if ("XDSDocumentEntry.patientId" === currentNode.child(0).child(0).attr("value").value()) {
-															document['patientId'] = currentNode.attr("value").value().substr(0, currentNode.attr("value").value().indexOf("^"));
-														} else if ("XDSDocumentEntry.uniqueId" === currentNode.child(0).child(0).attr("value").value()) {
-															document['documentId'] = currentNode.attr("value").value();
+														if ("XDSDocumentEntry.patientId" === currentNode.child(0).child(0).getAttribute("value").value()) {
+															document['patientId'] = currentNode.getAttribute("value").value().substr(0, currentNode.getAttribute("value").value().indexOf("^"));
+														} else if ("XDSDocumentEntry.uniqueId" === currentNode.child(0).child(0).getAttribute("value").value()) {
+															document['documentId'] = currentNode.getAttribute("value").value();
 														} else {
 
 														}

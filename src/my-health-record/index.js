@@ -15,6 +15,7 @@
 const recordAccessService 		= require('./record-access-service');
 const documentExchangeService 	= require('./document-exchange-service');
 const viewService 				= require('./view-service');
+const removeDocumentService     = require('./remove-document-service');
 
 
 module.exports = {
@@ -23,5 +24,6 @@ module.exports = {
 	getDocumentList:	documentExchangeService	.getDocumentList,	
 	getDocument:		documentExchangeService	.getDocument,
 	uploadDocument:		documentExchangeService	.uploadDocument,
-	getView: 			viewService				.getView
+	getView: 			viewService				.getView,
+	removeDocument:     removeDocumentService   .removeDocument
 };
