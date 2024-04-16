@@ -14,14 +14,7 @@ const filePath = './file.zip';
 async function runServices() {
   try {
 
-    let package_data = fs.readFile(filePath, (err, data) => {
-      if (err) {
-          console.error('Error reading file:', err);
-          return;
-      }
-      console.log("file read...")
-      return data;
-    });
+    let package_data = await fs.promises.readFile(filePath);
 
     const existResult = await services.myHealthRecord.uploadDocument({
       product: {
