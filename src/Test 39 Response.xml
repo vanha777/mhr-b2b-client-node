@@ -1,0 +1,19 @@
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+<soap:Header />
+<soap:Body>
+<soap:Fault>
+<soap:Code>
+<soap:Value>soap:Receiver</soap:Value>
+</soap:Code>
+<soap:Reason>
+<soap:Text xml:lang="en-AU">PCEHR_ERROR</soap:Text>
+</soap:Reason>
+<soap:Detail>
+<ns2:standardError xmlns:ns2="http://ns.electronichealth.net.au/wsp/xsd/StandardError/2010">
+<ns2:errorCode>badlyFormedMsg</ns2:errorCode>
+<ns2:message>messageBlocked</ns2:message>
+</ns2:standardError>
+</soap:Detail>
+</soap:Fault>
+</soap:Body>
+</soap:Envelope>

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+Template package id: 1.2.36.1.2001.1006.1.16615.28
+-->
+<ClinicalDocument xmlns:ext="http://ns.electronichealth.net.au/Ci/Cda/Extensions/3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:hl7-org:v3">
+	<!-- Begin Common Header Part -->
+	<typeId root="2.16.840.1.113883.1.3" extension="POCD_HD000040" />
+	<templateId root="333" extension="1.3" />
+	<templateId root="333" extension="1.0" />
+						<id root="1.2.36.2250765283.8173.17322.48409.205351618934179" />
+			<code code="51852-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Letter" />
+	  <title>Specialist Letter</title>
+	
+
+<effectiveTime value="202403210452+1100"/>
+	<confidentialityCode nullFlavor="NA" />
+	<languageCode code="en-AU" />
+		<setId root="553FDDE2-2C70-4A77-BE30-A6AA8B9744B9" />
+		<versionNumber value="1" />
+	<ext:completionCode code="F" codeSystem="1.2.36.1.2001.1001.101.104.20104" codeSystemName="NCTIS Document Status Values" displayName="Final"/>
+	<!-- End Common Header Part -->
+	<!-- Begin recordTarget -->
+	<recordTarget typeCode="RCT">
+  <patientRole classCode="PAT">
+    <id root="09D3396D-6345-4C1C-A9FE-7756C0E4BAFA" />
+    <!-- Address -->
+    <addr use="H">
+  <streetAddressLine>14 KONRAD GR</streetAddressLine>
+  <city>AINSLIE</city>
+  <state>ACT</state>
+  <postalCode>2602</postalCode>
+</addr>
+		<patient>
+			<name use="L">
+	<given>NA</given>
+	<family>NA</family>
+</name>
+      <administrativeGenderCode code="N" codeSystem="2.16.840.1.113883.13.68" codeSystemName="AS 5017-2006 Health Care Client Identifier Sex" displayName="Not Stated/Inadequately Described" />
+			<birthTime value="19581009" />
+      <ethnicGroupCode code="9" codeSystem="2.16.840.1.113883.3.879.291036" codeSystemName="METeOR Indigenous Status" displayName="Not stated/inadequately described"/>
+      <ext:deceasedInd value="false"/>
+			<ext:asEntityIdentifier classCode="IDENT">
+				<ext:id root="1.2.36.1.2001.1003.0.8003608166980706" assigningAuthorityName="IHI" />
+				<ext:assigningGeographicArea classCode="PLC">
+					<ext:name>National Identifier</ext:name>
+				</ext:assigningGeographicArea>
+			</ext:asEntityIdentifier>
+		</patient>
+	</patientRole>
+</recordTarget>
+	<!-- End recordTarget -->
+	<!-- Begin author -->
+	<author typeCode="AUT">
+  <time value="202403210452+1100"/>
+  <assignedAuthor>
+  <id root="BB4F9271-4704-423F-A9E6-C728BB733C62" />
+<code code="253111" codeSystem="2.16.840.1.113883.13.62" codeSystemName="1220.0 - ANZSCO - Australian and New Zealand Standard Classification of Occupations, First Edition, 2006" displayName="General Medical Practitioner" />
+<addr use="WP">
+  <streetAddressLine>1 Clinician Street</streetAddressLine>
+  <city>Nehtaville</city>
+  <state>QLD</state>
+  <postalCode>5555</postalCode>
+  <country>Australia</country>
+</addr>
+<telecom value="tel: 0400000000" use="WP" />
+  <assignedPerson>
+    <name>
+	<prefix>DR</prefix>
+	<given>Roger</given>
+	<family>Adams</family>
+</name>
+<!-- HPII based Employee Identifier -->
+<ext:asEntityIdentifier classCode="IDENT">
+  <ext:id root="1.2.36.1.2001.1003.0.8003611566713495" assigningAuthorityName="HPI-I" />
+  <ext:assigningGeographicArea classCode="PLC">
+    <ext:name>National Identifier</ext:name>
+  </ext:assigningGeographicArea>
+</ext:asEntityIdentifier>
+<ext:asEmployment classCode="EMP">
+  <ext:employerOrganization>
+  <name use="ORGL">Tes Health Service 838</name>
+  <asOrganizationPartOf>
+    <wholeOrganization>
+      <name use="ORGL">Tes Health Service 838</name>
+<ext:asEntityIdentifier classCode="IDENT">
+  <ext:id root="1.2.36.1.2001.1003.0.8003623233372670" assigningAuthorityName="HPI-O" />
+  <ext:assigningGeographicArea classCode="PLC">
+    <ext:name>National Identifier</ext:name>
+  </ext:assigningGeographicArea>
+</ext:asEntityIdentifier>
+    </wholeOrganization>
+  </asOrganizationPartOf>
+</ext:employerOrganization>
+</ext:asEmployment>
+  </assignedPerson>
+  </assignedAuthor>
+</author>
+		<!-- End author -->
+	<!-- Begin custodian -->
+	<custodian>
+	<assignedCustodian>
+		<representedCustodianOrganization>
+			<id root="90A91D56-CC08-4FFE-874C-C186FE84EA81"/>
+			<name>Tes Health Service 838</name>			      			<ext:asEntityIdentifier classCode="IDENT">
+				<ext:id root="1.2.36.1.2001.1003.0.8003623233372670" assigningAuthorityName="HPI-O" />
+			</ext:asEntityIdentifier>
+		</representedCustodianOrganization>
+	</assignedCustodian>
+</custodian>
+	<!-- End custodian -->
+<participant typeCode="REFB">
+				<time value="202403210452+1100" /><associatedEntity classCode="ASSIGNED">
+  <id root="DE34F789-6935-4214-AC45-D305F59DB723" />
+<code code="253111" codeSystem="2.16.840.1.113883.13.62" codeSystemName="1220.0 - ANZSCO - Australian and New Zealand Standard Classification of Occupations, First Edition, 2006" displayName="General Medical Practitioner" />
+<addr use="WP">
+  <streetAddressLine>1 Clinician Street</streetAddressLine>
+  <city>Nehtaville</city>
+  <state>QLD</state>
+  <postalCode>5555</postalCode>
+  <country>Australia</country>
+</addr>
+<telecom value="tel: 0400000000" use="WP" />
+	<associatedPerson >
+    <name>
+	<prefix>Dr.</prefix>
+	<given>Allen</given>
+	<family>Smith</family>
+	<suffix>Jr.</suffix>
+</name>
+<!-- HPII based Employee Identifier -->
+<ext:asEntityIdentifier classCode="IDENT">
+  <ext:id root="1.2.36.1.2001.1003.0.8003611566713495" assigningAuthorityName="HPI-I" />
+  <ext:assigningGeographicArea classCode="PLC">
+    <ext:name>National Identifier</ext:name>
+  </ext:assigningGeographicArea>
+</ext:asEntityIdentifier>
+<ext:asEmployment classCode="EMP">
+  <ext:employerOrganization>
+  <name use="ORGL">Tes Health Service 838</name>
+  <asOrganizationPartOf>
+    <wholeOrganization>
+      <name use="ORGL">Tes Health Service 838</name>
+<ext:asEntityIdentifier classCode="IDENT">
+  <ext:id root="1.2.36.1.2001.1003.0.8003623233372670" assigningAuthorityName="HPI-O" />
+  <ext:assigningGeographicArea classCode="PLC">
+    <ext:name>National Identifier</ext:name>
+  </ext:assigningGeographicArea>
+</ext:asEntityIdentifier>
+    </wholeOrganization>
+  </asOrganizationPartOf>
+</ext:employerOrganization>
+</ext:asEmployment>
+	</associatedPerson>
+</associatedEntity>
+</participant>
+<!-- Begin Encounter Period -->
+<componentOf>
+	<encompassingEncounter>
+    
+
+	<effectiveTime xsi:type="IVL_TS">
+  
+		<width value="3" unit="wk"/>
+
+	</effectiveTime>
+    	</encompassingEncounter>
+</componentOf>
+<!-- End Encounter Period -->
+	<component>
+		<structuredBody>
+			 <component>
+        <section>
+          <title>Attached Content</title>
+          <text mediaType="text/x-hl7-text+xml">
+            <renderMultiMedia referencedObject="c12070dc-bf5d-4961-a694-a919b2a6a16d">
+              <caption>Structured Body File</caption>
+            </renderMultiMedia>
+          </text>
+          <entry>
+            <observationMedia ID="c12070dc-bf5d-4961-a694-a919b2a6a16d" classCode="OBS" moodCode="EVN">
+              <id root="79693654-3d41-4e12-90f6-2ea6e4c02896" />
+              <value mediaType="application/pdf" integrityCheck="NPdy0GkAHgvThLC95bUSXThuw9M=">
+                <reference value="NCFU.pdf" />
+              </value>
+            </observationMedia>
+          </entry>
+        </section>
+</component>
+
+			
+					</structuredBody>
+	</component>
+</ClinicalDocument>

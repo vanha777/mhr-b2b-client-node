@@ -181,10 +181,10 @@ let uploadDocumentMtom = (originalRequest, package, binaryContentId, organisatio
 		headers: {
 			'MIME-Version': '1.0'
 		},
-		'host': 'b2b.ehealthvendortest.health.gov.au',
+		'host': 'services.svt.gw.myhealthrecord.gov.au',
 		'gzip' :true,
 		'chunked': true,
-		uri: 'https://b2b.ehealthvendortest.health.gov.au/uploadDocument',
+		uri: 'https://services.svt.gw.myhealthrecord.gov.au/uploadDocument',
 		multipart: [
 			{
 				'Content-Type': 'application/xop+xml;charset=utf-8;type="application/soap+xml"',

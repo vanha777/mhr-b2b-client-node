@@ -16,6 +16,8 @@ const libxmljs = require("libxmljs");
 const namespaces = require('./namespaces');
 const moment = require('moment');
 let guid = require('uuid').v4;
+const JSZip = require('jszip');
+const fs = require('fs');
 
 let processMimeMultipart = require('./mime-multipart').getAttachment;
 let xop = require('./mime-multipart').xop;
@@ -25,7 +27,7 @@ let uploadDocumentMtom = require('./mime-multipart').uploadDocumentMtom;
 let processHL7DataType = require('./hl7').processDataType;
 
 const chalk = require('chalk');
-const fs = require('fs').promises;
+// const fs = require('fs').promises;
 const Busboy = require('busboy');
 
 
@@ -89,7 +91,7 @@ let getDocumentList = ({ product, user, organisation }, patient, options) => {
 				(error, response, body) => {
 					//DEBUG
 					let xmlDoc = libxmljs.parseXml(body);
-					if(xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='AdhocQueryResponse']").getAttribute('status').value() === "urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Failure") {
+					if (xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='AdhocQueryResponse']").getAttribute('status').value() === "urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Failure") {
 						resolve({
 							response: {
 								code: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='AdhocQueryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute('errorCode').value(),
@@ -97,21 +99,9 @@ let getDocumentList = ({ product, user, organisation }, patient, options) => {
 							},
 						})
 					}
+					console.log("Request: \n", response.request.body);
+					console.log("Response: \n", body);
 
-					const fs = require('fs');
-					fs.writeFile("C:\\Users\\EricAlforque\\Desktop\\testcases\\Test 133 Request.xml", response.request.body.replace('\n', '').replace('\r', ''), function(err) {
-						if(err) {
-							return console.log(err);
-						}
-						// console.log("The file was saved!");
-					}); 
-
-					fs.writeFile("C:\\Users\\EricAlforque\\Desktop\\testcases\\Test 133 Response.xml", response.body.replace('\n', '').replace('\r', ''), function(err) {
-						if(err) {
-							return console.log(err);
-						}
-						// console.log("The file was saved!");
-					}); 
 					//end.
 					if (error) {
 						reject(error);
@@ -306,120 +296,135 @@ let getDocumentList = ({ product, user, organisation }, patient, options) => {
 let getDocument = ({ product, user, organisation }, patient, document) => {
 	return new Promise((resolve, reject) => {
 		try {
-			executeRequest(organisation, "getDocument", 		//Attention. Need to confirm this!
+			executeRequest(organisation, "getDocument",
 				signRequest(
 					buildUnsignedB2BRequest(
 						buildHeader(product, user, organisation, patient, "urn:ihe:iti:2007:RetrieveDocumentSet"),
 						`<RetrieveDocumentSetRequest xmlns="urn:ihe:iti:xds-b:2007">
-				<DocumentRequest>
-					<RepositoryUniqueId>${document.repositoryUniqueId}</RepositoryUniqueId>
-					<DocumentUniqueId>${document.documentId}</DocumentUniqueId>
-				</DocumentRequest>
-			</RetrieveDocumentSetRequest>
-				`
+                            <DocumentRequest>
+                                <RepositoryUniqueId>${document.repositoryUniqueId}</RepositoryUniqueId>
+                                <DocumentUniqueId>${document.documentId}</DocumentUniqueId>
+                            </DocumentRequest>
+                        </RetrieveDocumentSetRequest>`
 					),
 					organisation
 				),
 				async (error, httpResponse, body) => {
-
 					if (error) {
-						console.error("Error while making HTTP request:", error);
-						return; // Handle the error as needed
+						reject(error);
+						return;
 					}
 
-					// Check if the response is multipart
-					const contentType = httpResponse.headers['content-type'] || '';
-					if (!contentType.includes("multipart")) {
-						console.log("Response is not multipart, handling skipped.");
-						return; // Or handle as needed for non-multipart responses
-					}
+					if (httpResponse.statusCode === 500) {
+						let xmlDoc = libxmljs.parseXml(body);
+						let errorCode = xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='Fault']/*[local-name()='Detail']/*[local-name()='standardError']/*[local-name()='errorCode']").text();
+						let errorMessage = xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='Fault']/*[local-name()='Detail']/*[local-name()='standardError']/*[local-name()='message']").text();
 
-					// Extract the boundary from the Content-Type header for multipart parsing
-					const match = contentType.match(/boundary=(?:"([^"]+)"|([^;]+))/i);
-					if (!match) {
-						console.error('Failed to extract boundary from Content-Type header');
-						return; // Handle this situation as needed
-					}
-
-					const boundary = match[1] || match[2];
-
-					// Setup Busboy for multipart parsing
-					const busboy = new Busboy({ headers: { 'content-type': contentType } });
-
-					busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
-						// Targeting only the application/octet-stream parts
-						if (mimetype === 'application/octet-stream') {
-							console.log(`Writing binary part to file...`);
-							// Define your desired output path
-							const outputPath = './binary_part_output.bin';
-							const writeStream = fs.createWriteStream(outputPath);
-							file.pipe(writeStream).on('close', () => {
-								console.log(`Binary part has been written to ${outputPath}`);
+						if (errorCode === 'PCEHR_ERROR_3002') {
+							reject({
+								response: {
+									code: errorCode,
+									message: errorMessage,
+									type: 'XDSRepositoryError'
+								}
 							});
 						} else {
-							// Drain any non-targeted file streams
-							file.resume();
+							resolve({
+								response: {
+									code: errorCode,
+									message: errorMessage
+								}
+							});
 						}
-					});
+					} else if (httpResponse.statusCode >= 200 && httpResponse.statusCode < 300) {
+						try {
+							const contentType = httpResponse.headers['content-type'];
 
-					busboy.on('finish', () => {
-						console.log('Finished processing the multipart response.');
-					});
+							if (!contentType) {
+								reject('Content-Type header is missing in the HTTP response');
+								return;
+							}
 
-					// Start parsing the multipart response
-					busboy.end(body);
-					//DEBUG
-					// console.log("",httpResponse.headers);
-					//end.
-					// if (error) {
-					// 	reject(error);
-					// } else {
-					// 	//let response = httpMessageParser(body);
+							if (!contentType.includes("application/soap+xml")) {
+								reject("Unsure on how to handle response payload. Content Type: " + contentType);
+								return;
+							}
 
+							fs.writeFile("./Test 43 Response.xml", body, function (err) {
+								if (err) {
+									return console.log(err);
+								}
+							});
 
-					// 	if (httpResponse.headers["content-type"].includes("multipart")) {
-					// 		console.log("this is multipart");
-					// 		resolve({ ...document, cdaPackage: processMimeMultipart(httpResponse, body).package });
-					// 	} else if (httpResponse.headers["content-type"].includes("application/soap+xml")) {
-					// 		// console.log("here 0");
-					// 		// let xmlDoc = libxmljs.parseXml(body.toString());
-					// 		// console.log("here");
-					// 		// let base64Document = xmlDoc.get("//soap:Envelope/soap:Body/xds:RetrieveDocumentSetResponse/xds:DocumentResponse/xds:Document", namespaces).text();
-					// 		// 	//DEUBG
-					// 		// 	console.log("this is body: ", base64Document);
-					// 		// 	// console.log("debug 0");
-					// 		// 	//end.
-					// 		// resolve(
-					// 		// 	{	...document,
-					// 		// 		 cdaPackage: Buffer.alloc(base64Document.length, base64Document, 'base64')
-					// 		// 	});
-					// 		// 	console.log("debug 1");
-					// 		try {
-					// 			// Define a path for the output file
-					// 			const outputPath = './file.txt';
+							fs.writeFile("./Test 43 Request.xml", httpResponse.request.body, function (err) {
+								if (err) {
+									return console.log(err);
+								}
+							});
 
-					// 			// If 'body' is a Buffer, write directly. If it's a string, no conversion is needed.
-					// 			await fs.writeFile(outputPath, body);
+							let boundaryPart = contentType.split(';').find(ct => ct.trim().startsWith("boundary="));
+							if (!boundaryPart) {
+								let xmlDoc = libxmljs.parseXml(body);
+								resolve({
+									response: {
+										code: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RetrieveDocumentSetResponse']/*[local-name()='RegistryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute("errorCode").value(),
+										message: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RetrieveDocumentSetResponse']/*[local-name()='RegistryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute("codeContext").value(),
+									},
+								})
+								return;
+							}
 
-					// 			console.log("Response written to file:", outputPath);
+							const boundary = "--" + contentType.split(';').find(ct => ct.trim().startsWith("boundary=")).trim().substring(9).replace(/['"]+/g, '');
+							let parts = parseMultipart(body, boundary);
 
-					// 			resolve({ ...document, outputPath });
-					// 		} catch (writeError) {
-					// 			console.error("Failed to write response to file:", writeError);
-					// 			reject(writeError);
-					// 		}
-					// 	} else {
-					// 		reject("Unsure on how to handle response payload. Content Type: " + httpResponse.headers["content-type"]);
-					// 	}
-					// }
+							const cdafile = extractBinaryFile(parts[1]);
+							const outputPath = './xml/CDAPackage.zip';
+							await saveFile(cdafile, outputPath);
+							resolve({ ...document, outputPath });
+
+						} catch (parseError) {
+							console.error("Error processing response:", parseError);
+							reject(parseError);
+						}
+					} else {
+						reject("Received unexpected status code: " + httpResponse.statusCode);
+					}
 				}, { encoding: null }
 			);
 		} catch (e) {
 			reject(e);
 		}
 	});
+};
 
+// Helper functions for processing multipart messages, extracting binary content, and saving files
+function parseMultipart(body, boundary) {
+	let parts = [];
+	let offset = 0;
+	while (offset !== -1) {
+		let nextOffset = body.indexOf(boundary, offset + 1);
+		parts.push(body.slice(offset + boundary.length, nextOffset === -1 ? undefined : nextOffset));
+		offset = nextOffset;
+	}
+	return parts;
 }
+
+function extractBinaryFile(part) {
+	return part.slice(part.indexOf("Content-Transfer-Encoding: binary") + 37, part.indexOf("------=_") - 1);
+}
+
+async function saveFile(data, path) {
+	const fs = require('fs');
+	const JSZip = require('jszip');
+	const zip = new JSZip();
+	zip.file('file.zip', data, { binary: true });
+	await zip.generateNodeStream({ type: 'nodebuffer', streamFiles: true })
+		.pipe(fs.createWriteStream(path))
+		.on('finish', () => {
+			console.log('Zip file created successfully');
+		});
+}
+
 
 let uploadDocument = ({ product, user, organisation }, patient, document) => {
 
@@ -778,6 +783,11 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 
 		let packageReference = guid();
 
+		fs.writeFile("./Test 39 Request.xml", request, function (err) {
+					if (err) {
+						return console.log(err);
+					}
+				});
 
 		uploadDocumentMtom(request,
 			document.package,
@@ -787,6 +797,13 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 				if (error) {
 					reject(error);
 				}
+
+				fs.writeFile("./Test 39 Response.xml", body, function (err) {
+					if (err) {
+						return console.log(err);
+					}
+				});
+
 				try {
 					let xmlDoc = libxmljs.parseXml(httpResponse.headers["content-type"].includes("multipart") ? xop(httpResponse, body) : body.toString());
 
@@ -811,11 +828,15 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 						});
 					}
 				} catch (error) {
+					let xmlDoc = libxmljs.parseXml(body);
 					reject({
 						result: "error",
-						body: body,
-						request
-					});
+						response: {
+							reason: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='Fault']/*[local-name()='Reason']/*[local-name()='Text']").text(),
+							message: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='Fault']/*[local-name()='Detail']/*[local-name()='standardError']/*[local-name()='message']").text(),
+							code: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='Fault']/*[local-name()='Detail']/*[local-name()='standardError']/*[local-name()='errorCode']").text()
+						},
+					})
 				}
 			}
 

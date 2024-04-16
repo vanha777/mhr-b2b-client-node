@@ -23,14 +23,14 @@ let doesPCEHRExist = ({ product, user, organisation }, patient) => {
 			(error, response, body) => {
 				//DEBUG
 				const fs = require('fs');
-				fs.writeFile("C:\\Users\\EricAlforque\\Desktop\\testcases\\Test 23 Request.xml", response.request.body.replace('\n', '').replace('\r', ''), function(err) {
+				fs.writeFile("./Test 18 Request.xml", response.request.body.replace('\n', '').replace('\r', ''), function(err) {
 					if(err) {
 						return console.log(err);
 					}
 					// console.log("The file was saved!");
 				}); 
 
-				fs.writeFile("C:\\Users\\EricAlforque\\Desktop\\testcases\\Test 23 Response.xml", response.body.replace('\n', '').replace('\r', ''), function(err) {
+				fs.writeFile("./Test 18 Response.xml", response.body.replace('\n', '').replace('\r', ''), function(err) {
 					if(err) {
 						return console.log(err);
 					}
@@ -90,14 +90,14 @@ let gainAccess = ({ product, user, organisation }, patient, accessType = "standa
 			(error, response, body) => {
 				//DEBUG
 				const fs = require('fs');
-				fs.writeFile("C:\\Users\\EricAlforque\\Desktop\\testcases\\Test 30 Request.xml", response.request.body.replace('\n', '').replace('\r', ''), function(err) {
+				fs.writeFile("./Test 31 Request.xml", response.request.body.replace('\n', '').replace('\r', ''), function(err) {
 					if(err) {
 						return console.log(err);
 					}
 					// console.log("The file was saved!");
 				}); 
 
-				fs.writeFile("C:\\Users\\EricAlforque\\Desktop\\testcases\\Test 30 Response.xml", response.body.replace('\n', '').replace('\r', ''), function(err) {
+				fs.writeFile("./Test 31 Response.xml", response.body.replace('\n', '').replace('\r', ''), function(err) {
 					if(err) {
 						return console.log(err);
 					}
@@ -120,12 +120,12 @@ let gainAccess = ({ product, user, organisation }, patient, accessType = "standa
 						let xmlDoc = libxmljs.parseXml(body);
 						//todo: use namespaces rather than relying on wild card operators
 						resolve({
-							// response: {
-							// 	code: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='gainPCEHRAccessResponse']/*[local-name()='responseStatus']/*[local-name()='code']").text(),
-							// 	description: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='gainPCEHRAccessResponse']/*[local-name()='responseStatus']/*[local-name()='description']").text()
-							// },
+							response: {
+								code: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='gainPCEHRAccessResponse']/*[local-name()='responseStatus']/*[local-name()='code']").text(),
+								description: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='gainPCEHRAccessResponse']/*[local-name()='responseStatus']/*[local-name()='description']").text()
+							},
 							// patient: {
-							// 	ihiNumber: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='gainPCEHRAccessResponse']/*[local-name()='individual']/*[local-name()='ihiNumber']").text(),
+							// 	// ihiNumber: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='gainPCEHRAccessResponse']/*[local-name()='individual']/*[local-name()='ihiNumber']").text(),
 							// 	ihiRecordStatus: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='gainPCEHRAccessResponse']/*[local-name()='individual']/*[local-name()='ihiRecordStatus']").text(),
 							// 	ihiStatus: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='gainPCEHRAccessResponse']/*[local-name()='individual']/*[local-name()='ihiStatus']").text(),
 							// 	dateOfBirth: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='gainPCEHRAccessResponse']/*[local-name()='individual']/*[local-name()='dateOfBirth']").text(),

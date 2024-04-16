@@ -9,9 +9,21 @@ let ca = fs.readFileSync("./sample/entities/certificates/certificate_authorities
 
 // Assuming these functions return promises; using async/await for handling them.
 
+const filePath = './file.zip';
+
 async function runServices() {
   try {
-    const existResult = await services.myHealthRecord.getView({
+
+    let package_data = fs.readFile(filePath, (err, data) => {
+      if (err) {
+          console.error('Error reading file:', err);
+          return;
+      }
+      console.log("file read...")
+      return data;
+    });
+
+    const existResult = await services.myHealthRecord.uploadDocument({
       product: {
         vendor: "StrongRoom AI",
         name: "StrongCare",
@@ -51,114 +63,72 @@ async function runServices() {
       medicareNumber: "8003604570631431",
       name: "John Doe",
       dob: "1990-01-01",
-      ihi: "8003608166980706"
+      ihi: "8003608666976659"
     },
-    // -----------
-    // access code
-    // -----------
-    // "accessCode",
-    // "12345678",
-    
-    // -----------
-    // options for get document list
-    // -----------
-    // {
-    //   // serviceStopTimeTo: new Date(),
-    //   // serviceStopTimeFrom: new Date(2024,'01','01'),
-    //   documentTypes: [
-    //     '100.32044^^NCTIS Data Components',
-    //     '100.32047^^NCTIS Data Components',
-    //     '100.32046^^NCTIS Data Components',
-    //     '100.32049^^NCTIS Data Components',
-    //   ]
-    // },
+      // this is single document
+      {metadata: {
+        "creationTime": "20240313053310",
+        "serviceStartTime": "20200611013225",
+        "serviceStopTime": "20240313053310",
+        "sourcePatientId": "8003608666701594^^^&1.2.36.1.2001.1003.0&ISO",
+        "hash": "264e81560204758feb0ec3e5d7cb9d1ad28b306e",
+        "size": "47931",
+        "repositoryUniqueId": "1.2.36.1.2001.1007.10.8003640002000050",
+        "authorInstitution": {
+          "hl7": "MEDTESTORGSB120^^^^^^^^^1.2.36.1.2001.1003.0.8003629900019338",
+          "organizationName": "MEDTESTORGSB120",
+          "organizationIdentifier": "1.2.36.1.2001.1003.0.8003629900019338"
+        },
+        "authorPerson": {
+          "hl7": "^Jones^^^^Sir^^^&1.2.36.1.2001.1003.0.8003615833334118&ISO",
+          "familyName": "Jones",
+          "firstGivenName": "Christine",
+          "assigningAuthority": "&1.2.36.1.2001.1003.0.8003615833334118&ISO"
+        },
+        "authorSpecialty": "General Medical Practitioner",
+        "class": {
+          "code": "1.2.36.1.2001.1006.1.16473.14",
+          "codingScheme": "LOINC",
+          "displayName": "Event Summary"
+        },
+        "format": {
+          "codingScheme": "PCEHR_FormatCodes",
+          "displayName": "333"
+        },
+        "healthcareFacilityType": {
+          "code": "8511",
+          "codingScheme": "ANZSIC",
+          "displayName": "General Practice"
+        },
+        "practiceSetting": {
+          "code": "8511-3",
+          "codeSystem": "ANZSIC",
+          "displayName": "General practice medical clinic service"
+        },
+        "type": {
+          "code": "34133-9",
+          "codingScheme": "LOINC",
+          "displayName": "Event Summary"
+        },
+        "patientId": "8003608666701594",
+        "documentId": "1.2.36.3253193630.51542.18960.38486.113960358484453"
+      },
+      package: package_data
+    },     
 
-    // -----------
-    // view options
-    // -----------
-    {
-      from_date: new Date(2012,'01','01'),
-      end_date: new Date(2024,'04','01'),
-      view: "pathology",
-      version: "1.0",
-    },
-
-    // -----------
-    // remove document
-    // -----------
-    // '1.2.36.1241829446.42762.17357.45721.16782558161291',
-    // '1.3.16.2.38818.9999999999999999999999999999999',
-    // 'Withdrawn',
-
-
-
-
-
-
-
-
-      //this is single document
-      // {
-      //   "creationTime": "20240313053310",
-      //   "serviceStartTime": "20200611013225",
-      //   "serviceStopTime": "20240313053310",
-      //   "sourcePatientId": "8003608666701594^^^&1.2.36.1.2001.1003.0&ISO",
-      //   "hash": "264e81560204758feb0ec3e5d7cb9d1ad28b306e",
-      //   "size": "47931",
-      //   "repositoryUniqueId": "1.2.36.1.2001.1007.10.8003640002000050",
-      //   "authorInstitution": {
-      //     "hl7": "MEDTESTORGSB120^^^^^^^^^1.2.36.1.2001.1003.0.8003629900019338",
-      //     "organizationName": "MEDTESTORGSB120",
-      //     "organizationIdentifier": "1.2.36.1.2001.1003.0.8003629900019338"
-      //   },
-      //   "authorPerson": {
-      //     "hl7": "^Jones^^^^Sir^^^&1.2.36.1.2001.1003.0.8003615833334118&ISO",
-      //     "familyName": "Jones",
-      //     "firstGivenName": "Christine",
-      //     "assigningAuthority": "&1.2.36.1.2001.1003.0.8003615833334118&ISO"
-      //   },
-      //   "authorSpecialty": "General Medical Practitioner",
-      //   "class": {
-      //     "code": "1.2.36.1.2001.1006.1.16473.14",
-      //     "codingScheme": "LOINC",
-      //     "displayName": "Event Summary"
-      //   },
-      //   "format": {
-      //     "codingScheme": "PCEHR_FormatCodes",
-      //     "displayName": "Event Summary Report 3A"
-      //   },
-      //   "healthcareFacilityType": {
-      //     "code": "8511",
-      //     "codingScheme": "ANZSIC",
-      //     "displayName": "General Practice"
-      //   },
-      //   "practiceSetting": {
-      //     "code": "8511-3",
-      //     "codeSystem": "ANZSIC",
-      //     "displayName": "General practice medical clinic service"
-      //   },
-      //   "type": {
-      //     "code": "34133-9",
-      //     "codingScheme": "LOINC",
-      //     "displayName": "Event Summary"
-      //   },
-      //   "patientId": "8003608666701594",
-      //   "documentId": "2.25.235434944956345595199871874379337165199"
-      // }      
-
-      //Options to query document List
-      // {
-      //   serviceStopTimeTo: 		new Date(),
-      //   serviceStopTimeFrom:	new Date(2024,'01','01'),
-      //   // documentTypes: [
-      //   //   '60591-5^^LOINC',
-      //   //   '57133-1^^LOINC',
-      //   //   '51852-2^^LOINC',
-      //   //   '18842-5^^LOINC',
-      //   //   '34133-9^^LOINC',
-      //   //   '100.17042^^NCTIS'
-      //   // ]
-      // }
+      // Options to query document List
+      {
+        serviceStopTimeTo: 		new Date(),
+        serviceStopTimeFrom:	new Date(2024,'01','01'),
+        // documentTypes: [
+        //   '60591-5^^LOINC',
+        //   '57133-1^^LOINC',
+        //   '51852-2^^LOINC',
+        //   '18842-5^^LOINC',
+        //   '34133-9^^LOINC',
+        //   '100.17042^^NCTIS'
+        // ]
+      }
     );
     console.log('Result:', existResult);
 
