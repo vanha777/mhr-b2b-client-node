@@ -24,5 +24,5 @@ module.exports = {
 	diagnosticImagingReportMetadata,
 	diagnosticImagingReportSync,
 	diagnosticImagingReportAsync,
-	package
+	package: package .createPackage
 };

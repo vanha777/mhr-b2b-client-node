@@ -13,6 +13,6 @@
  */
 module.exports = {
 	myHealthRecord: 		require('./my-health-record/index'),
-	cda: 					require('./cda'),
+	cda: 					require('./cda/index'),
 	pdf:					require('./pdf')
 };

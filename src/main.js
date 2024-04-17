@@ -9,12 +9,48 @@ let ca = fs.readFileSync("./sample/entities/certificates/certificate_authorities
 
 // Assuming these functions return promises; using async/await for handling them.
 
-const filePath = './CdaPackageOutputFilePath.zip';
+const filePath = './doc.xml';
 
 async function runServices() {
   try {
 
     let package_data = await fs.promises.readFile(filePath);
+
+    const packageResult = await services.cda.package(
+      package_data.toString(), 
+      {
+        name: "Strong Room",
+        id: "4991012131",
+        contact: "info@cityhospital.com",
+        privatePem,
+        publicPem,
+        ca,
+        hpio,
+      },
+      {
+        IdType: "RA",
+        id: "49910121312",
+        name: [
+          {
+            user: "L",
+            family: "Farman",
+            given: ["Philip", "James"],
+            prefix: ["Mr"],
+            suffix: ["II"],
+          }
+        ],
+        hpii: "8003611566713495"
+        // hpio: ""
+      }
+    )
+
+    // console.log('Result:', packageResult);
+
+    fs.writeFile("./cda_package.zip", packageResult, function (err) {
+			if (err) {
+				return console.log(err);
+			}
+		});
 
     const existResult = await services.myHealthRecord.uploadDocument({
       product: {
@@ -109,7 +145,7 @@ async function runServices() {
         "documentId": "1.2.36.2250765283.8173.17322.48409.205351618934179"
         // "documentId": "'1.2.36.3253193630.51542.18960.38486.113960358484453"
       },
-      package: package_data
+      package: packageResult,
     },     
 
       // Options to query document List
@@ -126,6 +162,7 @@ async function runServices() {
         // ]
       }
     );
+
     console.log('Result:', existResult);
 
     // const accessResult = await services.gainAccess(/* parameters */);
@@ -142,6 +179,7 @@ async function runServices() {
 
     // const viewResult = await services.getView(/* parameters */);
     // console.log('getView result:', viewResult);
+  
   } catch (error) {
     console.error('An error occurred:', error);
   }

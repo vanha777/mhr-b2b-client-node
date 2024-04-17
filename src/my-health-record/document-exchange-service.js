@@ -848,8 +848,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 								'severity':		node.attr('severity').value(),
 								'location':		node.attr('location').value()
 							}}),
-							body
-
+							xmlContent
 						});
 					}
 				}catch (error) {
