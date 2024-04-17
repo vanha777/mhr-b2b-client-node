@@ -94,56 +94,56 @@ async function runServices() {
       dob: "1990-01-01",
       ihi: "8003608666976659"
     },
-      // this is single document
-      {metadata: {
-        "creationTime": "20240313053310",
-        "serviceStartTime": "20200611013225",
-        "serviceStopTime": "20240313053310",
-        "sourcePatientId": "8003608666701594^^^&1.2.36.1.2001.1003.0&ISO",
-        "hash": "264e81560204758feb0ec3e5d7cb9d1ad28b306e",
-        "size": "47931",
-        "name": "Event Summary",
-
+    // this is single document
+    {
+      "metadata": {
+          "creationTime": "201206201818",
+          "serviceStartTime": "201206201818",
+          "serviceStopTime": "201206201818",
+          "sourcePatientId": "8003608666976659^^^&1.2.36.1.2001.1003.0&ISO",
+          "hash": "264e81560204758feb0ec3e5d7cb9d1ad28b306e",
+          "size": "47931",
+          "name": "Event Summary",
+  
         "repositoryUniqueId": "1.2.36.1.2001.1007.10.8003640002000050",
-        "authorInstitution": {
-          "authorInstitution": "MEDTESTORGSB120^^^^^^^^^1.2.36.1.2001.1003.0.8003629900019338",
-          "organizationName": "MEDTESTORGSB120",
-          "organizationIdentifier": "1.2.36.1.2001.1003.0.8003629900019338"
-        },
-        "authorPerson": {
-          "authorPerson": "^Jones^^^^Sir^^^&1.2.36.1.2001.1003.0.8003615833334118&ISO",
-          "familyName": "Jones",
-          "firstGivenName": "Christine",
-          "assigningAuthority": "&1.2.36.1.2001.1003.0.8003615833334118&ISO"
-        },
-        "authorSpecialty": "General Medical Practitioner",
-        "class": {
-          "code": "1.2.36.1.2001.1006.1.16473.14",
-          "codingScheme": "LOINC",
-          "displayName": "Event Summary"
-        },
-        "format": {
-          "codingScheme": "PCEHR_FormatCodes",
-          "displayName": "333"
-        },
-        "healthcareFacilityType": {
-          "code": "8511",
-          "codingScheme": "ANZSIC",
-          "displayName": "General Practice"
-        },
-        "practiceSetting": {
-          "code": "8511-3",
-          "codingScheme": "ANZSIC",
-          "displayName": "General practice medical clinic service"
-        },
-        "type": {
-          "code": "34133-9",
-          "codingScheme": "LOINC",
-          "displayName": "Event Summary"
-        },
-        "patientId": "8003608666976659",
-        "documentId": "1.2.36.2250765283.8173.17322.48409.205351618934179"
-        // "documentId": "'1.2.36.3253193630.51542.18960.38486.113960358484453"
+          "authorInstitution": {
+              "authorInstitution": "MediHomeCroydon^^^^^^^^^1.2.36.1.2001.1003.0.8003629900001245",
+              "organizationName": "MediHomeCroydon",
+              "organizationIdentifier": "1.2.36.1.2001.1003.0.8003629900001245"
+          },
+          "authorPerson": {
+              "authorPerson": "^Javad^Chris^^^^Sir^^^&1.2.36.1.2001.1003.0.8003613233333558&ISO",
+              "familyName": "Javad",
+              "firstGivenName": "Chris",
+              "assigningAuthority": "&1.2.36.1.2001.1003.0.8003613233333558&ISO"
+          },
+          "authorSpecialty": "General Medical Practitioner",
+          "class": {
+              "code": "1.2.36.1.2001.1006.1.16659.6",
+              "codingScheme": "LOINC",
+              "displayName": "Australian Childhood Immunisation Register"
+          },
+          "format": {
+              "codingScheme": "PCEHR_FormatCodes",
+              "displayName": "eDS"
+          },
+          "healthcareFacilityType": {
+              "code": "8511",
+              "codingScheme": "ANZSIC",
+              "displayName": "General Practice"
+          },
+          "practiceSetting": {
+              "code": "8511-3",
+              "codingScheme": "ANZSIC",
+              "displayName": "General practice medical clinic service"
+          },
+          "type": {
+              "code": "34133-9",
+              "codingScheme": "LOINC",
+              "displayName": "Event Summary"
+          },
+          "patientId": "8003608666976659",
+          "documentId": "1.3.16.1.38818.74789806"
       },
       package: packageResult,
     },     
