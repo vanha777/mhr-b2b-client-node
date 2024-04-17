@@ -1,19 +1,38 @@
-<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
-<soap:Header />
-<soap:Body>
-<soap:Fault>
-<soap:Code>
-<soap:Value>soap:Receiver</soap:Value>
-</soap:Code>
-<soap:Reason>
-<soap:Text xml:lang="en-AU">PCEHR_ERROR</soap:Text>
-</soap:Reason>
-<soap:Detail>
-<ns2:standardError xmlns:ns2="http://ns.electronichealth.net.au/wsp/xsd/StandardError/2010">
-<ns2:errorCode>badlyFormedMsg</ns2:errorCode>
-<ns2:message>messageBlocked</ns2:message>
-</ns2:standardError>
-</soap:Detail>
-</soap:Fault>
-</soap:Body>
-</soap:Envelope>
+<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope"><env:Header xmlns:wsa="http://www.w3.org/2005/08/addressing"><signature xmlns="http://ns.electronichealth.net.au/pcehr/xsd/common/CommonCoreElements/1.0"><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><ds:Reference URI="#_71a721d4-ce2b-4fd6-abc7-d90f3a07d98c"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>V5vy+fbfz9xjSbgxpenbAcGph18=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue>ZB4022MXWP2NBlWsvD7LnNeciwkkqMMuMZMKYcwBFrFEfonKn4Zn8AV55C3DyTCkznEgA0lVspOA&#13;
+oHUmMb8mXBUQ0QSAcWZo4N+2echQOIBExy7qFsypEezQbqTjIP8sXMJgG4sm0O2DBhPCb5Tzr4fc&#13;
+xFMttiuwtSuoKGFw1DX09Id6PHFIVXRPFoxXWNx0p1nTgc8EwjWKTqN0PBRNgXFFlRWEUUydKhm0&#13;
+lsYzes/iJBxED7PWJiA7zg40Tei2gcSMhmfwI9dHBUP0pO3kUnHYq5Iz1H2quhCzZJQoVs2xk3Ix&#13;
+ceBD3LwJKm+y0urXCwZFbKOlXQ8bM56//nhDHQ==</ds:SignatureValue><ds:KeyInfo><ds:X509Data><ds:X509Certificate>MIIHbDCCBlSgAwIBAgIQDIdCoR5IMoDKlkeANA5tVTANBgkqhkiG9w0BAQsFADBPMQswCQYDVQQG&#13;
+EwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMSkwJwYDVQQDEyBEaWdpQ2VydCBUTFMgUlNBIFNI&#13;
+QTI1NiAyMDIwIENBMTAeFw0yMzA1MDQwMDAwMDBaFw0yNDA1MDQyMzU5NTlaMIGTMQswCQYDVQQG&#13;
+EwJBVTEYMBYGA1UECBMPTmV3IFNvdXRoIFdhbGVzMQ8wDQYDVQQHEwZTeWRuZXkxKTAnBgNVBAoT&#13;
+IEF1c3RyYWxpYW4gRGlnaXRhbCBIZWFsdGggQWdlbmN5MS4wLAYDVQQDEyVzZXJ2aWNlcy5zaXQu&#13;
+Z3cubXloZWFsdGhyZWNvcmQuZ292LmF1MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA&#13;
+wGLr5CfS98hoYP468OZi76HM0eA3Vn0Ojb6YbwIGV3bhIJal5uRI8GsinXFif/pzA/s4Eqj9B6pM&#13;
+I/qRq5BtyCWpSckqnwtMewlA4+A0Uo1ES6UjD6rAYL/Pf5KraBbblt3j5II6gXpcRyNzU43o4J+U&#13;
+kwPU+Yh0pu+n0K7Nc4xzybouNl20QFWAcBKYUaYf/nsRD6D/EJjht6YJmBxQ3Dc76v36mSEnq/KE&#13;
+IkklEhM5VOkjnw/ei5e3aUHp96ll01zLdeU/jXTREXTQ812RRD1DX5AYyCFOGk4+pB+JOLkcH7vc&#13;
+utGEEVkFcCwpvTM3sZL+vz2t/vDUcJ9zsDij/QIDAQABo4ID/TCCA/kwHwYDVR0jBBgwFoAUt2ui&#13;
+6qiqhIx56rTaD5iyxZV2ufQwHQYDVR0OBBYEFElcjqsKeoVNxzcfhY3weF6asOSlMIGnBgNVHREE&#13;
+gZ8wgZyCJXNlcnZpY2VzLnNpdC5ndy5teWhlYWx0aHJlY29yZC5nb3YuYXWCJXNlcnZpY2VzLnBz&#13;
+cC5ndy5teWhlYWx0aHJlY29yZC5nb3YuYXWCJXNlcnZpY2VzLnBmYS5ndy5teWhlYWx0aHJlY29y&#13;
+ZC5nb3YuYXWCJXNlcnZpY2VzLnN2dC5ndy5teWhlYWx0aHJlY29yZC5nb3YuYXUwDgYDVR0PAQH/&#13;
+BAQDAgWgMB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjCBjwYDVR0fBIGHMIGEMECgPqA8&#13;
+hjpodHRwOi8vY3JsMy5kaWdpY2VydC5jb20vRGlnaUNlcnRUTFNSU0FTSEEyNTYyMDIwQ0ExLTQu&#13;
+Y3JsMECgPqA8hjpodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vRGlnaUNlcnRUTFNSU0FTSEEyNTYy&#13;
+MDIwQ0ExLTQuY3JsMD4GA1UdIAQ3MDUwMwYGZ4EMAQICMCkwJwYIKwYBBQUHAgEWG2h0dHA6Ly93&#13;
+d3cuZGlnaWNlcnQuY29tL0NQUzB/BggrBgEFBQcBAQRzMHEwJAYIKwYBBQUHMAGGGGh0dHA6Ly9v&#13;
+Y3NwLmRpZ2ljZXJ0LmNvbTBJBggrBgEFBQcwAoY9aHR0cDovL2NhY2VydHMuZGlnaWNlcnQuY29t&#13;
+L0RpZ2lDZXJ0VExTUlNBU0hBMjU2MjAyMENBMS0xLmNydDAJBgNVHRMEAjAAMIIBfgYKKwYBBAHW&#13;
+eQIEAgSCAW4EggFqAWgAdgDuzdBk1dsazsVct520zROiModGfLzs3sNRSFlGcR+1mwAAAYflm4as&#13;
+AAAEAwBHMEUCIAOAbZ8XFfFOjOcGmRepFtvr3N8ZWU8CDDK7ApJJ7WsHAiEAzvW88qqxr8iGX+V6&#13;
+t7kEaT9ZPokP2XdvicUOC3aGFSoAdwBz2Z6JG0yWeKAgfUed5rLGHNBRXnEZKoxrgBB6wXdytQAA&#13;
+AYflm4aUAAAEAwBIMEYCIQDMq3qaxMJsvcm3IrpAkqaqeMU+T1K091Y6FE3wvsQ/ewIhAOKu/5Yu&#13;
+x0W99z8M1hZENkAc1yPcppGRLUEHRpDq289ZAHUASLDja9qmRzQP5WoC+p0w6xxSActW3SyB2bu/&#13;
+qznYhHMAAAGH5ZuGfwAABAMARjBEAiAdhRonebIeg7h7IvwVzfd6lADpMPCwVhrPOf4u5piA/QIg&#13;
+R6Y0i26E0/6agdKHeYVQZ1yOcUk+IHoGsB55tMEI2B8wDQYJKoZIhvcNAQELBQADggEBACwykIQq&#13;
+FE1T9Oc7+fDIk0jMvlx0U4rbbERLkecnARZXRvtVuSKghmLyuPqwRtpgk1PHTjWuK0HRsty2LmT6&#13;
+JTGg0bcUwIt/rhSPjT3ya40EKhy6cFOekPdx7TPWscKRStgbmDzj7dEdajrKkna/WNiQ5HqDBef2&#13;
+EUFFNnbKd+0rTsUKoXYbiHiySURLCHhBEN2liJ4IM8kPBntiBq584vUs8o+VEkUN9ZBiODIK0fHw&#13;
+xmooaQ0a/5Q9uaUfavmhtZvbPHfus/hWy/BIbXtBoVG48oQpxc50NMOgtMivNfJ5Hpvgo6JQCIYg&#13;
++soDEadOQTsBFifjmzpYyhg3c+8F1YQ=</ds:X509Certificate></ds:X509Data></ds:KeyInfo></ds:Signature></signature><wsa:To env:mustUnderstand="true">http://www.w3.org/2005/08/addressing/anonymous</wsa:To><wsa:Action>urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-bResponse</wsa:Action><wsa:MessageID>e0a2e76c-136a-4544-afef-c035f18f1f5a</wsa:MessageID><wsa:RelatesTo>urn:uuid:b22b4a80-6c4b-4f69-9e4c-c5432be1dec1</wsa:RelatesTo></env:Header><env:Body xml:id="_71a721d4-ce2b-4fd6-abc7-d90f3a07d98c"><urn:RegistryResponse xmlns:urn="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" status="urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Failure"><urn:RegistryErrorList highestSeverity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error"><urn:RegistryError codeContext="PCEHR_ERROR_3001 - Invalid document folder structure" errorCode="XDSRepositoryError" location="PCEHR Interface" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error"/></urn:RegistryErrorList></urn:RegistryResponse></env:Body></env:Envelope>

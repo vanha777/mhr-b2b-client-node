@@ -9,7 +9,7 @@ let ca = fs.readFileSync("./sample/entities/certificates/certificate_authorities
 
 // Assuming these functions return promises; using async/await for handling them.
 
-const filePath = './application.zip';
+const filePath = './CdaPackageOutputFilePath.zip';
 
 async function runServices() {
   try {
