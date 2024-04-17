@@ -461,9 +461,9 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 				type: 'name',
 				source: 'metadata',
 				'name': 'name'
-
 			},
 			{
+				id: "cl01",
 				type: 'classification',
 				classifiedObject: "DOCUMENT_SYMBOLICID_01",
 				scheme: "urn:uuid:93606bcf-9494-43ec-9b4e-a7748d1a838d",
@@ -486,6 +486,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 				]
 			},
 			{
+				id: "cl02",
 				type: 'classification',
 				classifiedObject: "DOCUMENT_SYMBOLICID_01",
 				scheme: "urn:uuid:41a5887f-8865-4c09-adf7-e362475b143a",
@@ -505,6 +506,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 				]
 			},
 			{
+				id: "cl03",
 				type: 'classification',
 				classifiedObject: "DOCUMENT_SYMBOLICID_01",
 				scheme: "urn:uuid:f4f85eac-e6cb-4883-b524-f2705394840f",
@@ -523,10 +525,11 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 				]
 			},
 			{
+				id: "cl04",
 				type: 'classification',
 				classifiedObject: "DOCUMENT_SYMBOLICID_01",
 				scheme: "urn:uuid:a09d5840-386c-46f2-b5ad-9c3699a4309d",
-				dynamicNodeRepresentation: { value: "format", subvalue: "code" },
+				nodeRepresentation: "1.2.36.1.2001.1006.1.16473.14",
 				slots: [
 					{
 						name: "codingScheme",
@@ -542,6 +545,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 				]
 			},
 			{
+				id: "cl05",
 				type: 'classification',
 				classifiedObject: "DOCUMENT_SYMBOLICID_01",
 				scheme: "urn:uuid:f33fb8ac-18af-42cc-ae0e-ed0b0bdb91e1",
@@ -561,6 +565,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 				]
 			},
 			{
+				id: "cl06",
 				type: 'classification',
 				classifiedObject: "DOCUMENT_SYMBOLICID_01",
 				scheme: "urn:uuid:cccf5598-8b07-4b77-a05e-ae952c785ead",
@@ -569,7 +574,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 					{
 						name: "codingScheme",
 						value: "practiceSetting",
-						subvalue: "codeSystem"
+						subvalue: "codingScheme"
 					}
 				],
 				names: [
@@ -580,6 +585,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 				]
 			},
 			{
+				id: "cl07",
 				type: 'classification',
 				classifiedObject: "DOCUMENT_SYMBOLICID_01",
 				scheme: "urn:uuid:f0306f51-975f-434e-a61c-c59651d33983",
@@ -599,6 +605,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 				]
 			},
 			{
+				id: 'ei01',
 				type: 'externalIdentifier',
 				scheme: "urn:uuid:58a6f841-87b3-4a3e-92fd-a8ffeff98427",
 				value: "sourcePatientId",
@@ -609,6 +616,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 				]
 			},
 			{
+				id: 'ei02',
 				type: 'externalIdentifier',
 				scheme: "urn:uuid:2e82c1f6-a085-4c72-9da3-8640a32e42ab",
 				value: 'documentId',
@@ -633,6 +641,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 				'name': 'name'
 			},
 			{
+				id: "cl08",
 				type: 'classification',
 				classifiedObject: "SUBSET_SYMBOLICID_01",
 				scheme: "urn:uuid:a7058bb9-b4e4-4307-ba5b-e3f0ab85e12d",
@@ -655,6 +664,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 				]
 			},
 			{
+				id: "cl09",
 				type: 'classification',
 				classifiedObject: "SUBSET_SYMBOLICID_01",
 				scheme: "urn:uuid:aa543740-bdda-424e-8c96-df4873be8500",
@@ -673,8 +683,8 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 					}
 				]
 			},
-
 			{
+				id: 'ei03',
 				type: 'externalIdentifier',
 				scheme: "urn:uuid:96fdda7c-d067-4183-912e-bf5ee74998a8",
 				value: "documentId",
@@ -685,6 +695,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 				]
 			},
 			{
+				id: 'ei04',
 				type: 'externalIdentifier',
 				scheme: "urn:uuid:554ac39e-e3fe-47fe-b233-965d2a147832",
 				value: { value: 'authorInstitution', subvalue: "organizationIdentifier" },
@@ -695,6 +706,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 				]
 			},
 			{
+				id: 'ei05',
 				type: 'externalIdentifier',
 				scheme: "urn:uuid:6b5aea1a-874d-4603-a4bc-96a0a7b38446",
 				value: "sourcePatientId",
@@ -732,16 +744,16 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 
 		let processClassification = (item, document, index) => {
 			let processSlot = (slot) => {
-				return `<Slot name="${slot.name}"><ValueList><Value>${slot.subvalue ? document.metadata[slot.value][slot.subvalue] : slot.value ? document.metadata[slot.value] : slot.constant}</Value></ValueList></Slot>`
+				return `<Slot name="${slot.name}"><ValueList><Value>${slot.subvalue ? document.metadata[slot.value][slot.name] : slot.value ? document.metadata[slot.value] : slot.constant}</Value></ValueList></Slot>`
 			}
 			let processName = (name) => {
 				return `<Name><LocalizedString value="${name.subvalue ? document.metadata[name.value][name.subvalue] : name.value ? document.metadata[name.value] : name.constant}"/></Name>`;
 			}
-			return `<Classification classificationScheme="${item.scheme}" classifiedObject="${item.classifiedObject}" id="cl${index.toString().padStart(2, '0')}" nodeRepresentation="${item.dynamicNodeRepresentation ? typeof item.dynamicNodeRepresentation === 'string' ? document.metadata[item.dynamicNodeRepresentation.value] : document.metadata[item.dynamicNodeRepresentation.value][item.dynamicNodeRepresentation.subvalue] : item.nodeRepresentation}" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification">${item.slots ? item.slots.map(processSlot).join("") : ""}${item.names ? item.names.map(processName).join("") : ""}</Classification>`;
+			return `<Classification classificationScheme="${item.scheme}" classifiedObject="${item.classifiedObject}" id="${item.id}" nodeRepresentation="${item.dynamicNodeRepresentation ? typeof item.dynamicNodeRepresentation === 'string' ? document.metadata[item.dynamicNodeRepresentation.value] : document.metadata[item.dynamicNodeRepresentation.value][item.dynamicNodeRepresentation.subvalue] : item.nodeRepresentation}" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification">${item.slots ? item.slots.map(processSlot).join("") : ""}${item.names ? item.names.map(processName).join("") : ""}</Classification>`;
 		};
 
 		let processExternalIdentifier = (item, document, index) => {
-			return `<ExternalIdentifier id="ei${index}" identificationScheme="${item.scheme}" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="SUBSET_SYMBOLICID_01" value="${typeof item.value === 'string' ? document.metadata[item.value] : document.metadata[item.value.value][item.value.subvalue]}">${item.names.map(name => processName(name, document)).join("")}</ExternalIdentifier>`;
+			return `<ExternalIdentifier id="${item.id}" identificationScheme="${item.scheme}" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="SUBSET_SYMBOLICID_01" value="${typeof item.value === 'string' ? document.metadata[item.value] : document.metadata[item.value.value][item.value.subvalue]}">${item.names.map(name => processName(name, document)).join("")}</ExternalIdentifier>`;
 		};
 
 		let stableExtrinsicObjectMetadata = extrinsicObjectStructure.map((item, index) => {
@@ -763,8 +775,9 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 		let registryPackageMetadata = registryPackage.map((item, index) => {
 			if (item.type === 'slot') {
 				return { item: item, value: processSlot(item, document), type: "processSlot" };
-			} else if (item.type === 'name') {
-				return { item: item, value: processName(item, document), type: "processName" };
+			// }
+			//  else if (item.type === 'name') {
+			// 	return { item: item, value: processName(item, document), type: "processName" };
 			} else if (item.type === "classification") {
 				return { item: item, value: processClassification(item, document, index), type: "classification" };
 			} else if (item.type === "externalIdentifier") {
@@ -784,10 +797,10 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 		let packageReference = guid();
 
 		fs.writeFile("./Test 39 Request.xml", request, function (err) {
-					if (err) {
-						return console.log(err);
-					}
-				});
+			if (err) {
+				return console.log(err);
+			}
+		});
 
 		uploadDocumentMtom(request,
 			document.package,
@@ -804,40 +817,42 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 					}
 				});
 
-				try {
-					let xmlDoc = libxmljs.parseXml(httpResponse.headers["content-type"].includes("multipart") ? xop(httpResponse, body) : body.toString());
+				console.log(httpResponse.statusCode)
 
-					if ("urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Success" === xmlDoc.get("//soap:Envelope/soap:Body/ebxmlRegRep3:RegistryResponse/@status", namespaces).value()) {
-						resolve({
-							result: 'success',
-							document: { ...document, status: 'uploaded', uploadTime: new Date() }
-						});
-					} else {
-						reject({
-							result: "failed",
-							registryErrorList: xmlDoc.get("//soap:Envelope/soap:Body/ebxmlRegRep3:RegistryResponse/ebxmlRegRep3:RegistryErrorList", namespaces).childNodes().map(node => {
-								return {
-									'codeContext': node.attr('codeContext').value(),
-									'errorCode': node.attr('errorCode').value(),
-									'severity': node.attr('severity').value(),
-									'location': node.attr('location').value()
-								}
-							}),
-							body,
-							request
-						});
-					}
-				} catch (error) {
-					let xmlDoc = libxmljs.parseXml(body);
-					reject({
-						result: "error",
-						response: {
-							reason: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='Fault']/*[local-name()='Reason']/*[local-name()='Text']").text(),
-							message: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='Fault']/*[local-name()='Detail']/*[local-name()='standardError']/*[local-name()='message']").text(),
-							code: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='Fault']/*[local-name()='Detail']/*[local-name()='standardError']/*[local-name()='errorCode']").text()
-						},
-					})
-				}
+				// try {
+				// 	let xmlDoc = libxmljs.parseXml(httpResponse.headers["content-type"].includes("multipart") ? xop(httpResponse, body) : body.toString());
+
+				// 	if ("urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Success" === xmlDoc.get("//soap:Envelope/soap:Body/ebxmlRegRep3:RegistryResponse/@status", namespaces).value()) {
+				// 		resolve({
+				// 			result: 'success',
+				// 			document: { ...document, status: 'uploaded', uploadTime: new Date() }
+				// 		});
+				// 	} else {
+				// 		reject({
+				// 			result: "failed",
+				// 			registryErrorList: xmlDoc.get("//soap:Envelope/soap:Body/ebxmlRegRep3:RegistryResponse/ebxmlRegRep3:RegistryErrorList", namespaces).childNodes().map(node => {
+				// 				return {
+				// 					'codeContext': node.attr('codeContext').value(),
+				// 					'errorCode': node.attr('errorCode').value(),
+				// 					'severity': node.attr('severity').value(),
+				// 					'location': node.attr('location').value()
+				// 				}
+				// 			}),
+				// 			body,
+				// 			request
+				// 		});
+				// 	}
+				// } catch (error) {
+				// 	let xmlDoc = libxmljs.parseXml(body);
+				// 	reject({
+				// 		result: "error",
+				// 		response: {
+				// 			reason: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='Fault']/*[local-name()='Reason']/*[local-name()='Text']").text(),
+				// 			message: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='Fault']/*[local-name()='Detail']/*[local-name()='standardError']/*[local-name()='message']").text(),
+				// 			code: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='Fault']/*[local-name()='Detail']/*[local-name()='standardError']/*[local-name()='errorCode']").text()
+				// 		},
+				// 	})
+				// }
 			}
 
 

@@ -66,14 +66,16 @@ async function runServices() {
         "sourcePatientId": "8003608666701594^^^&1.2.36.1.2001.1003.0&ISO",
         "hash": "264e81560204758feb0ec3e5d7cb9d1ad28b306e",
         "size": "47931",
+        "name": "Event Summary",
+
         "repositoryUniqueId": "1.2.36.1.2001.1007.10.8003640002000050",
         "authorInstitution": {
-          "hl7": "MEDTESTORGSB120^^^^^^^^^1.2.36.1.2001.1003.0.8003629900019338",
+          "authorInstitution": "MEDTESTORGSB120^^^^^^^^^1.2.36.1.2001.1003.0.8003629900019338",
           "organizationName": "MEDTESTORGSB120",
           "organizationIdentifier": "1.2.36.1.2001.1003.0.8003629900019338"
         },
         "authorPerson": {
-          "hl7": "^Jones^^^^Sir^^^&1.2.36.1.2001.1003.0.8003615833334118&ISO",
+          "authorPerson": "^Jones^^^^Sir^^^&1.2.36.1.2001.1003.0.8003615833334118&ISO",
           "familyName": "Jones",
           "firstGivenName": "Christine",
           "assigningAuthority": "&1.2.36.1.2001.1003.0.8003615833334118&ISO"
@@ -95,7 +97,7 @@ async function runServices() {
         },
         "practiceSetting": {
           "code": "8511-3",
-          "codeSystem": "ANZSIC",
+          "codingScheme": "ANZSIC",
           "displayName": "General practice medical clinic service"
         },
         "type": {
@@ -103,7 +105,7 @@ async function runServices() {
           "codingScheme": "LOINC",
           "displayName": "Event Summary"
         },
-        "patientId": "8003608666701594",
+        "patientId": "8003608666976659",
         "documentId": "1.2.36.3253193630.51542.18960.38486.113960358484453"
       },
       package: package_data
