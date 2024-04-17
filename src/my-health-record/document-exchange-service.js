@@ -783,7 +783,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 			} else if (item.type === "externalIdentifier") {
 				return { item: item.type, value: processExternalIdentifier(item, document, index), type: "externalIdentifier" };
 			} else {
-				return { item: item, value: "not processed", type: "else" };
+				return { item: item, value: "", type: "else" };
 			}
 		});
 
@@ -802,12 +802,75 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 			}
 		});
 
-		uploadDocumentMtom(request,
-			document.package,
-			`http://document/${packageReference}`,
-			organisation,
+		// uploadDocumentMtom(request,
+		// 	document.package,
+		// 	`http://document/${packageReference}`,
+		// 	organisation,
+		// 	(error, httpResponse, body) => {
+		// 		if (error) {
+		// 			reject(error);
+		// 		}
+
+		// 		console.log(httpResponse)
+
+		// 		fs.writeFile("./Test 39 Response.xml", body, function (err) {
+		// 			if (err) {
+		// 				return console.log(err);
+		// 			}
+		// 		});
+
+		// 		console.log(httpResponse.statusCode)
+
+		// 		// try {
+		// 		// 	let xmlDoc = libxmljs.parseXml(httpResponse.headers["content-type"].includes("multipart") ? xop(httpResponse, body) : body.toString());
+
+		// 		// 	if ("urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Success" === xmlDoc.get("//soap:Envelope/soap:Body/ebxmlRegRep3:RegistryResponse/@status", namespaces).value()) {
+		// 		// 		resolve({
+		// 		// 			result: 'success',
+		// 		// 			document: { ...document, status: 'uploaded', uploadTime: new Date() }
+		// 		// 		});
+		// 		// 	} else {
+		// 		// 		reject({
+		// 		// 			result: "failed",
+		// 		// 			registryErrorList: xmlDoc.get("//soap:Envelope/soap:Body/ebxmlRegRep3:RegistryResponse/ebxmlRegRep3:RegistryErrorList", namespaces).childNodes().map(node => {
+		// 		// 				return {
+		// 		// 					'codeContext': node.attr('codeContext').value(),
+		// 		// 					'errorCode': node.attr('errorCode').value(),
+		// 		// 					'severity': node.attr('severity').value(),
+		// 		// 					'location': node.attr('location').value()
+		// 		// 				}
+		// 		// 			}),
+		// 		// 			body,
+		// 		// 			request
+		// 		// 		});
+		// 		// 	}
+		// 		// } catch (error) {
+		// 		// 	let xmlDoc = libxmljs.parseXml(body);
+		// 		// 	reject({
+		// 		// 		result: "error",
+		// 		// 		response: {
+		// 		// 			reason: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='Fault']/*[local-name()='Reason']/*[local-name()='Text']").text(),
+		// 		// 			message: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='Fault']/*[local-name()='Detail']/*[local-name()='standardError']/*[local-name()='message']").text(),
+		// 		// 			code: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='Fault']/*[local-name()='Detail']/*[local-name()='standardError']/*[local-name()='errorCode']").text()
+		// 		// 		},
+		// 		// 	})
+		// 		// }
+		// 	}
+
+
+		// );
+
+
+		executeRequest(organisation, "uploadDocument",
+			signRequest(
+				buildUnsignedB2BRequest(
+					buildHeader(product, user, organisation, patient, "urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b"),
+					`<ProvideAndRegisterDocumentSetRequest xmlns="urn:ihe:iti:xds-b:2007"><SubmitObjectsRequest xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0"><RegistryObjectList xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0"><ExtrinsicObject id="DOCUMENT_SYMBOLICID_01" mimeType="application/zip" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">${stableExtrinsicObjectMetadata.map(item => item.value).join('')}</ExtrinsicObject><RegistryPackage id="SUBSET_SYMBOLICID_01" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:RegistryPackage">${registryPackageMetadata.map(item => item.value).join('')}</RegistryPackage><Classification classificationNode="urn:uuid:a54d6aa5-d40d-43f9-88c5-b4633d873bdd" classifiedObject="SUBSET_SYMBOLICID_01" id="cl10" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification"/><Association associationType="urn:oasis:names:tc:ebxml-regrep:AssociationType:HasMember" id="as01" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Association" sourceObject="SUBSET_SYMBOLICID_01" targetObject="DOCUMENT_SYMBOLICID_01"><Slot name="SubmissionSetStatus"><ValueList><Value>Original</Value></ValueList></Slot></Association></RegistryObjectList></SubmitObjectsRequest><Document id="DOCUMENT_SYMBOLICID_01">${document.package.toString('base64')}</Document></ProvideAndRegisterDocumentSetRequest>`
+				),
+				organisation
+			),
 			(error, httpResponse, body) => {
-				if (error) {
+				if (error){
 					reject(error);
 				}
 
@@ -816,97 +879,38 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 						return console.log(err);
 					}
 				});
-
-				console.log(httpResponse.statusCode)
-
+				
 				// try {
+
 				// 	let xmlDoc = libxmljs.parseXml(httpResponse.headers["content-type"].includes("multipart") ? xop(httpResponse, body) : body.toString());
 
-				// 	if ("urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Success" === xmlDoc.get("//soap:Envelope/soap:Body/ebxmlRegRep3:RegistryResponse/@status", namespaces).value()) {
+				// 	if ("urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Success" === xmlDoc.get("//soap:Envelope/soap:Body/ebxmlRegRep3:RegistryResponse/@status", namespaces).value()){
 				// 		resolve({
 				// 			result: 'success',
-				// 			document: { ...document, status: 'uploaded', uploadTime: new Date() }
+				// 			document: {...document, status: 'uploaded'}
 				// 		});
-				// 	} else {
+				// 	}else{
 				// 		reject({
 				// 			result: "failed",
-				// 			registryErrorList: xmlDoc.get("//soap:Envelope/soap:Body/ebxmlRegRep3:RegistryResponse/ebxmlRegRep3:RegistryErrorList", namespaces).childNodes().map(node => {
-				// 				return {
-				// 					'codeContext': node.attr('codeContext').value(),
-				// 					'errorCode': node.attr('errorCode').value(),
-				// 					'severity': node.attr('severity').value(),
-				// 					'location': node.attr('location').value()
-				// 				}
-				// 			}),
-				// 			body,
-				// 			request
+				// 			registryErrorList: 	xmlDoc.get("//soap:Envelope/soap:Body/ebxmlRegRep3:RegistryResponse/ebxmlRegRep3:RegistryErrorList",namespaces).childNodes().map(node => {return {
+				// 				'codeContext':	node.attr('codeContext').value(),
+				// 				'errorCode':	node.attr('errorCode').value(),
+				// 				'severity':		node.attr('severity').value(),
+				// 				'location':		node.attr('location').value()
+				// 			}}),
+				// 			body
+
 				// 		});
 				// 	}
-				// } catch (error) {
-				// 	let xmlDoc = libxmljs.parseXml(body);
+				// }catch (error) {
 				// 	reject({
 				// 		result: "error",
-				// 		response: {
-				// 			reason: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='Fault']/*[local-name()='Reason']/*[local-name()='Text']").text(),
-				// 			message: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='Fault']/*[local-name()='Detail']/*[local-name()='standardError']/*[local-name()='message']").text(),
-				// 			code: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='Fault']/*[local-name()='Detail']/*[local-name()='standardError']/*[local-name()='errorCode']").text()
-				// 		},
-				// 	})
+				// 		body: body
+				// 	});
 				// }
-			}
-
-
-		);
-
-
-		/*
 				
-				executeRequest(organisation, "uploadDocument",
-					signRequest(
-						buildUnsignedB2BRequest(
-							buildHeader(product, user, organisation, patient, "urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b"),
-							`<ProvideAndRegisterDocumentSetRequest xmlns="urn:ihe:iti:xds-b:2007"><SubmitObjectsRequest xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0"><RegistryObjectList xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0"><ExtrinsicObject id="DOCUMENT_SYMBOLICID_01" mimeType="application/zip" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">${stableExtrinsicObjectMetadata.map(item => item.value).join('')}</ExtrinsicObject><RegistryPackage id="SUBSET_SYMBOLICID_01" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:RegistryPackage">${registryPackageMetadata.map(item => item.value).join('')}</RegistryPackage><Classification classificationNode="urn:uuid:a54d6aa5-d40d-43f9-88c5-b4633d873bdd" classifiedObject="SUBSET_SYMBOLICID_01" id="cl10" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification"/><Association associationType="urn:oasis:names:tc:ebxml-regrep:AssociationType:HasMember" id="as01" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Association" sourceObject="SUBSET_SYMBOLICID_01" targetObject="DOCUMENT_SYMBOLICID_01"><Slot name="SubmissionSetStatus"><ValueList><Value>Original</Value></ValueList></Slot></Association></RegistryObjectList></SubmitObjectsRequest><Document id="DOCUMENT_SYMBOLICID_01">${document.package.toString('base64')}</Document></ProvideAndRegisterDocumentSetRequest>`
-						),
-						organisation
-					),
-					(error, httpResponse, body) => {
-						if (error){
-							reject(error);
-						}
-		
-						
-						try {
-		
-							let xmlDoc = libxmljs.parseXml(httpResponse.headers["content-type"].includes("multipart") ? xop(httpResponse, body) : body.toString());
-		
-							if ("urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Success" === xmlDoc.get("//soap:Envelope/soap:Body/ebxmlRegRep3:RegistryResponse/@status", namespaces).value()){
-								resolve({
-									result: 'success',
-									document: {...document, status: 'uploaded'}
-								});
-							}else{
-								reject({
-									result: "failed",
-									registryErrorList: 	xmlDoc.get("//soap:Envelope/soap:Body/ebxmlRegRep3:RegistryResponse/ebxmlRegRep3:RegistryErrorList",namespaces).childNodes().map(node => {return {
-										'codeContext':	node.attr('codeContext').value(),
-										'errorCode':	node.attr('errorCode').value(),
-										'severity':		node.attr('severity').value(),
-										'location':		node.attr('location').value()
-									}}),
-									body
-		
-								});
-							}
-						}catch (error) {
-							reject({
-								result: "error",
-								body: body
-							});
-						}
-						
-					}
-				);
-		*/
+			}
+		);
 
 	});
 }

@@ -9,7 +9,7 @@ let ca = fs.readFileSync("./sample/entities/certificates/certificate_authorities
 
 // Assuming these functions return promises; using async/await for handling them.
 
-const filePath = './file.zip';
+const filePath = './application.zip';
 
 async function runServices() {
   try {
@@ -106,7 +106,8 @@ async function runServices() {
           "displayName": "Event Summary"
         },
         "patientId": "8003608666976659",
-        "documentId": "1.2.36.3253193630.51542.18960.38486.113960358484453"
+        "documentId": "1.2.36.2250765283.8173.17322.48409.205351618934179"
+        // "documentId": "'1.2.36.3253193630.51542.18960.38486.113960358484453"
       },
       package: package_data
     },     
