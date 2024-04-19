@@ -529,7 +529,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 				type: 'classification',
 				classifiedObject: "DOCUMENT_SYMBOLICID_01",
 				scheme: "urn:uuid:a09d5840-386c-46f2-b5ad-9c3699a4309d",
-				nodeRepresentation: "1.2.36.1.2001.1006.1.16473.14",
+				nodeRepresentation: "1.2.36.1.2001.1006.1.16615.27", // this is template id
 				slots: [
 					{
 						name: "codingScheme",

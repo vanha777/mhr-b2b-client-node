@@ -10,17 +10,29 @@ let ca = fs.readFileSync("./sample/entities/certificates/certificate_authorities
 const	shasum = require('crypto').createHash('sha1');
 
 const filePath = './doc.xml';
+const attachmentPath = './NCFU.pdf';
 
 async function runServices() {
   try {
 
     let package_data = await fs.promises.readFile(filePath);
+    let attachment = await fs.promises.readFile(attachmentPath);
+    console.log("attached file: ", attachment);
 
     const now = new Date();
     const formattedDate = now.toISOString()
         .replace(/[-:T]/g, '')
         .slice(0, 14) + "00";
 
+    let documentObjectId = "36-2501047616-37544-18039-36495-170410403036301";
+
+    let documentId = '2.25.'+BigInt('0x'+documentObjectId.replace(/-/g,'')).toString()
+
+    console.log(documentId);
+
+    // shasum.update(attachment);
+      
+    // console.log("Digest of the attachment: ", shasum.digest('base64'),)
 
     const packageResult = await services.cda.package(
       package_data.toString(),
@@ -47,7 +59,13 @@ async function runServices() {
         ],
         hpii: "8003611566713495"
         // hpio: ""
-      }
+      },
+      [
+        {
+          "filename": "NCFU.pdf", 
+          "buffer": attachment  
+        }
+      ]
     )
 
     shasum.update(packageResult);
@@ -103,7 +121,7 @@ async function runServices() {
       // this is single document
       {
         "metadata": {
-          "creationTime": formattedDate,
+          "creationTime": "20240321",
           "serviceStartTime": "20240321",
           "serviceStopTime": "202403210",
           "sourcePatientId": "8003608666976659^^^&1.2.36.1.2001.1003.0&ISO",
@@ -148,7 +166,7 @@ async function runServices() {
             "displayName": "Event Summary"
           },
           "patientId": "8003608666976659",
-          "documentId": "1.2.36.2501047616.37544.18039.36495.170410403036301"
+          "documentId": "1.2.36.2501047616.37544.18039.36495.170410403036329" // documentId = CheckNullValue(cdaDocument.SelectSingleNode("/cda:ClinicalDocument/cda:id/@root", xnm));
         },
         package: packageResult,
       },
