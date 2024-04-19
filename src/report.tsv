@@ -1,0 +1,15 @@
+Input File Name	Test Date	Template Name	Template Id	Template Version	Template Effective Date	Conformance Level	Test Context	Package Errors	Package Warnings	Template Errors	Template Warnings	Additional Rules Issues	Additional Rules Warnings	Reference Set Errors	Reference Set Warnings	Other Terminology Errors	Other Terminology Warnings	Summary	
+doc.xml	19/04/2024 10:52:38 AM	Specialist Letter	1.2.36.1.2001.1006.1.16615.28	35416	2014-08-27T12:00:00+10:00	1A	MHR	0	0	6	0	0	0	0	0	0	0	Fail	
+doc.xml	19/04/2024 10:52:59 AM	Specialist Letter	1.2.36.1.2001.1006.1.16615.28	35416	2014-08-27T12:00:00+10:00	1A	MHR	0	0	6	0	0	0	0	0	0	0	Fail	
+doc.xml	19/04/2024 10:58:41 AM	Specialist Letter	1.2.36.1.2001.1006.1.16615.28	35416	2014-08-27T12:00:00+10:00	1A	MHR	0	0	6	0	0	0	0	0	0	0	Fail	
+doc.xml	19/04/2024 10:58:58 AM	Specialist Letter	1.2.36.1.2001.1006.1.16615.28	35416	2014-08-27T12:00:00+10:00	1A	MHR	0	0	6	0	0	0	0	0	0	0	Fail	
+doc.xml	19/04/2024 11:04:40 AM	Specialist Letter	1.2.36.1.2001.1006.1.16615.28	35416	2014-08-27T12:00:00+10:00	1A	MHR	0	0	5	0	0	0	0	0	0	0	Fail	
+doc.xml	19/04/2024 11:05:43 AM	Specialist Letter	1.2.36.1.2001.1006.1.16615.28	35416	2014-08-27T12:00:00+10:00	1A	MHR	0	0	4	0	0	0	0	0	0	0	Fail	
+doc.xml	19/04/2024 11:06:21 AM	Specialist Letter	1.2.36.1.2001.1006.1.16615.28	35416	2014-08-27T12:00:00+10:00	1A	MHR	0	0	2	0	0	0	0	0	0	0	Fail	
+doc.xml	19/04/2024 11:06:56 AM	Specialist Letter	1.2.36.1.2001.1006.1.16615.28	35416	2014-08-27T12:00:00+10:00	1A	MHR	0	0	0	0	0	0	0	0	0	0	Pass	
+doc.xml	19/04/2024 11:10:56 AM	Specialist Letter	1.2.36.1.2001.1006.1.16615.28	35416	2014-08-27T12:00:00+10:00	1A	MHR	0	0	0	0	0	0	0	0	0	0	Pass	
+doc.xml	19/04/2024 11:11:42 AM	Specialist Letter	1.2.36.1.2001.1006.1.16615.28	35416	2014-08-27T12:00:00+10:00	1A	MHR	0	0	0	0	0	0	0	0	0	0	Pass	
+doc.xml	19/04/2024 11:12:00 AM	Specialist Letter	1.2.36.1.2001.1006.1.16615.28	35416	2014-08-27T12:00:00+10:00	1A	MHR	0	0	0	0	0	0	0	0	0	0	Pass	
+doc.xml	19/04/2024 11:35:32 AM	Specialist Letter	1.2.36.1.2001.1006.1.16615.28	35416	2014-08-27T12:00:00+10:00	1A	MHR	0	0	0	0	0	0	0	0	0	0	Pass	
+cda_package.zip	19/04/2024 11:36:01 AM	Specialist Letter	1.2.36.1.2001.1006.1.16615.28	35416	2014-08-27T12:00:00+10:00	1A	MHR	7	0	0	0	0	0	0	0	0	0	Fail	
+cda_package.zip	19/04/2024 11:40:06 AM	Specialist Letter	1.2.36.1.2001.1006.1.16615.28	35416	2014-08-27T12:00:00+10:00	1A	MHR	7	0	0	0	0	0	0	0	0	0	Fail	

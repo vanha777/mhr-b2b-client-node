@@ -1,4 +1,4 @@
-const	shasum = require('crypto').createHash('sha256');
+const	shasum = require('crypto').createHash('sha1');
 let		guid = require('uuid').v4;
 let		moment = require('moment');
 const	SignedXml = require('xml-crypto').SignedXml;

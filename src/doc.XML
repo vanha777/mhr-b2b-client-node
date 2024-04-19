@@ -1,190 +1,181 @@
-<?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet href="genericNew.xsl" type="text/xsl"?>
-<!--
-ACN: KHK 19-Nov-2012 - Medicare ACIR template from official Medicare document. Cannot be uploaded via B2B, must fire into HTB directly.
-Static Level 2/3 content
--->
-<!-- TRUE COMMENT -->
-<!--
-Created by: McDagger V2.37 @22-Jan-2013 16:49 PM run 22-Jan-2013 18:18 PM by kah-hoe.kwa
-Do not edit this SOAP/Metadata file or its associated CDA since it was machine generated.
-
-PBS generated from ACIR_V112 (22-Jan-2013 11:11 AM)
-
-Template:      1.2.36.1.2001.1006.1.16659.6 (conformance 3A)
-LOINC:         100.16681
-
-Index name:    Event Summary        
-Date:          20120620 (201206201818)
-
-Patient:       Miss Rose Child 
-IHI:           8003608166686493
-DOB:           201105191818 (20110519)
-
-Author:        Dr. Chris Javad 
-HPI-I:         8003613233333558
-       
-Organisation:  MediHome Croydon
-HPI-O:         8003629900001245
-
-Intended for:  SVT
-B2B  office:   https://b2b.ehealthvendortest.health.gov.au/ uploadDocument
-Mode:          test
-
- effectiveTime:   20120620
-         NoUTC:   201206201818
-           UTC:   201206201818+1000
- admissionTime:   20120620
-         NoUTC:   201206201818
-           UTC:   201206201818+1000 
-     startTime:   20120620
-         NoUTC:   201206201818
-           UTC:   201206201818+1000     
- dischargeTime:   20120620
-         NoUTC:   201206201818
-           UTC:   201206201818+1000 
-      stopTime:   20120620
-         NoUTC:   201206201818
-           UTC:   201206201818       
-submissionTime:   201301221818+1000
-         NoUTC:   201301221818
-           UTC:   201301221818+1000
-     birthTime:   20110519
-         NoUTC:   201105191818
-           UTC:   201105191818+1000        
-           DOB:   20110519
-         NoUTC:   201105191818
-           UTC:   201105191818+1000           
-        DOBAus:   19-May-2011
-     deathtime:   
-         NoUTC:   
-           UTC:        
-        VMTime:   22-Jan-2013 11:11 AM
-       created:   22-Jan-2013 18:18 PM
-               
--->
-<ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:ns2="http://ns.electronichealth.net.au/Ci/Cda/Extensions/3.0">
-  <typeId extension="POCD_HD000040" root="2.16.840.1.113883.1.3" />
-  <templateId extension="1.1" root="1.2.36.1.2001.1001.101.100.1002.144" />
-  <templateId extension="1.0" root="1.2.36.1.2001.1001.100.149" />
-  <id root="1.3.16.1.38818.74789806" />
-  <code displayName="Australian Childhood Immunisation Register" codeSystemName="NCTIS Data Components" codeSystem="1.2.36.1.2001.1001.101" code="100.16659" />
-  <effectiveTime value="201206201818+1000" />
+<ClinicalDocument xmlns:ext="http://ns.electronichealth.net.au/Ci/Cda/Extensions/3.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="urn:hl7-org:v3">
+  <!-- Begin Common Header Part -->
+  <typeId root="2.16.840.1.113883.1.3" extension="POCD_HD000040" />
+  <templateId root="1.2.36.1.2001.1001.101.100.1002.132" extension="1.3" />
+  <templateId root="1.2.36.1.2001.1001.100.149" extension="1.0" />
+  <id root="1.2.36.2501047616.37544.18039.36495.170410403036301" />
+  <code code="51852-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Letter" />
+  <title>Specialist Letter</title>
+  <effectiveTime value="20240321"/>
   <confidentialityCode nullFlavor="NA" />
-  <ns2:completionCode displayName="Final" codeSystemName="NCTIS Document Status Values" codeSystem="1.2.36.1.2001.1001.101.104.20104" code="F" />
-  <recordTarget>
-    <patientRole>
-      <id nullFlavor="NA" />
+  <languageCode code="en-AU" />
+  <setId root="C438EF1E-5125-4DB5-8E7E-CE30AD046A41" />
+  <versionNumber value="1" />
+  <ext:completionCode code="F" codeSystem="1.2.36.1.2001.1001.101.104.20104" codeSystemName="NCTIS Document Status Values" displayName="Final"/>
+  <!-- End Common Header Part -->
+  <!-- Begin recordTarget -->
+  <recordTarget typeCode="RCT">
+    <patientRole classCode="PAT">
+      <id root="8B2932C4-AD01-426D-935B-E3C463E8BAFD" />
+      <!-- Address -->
+      <addr use="H">
+        <streetAddressLine>14 KONRAD GR</streetAddressLine>
+        <city>AINSLIE</city>
+        <state>ACT</state>
+        <postalCode>2602</postalCode>
+      </addr>
       <patient>
-        <name>
-          <family>Child</family>
-          <given>Rose</given> 
+        <name use="L">
+          <given>NA</given>
+          <family>NA</family>
         </name>
-        <administrativeGenderCode displayName="Female" codeSystemName="AS 5017-2006 Health Care Client Identifier Sex" codeSystem="2.16.840.1.113883.13.68" code="F" />
-        <birthTime value="20110519" />
-        <ns2:asEntityIdentifier classCode="IDENT">
-          <ns2:id assigningAuthorityName="IHI" root="1.2.36.1.2001.1003.0.8003608666976659" />
-        </ns2:asEntityIdentifier>
+        <administrativeGenderCode code="N" codeSystem="2.16.840.1.113883.13.68" codeSystemName="AS 5017-2006 Health Care Client Identifier Sex" displayName="Not Stated/Inadequately Described" />
+        <birthTime value="19581009" />
+        <ethnicGroupCode code="9" codeSystem="2.16.840.1.113883.3.879.291036" codeSystemName="METeOR Indigenous Status" displayName="Not stated/inadequately described"/>
+        <ext:deceasedInd value="false"/>
+        <ext:asEntityIdentifier classCode="IDENT">
+          <ext:id root="1.2.36.1.2001.1003.0.8003608666976659" assigningAuthorityName="IHI" />
+          <ext:assigningGeographicArea classCode="PLC">
+            <ext:name>National Identifier</ext:name>
+          </ext:assigningGeographicArea>
+        </ext:asEntityIdentifier>
       </patient>
     </patientRole>
   </recordTarget>
-  <author>
-    <time value="201206201818+1000" />
+  <!-- End recordTarget -->
+  <!-- Begin author -->
+  <author typeCode="AUT">
+    <time value="20240321"/>
     <assignedAuthor>
-      <id nullFlavor="NA" />
-      <code nullFlavor="NA" />
-      <assignedAuthoringDevice>
-        <softwareName>DHS Medicare Repository Services</softwareName>
-        <ns2:asEntityIdentifier classCode="IDENT">
-          <ns2:id assigningAuthorityName="PAI-D" root="1.2.36.1.2001.1007.20.8003640003000018" />
-        </ns2:asEntityIdentifier>
-      </assignedAuthoringDevice>
+      <id root="3A151B56-AF80-492B-8901-A8F16EF144E4" />
+      <code code="253111" codeSystem="2.16.840.1.113883.13.62" codeSystemName="1220.0 - ANZSCO - Australian and New Zealand Standard Classification of Occupations, First Edition, 2006" displayName="General Medical Practitioner" />
+      <addr use="WP">
+        <streetAddressLine>1 Clinician Street</streetAddressLine>
+        <city>Nehtaville</city>
+        <state>QLD</state>
+        <postalCode>5555</postalCode>
+        <country>Australia</country>
+      </addr>
+      <telecom value="tel: 0400000000" use="WP" />
+      <assignedPerson>
+        <name>
+          <given>Maisie</given>
+          <family>FORD</family>
+        </name>
+        <!-- HPII based Employee Identifier -->
+        <ext:asEntityIdentifier classCode="IDENT">
+          <ext:id root="1.2.36.1.2001.1003.0.8003611566713495" assigningAuthorityName="HPI-I" />
+          <ext:assigningGeographicArea classCode="PLC">
+            <ext:name>National Identifier</ext:name>
+          </ext:assigningGeographicArea>
+        </ext:asEntityIdentifier>
+        <ext:asEmployment classCode="EMP">
+          <ext:employerOrganization>
+            <name use="ORGL">Tes Health Service 838</name>
+            <asOrganizationPartOf>
+              <wholeOrganization>
+                <name use="ORGL">Tes Health Service 838</name>
+                <ext:asEntityIdentifier classCode="IDENT">
+                  <ext:id root="1.2.36.1.2001.1003.0.8003623233372670" assigningAuthorityName="HPI-O" />
+                  <ext:assigningGeographicArea classCode="PLC">
+                    <ext:name>National Identifier</ext:name>
+                  </ext:assigningGeographicArea>
+                </ext:asEntityIdentifier>
+              </wholeOrganization>
+            </asOrganizationPartOf>
+          </ext:employerOrganization>
+        </ext:asEmployment>
+      </assignedPerson>
     </assignedAuthor>
   </author>
+  <!-- End author -->
+  <!-- Begin custodian -->
   <custodian>
     <assignedCustodian>
       <representedCustodianOrganization>
-        <id nullFlavor="NA" />
-        <ns2:asEntityIdentifier classCode="IDENT">
-          <ns2:id assigningAuthorityName="PAI-O" root="1.2.36.1.2001.1007.1.8003640001000010" />
-        </ns2:asEntityIdentifier>
+        <id root="E61669E6-2D08-4821-960D-9E93026DE979"/>
+        <name>Tes Health Service 838</name>
+        <ext:asEntityIdentifier classCode="IDENT">
+          <ext:id root="1.2.36.1.2001.1003.0.8003623233372670" assigningAuthorityName="HPI-O" />
+        </ext:asEntityIdentifier>
       </representedCustodianOrganization>
     </assignedCustodian>
   </custodian>
+  <!-- End custodian -->
+  <participant typeCode="REFB">
+    <time value="20240321" />
+    <associatedEntity classCode="ASSIGNED">
+      <id root="D1AE110F-E0FE-4038-A5C8-155CC2894920" />
+      <code code="253111" codeSystem="2.16.840.1.113883.13.62" codeSystemName="1220.0 - ANZSCO - Australian and New Zealand Standard Classification of Occupations, First Edition, 2006" displayName="General Medical Practitioner" />
+      <addr use="WP">
+        <streetAddressLine>1 Clinician Street</streetAddressLine>
+        <city>Nehtaville</city>
+        <state>QLD</state>
+        <postalCode>5555</postalCode>
+        <country>Australia</country>
+      </addr>
+      <telecom value="tel: 0400000000" use="WP" />
+      <associatedPerson >
+        <name>
+          <prefix>Dr.</prefix>
+          <given>Allen</given>
+          <family>Smith</family>
+          <suffix>Jr.</suffix>
+        </name>
+        <!-- HPII based Employee Identifier -->
+        <ext:asEntityIdentifier classCode="IDENT">
+          <ext:id root="1.2.36.1.2001.1003.0.8003611566713495" assigningAuthorityName="HPI-I" />
+          <ext:assigningGeographicArea classCode="PLC">
+            <ext:name>National Identifier</ext:name>
+          </ext:assigningGeographicArea>
+        </ext:asEntityIdentifier>
+        <ext:asEmployment classCode="EMP">
+          <ext:employerOrganization>
+            <name use="ORGL">Tes Health Service 838</name>
+            <asOrganizationPartOf>
+              <wholeOrganization>
+                <name use="ORGL">Tes Health Service 838</name>
+                <ext:asEntityIdentifier classCode="IDENT">
+                  <ext:id root="1.2.36.1.2001.1003.0.8003623233372670" assigningAuthorityName="HPI-O" />
+                  <ext:assigningGeographicArea classCode="PLC">
+                    <ext:name>National Identifier</ext:name>
+                  </ext:assigningGeographicArea>
+                </ext:asEntityIdentifier>
+              </wholeOrganization>
+            </asOrganizationPartOf>
+          </ext:employerOrganization>
+        </ext:asEmployment>
+      </associatedPerson>
+    </associatedEntity>
+  </participant>
+  <!-- Begin Encounter Period -->
+  <componentOf>
+    <encompassingEncounter>
+      <effectiveTime xsi:type="IVL_TS">
+        <width value="3" unit="wk"/>
+      </effectiveTime>
+    </encompassingEncounter>
+  </componentOf>
+  <!-- End Encounter Period -->
   <component>
     <structuredBody>
       <component>
         <section>
-          <code displayName="Australian Childhood Immunisation Register Entries" codeSystemName="NCTIS Data Components" codeSystem="1.2.36.1.2001.1001.101" code="101.16658" />
-          <title>Australian Childhood Immunisation Register Entries</title>
-          <text>
-            <table>
-              <tbody>
-                <tr>
-                  <th>Vaccine Code</th>
-                  <th>Vaccine</th>
-                  <th>Protection Against</th>
-                  <th>Date Administered</th>
-                  <th>Dose Number</th>
-                </tr>
-                <tr>
-                  <td>HBVP</td>
-                  <td>HBVAX II</td>
-                  <td>Hepatitis B (paediatric)</td>
-                  <td>20/06/2012</td>
-                  <td>1</td>
-                </tr>
-              </tbody>
-            </table>
-          </text>
-          <entry typeCode="DRIV">
-            <substanceAdministration moodCode="EVN" classCode="SBADM">
-              <id nullFlavor="NA" />
-              <effectiveTime value="201206201818+1000" />
-              <consumable typeCode="CSM">
-                <manufacturedProduct classCode="MANU">
-                  <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
-                    <code displayName="HBVAX II" codeSystemName="Australian Vaccine Code" codeSystem="1.2.36.1.2001.1005.17" code="HBVP" />
-                    <ns2:asIngredient classCode="INGR">
-                      <ns2:ingredientManufacturedMaterial determinerCode="KIND" classCode="MMAT">
-                        <ns2:code nullFlavor="NA">
-                          <originalText>Hepatitis B (Paediatric)</originalText>
-                        </ns2:code>
-                      </ns2:ingredientManufacturedMaterial>
-                    </ns2:asIngredient>
-                  </manufacturedMaterial>
-                </manufacturedProduct>
-              </consumable>
-              <entryRelationship typeCode="COMP">
-                <sequenceNumber value="1" />
-                <supply moodCode="EVN" classCode="SPLY">
-                  <independentInd value="false" />
-                </supply>
-              </entryRelationship>
-            </substanceAdministration>
-          </entry>
-        </section>
-      </component>
-      <component>
-        <section>
-          <code displayName="Administrative Observations" codeSystemName="NCTIS Data Components" codeSystem="1.2.36.1.2001.1001.101" code="102.16080" />
-          <title>Administrative Observations</title>
-          <text>
-            <table>
-              <tbody>
-                <tr>
-                  <th>Age when record was created</th>
-                  <td>1 year</td>
-                </tr>
-              </tbody>
-            </table>
+          <title>Attached Content</title>
+          <text mediaType="text/x-hl7-text+xml">
+            <renderMultiMedia referencedObject="c12070dc-bf5d-4961-a694-a919b2a6a16d">
+              <caption>Structured Body File</caption>
+            </renderMultiMedia>
           </text>
           <entry>
-            <observation moodCode="EVN" classCode="OBS">
-              <id nullFlavor="NA" />
-              <code displayName="Age" codeSystemName="NCTIS Data Components" codeSystem="1.2.36.1.2001.1001.101" code="103.20109" />
-              <value xsi:type="PQ" unit="a" value="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" />
-            </observation>
+            <observationMedia ID="c12070dc-bf5d-4961-a694-a919b2a6a16d" classCode="OBS" moodCode="EVN">
+              <id root="79693654-3d41-4e12-90f6-2ea6e4c02896" />
+              <value mediaType="application/pdf" integrityCheck="NPdy0GkAHgvThLC95bUSXThuw9M=">
+                <reference value="NCFU.pdf" />
+              </value>
+            </observationMedia>
           </entry>
         </section>
       </component>
