@@ -166,7 +166,7 @@ async function runServices() {
             "displayName": "Event Summary"
           },
           "patientId": "8003608666976659",
-          "documentId": "1.2.36.2501047616.37544.18039.36495.170410403036329" // documentId = CheckNullValue(cdaDocument.SelectSingleNode("/cda:ClinicalDocument/cda:id/@root", xnm));
+          "documentId": "1.2.36.2501047616.37544.18039.36495.170410403036391" // documentId = CheckNullValue(cdaDocument.SelectSingleNode("/cda:ClinicalDocument/cda:id/@root", xnm));
         },
         package: packageResult,
       },

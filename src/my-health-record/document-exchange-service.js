@@ -852,12 +852,13 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 						});
 					}
 				}catch (error) {
-					let xmlDoc = libxmljs.parseXml(xmlContent);
-					reject({
-						result: "error",
-						code: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RegistryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute("errorCode").value(),
-						message: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RegistryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute("codeContext").value(),
-					});
+					console.log(xmlContent);
+					// let xmlDoc = libxmljs.parseXml(xmlContent);
+					// reject({
+					// 	result: "error",
+					// 	code: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RegistryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute("errorCode").value(),
+					// 	message: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RegistryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute("codeContext").value(),
+					// });
 				}
 				
 			}
