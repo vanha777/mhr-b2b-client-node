@@ -51,8 +51,8 @@ async function runServices() {
         name: [
           {
             user: "L",
-            family: "Farman",
-            given: ["Philip", "James"],
+            family: "FORD",
+            given: ["Maisie"],
             prefix: ["Mr"],
             suffix: ["II"],
           }
@@ -114,9 +114,9 @@ async function runServices() {
       {
         id: "patient-001",
         medicareNumber: "8003604570631431",
-        name: "John Doe",
-        dob: "1990-01-01",
-        ihi: "8003608666976659"
+        name: "Naomi KERR",
+        dob: "1994-09-20",
+        ihi: "8003608333647477"
       },
       // this is single document
       {
@@ -124,7 +124,7 @@ async function runServices() {
           "creationTime": "20240321",
           "serviceStartTime": "20240321",
           "serviceStopTime": "202403210",
-          "sourcePatientId": "8003608666976659^^^&1.2.36.1.2001.1003.0&ISO",
+          "sourcePatientId": "8003608333647477^^^&1.2.36.1.2001.1003.0&ISO",
           "hash": shasum.digest('base64'),
           "size": packageResult.byteLength,
           "name": "Specialist Letter",
@@ -142,9 +142,9 @@ async function runServices() {
           },
           "authorSpecialty": "General Medical Practitioner",
           "class": {
-            "code": "2.16.840.1.113883.6.1",
-            "codingScheme": "LOINC",
-            "displayName": "Letter"
+            "code": "80565-5",
+            "codingScheme": "NCTIS Data Components",
+            "displayName": "Residential Care Medication Chart"
           },
           "format": {
             "codingScheme": "PCEHR_FormatCodes",
@@ -161,12 +161,12 @@ async function runServices() {
             "displayName": "General practice medical clinic service"
           },
           "type": {
-            "code": "34133-9",
-            "codingScheme": "LOINC",
-            "displayName": "Event Summary"
+            "code": "100.32046",
+            "codingScheme": "NCTIS Data Components",
+            "displayName": "Residential Care Medication Chart"
           },
-          "patientId": "8003608666976659",
-          "documentId": "1.2.36.2501047616.37544.18039.36495.170410403036391" // documentId = CheckNullValue(cdaDocument.SelectSingleNode("/cda:ClinicalDocument/cda:id/@root", xnm));
+          "patientId": "8003608333647477",
+          "documentId": "1.2.36.2501047616.37544.18039.36495.1704104030363948" // documentId = CheckNullValue(cdaDocument.SelectSingleNode("/cda:ClinicalDocument/cda:id/@root", xnm));
         },
         package: packageResult,
       },

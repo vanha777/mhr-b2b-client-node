@@ -3,31 +3,28 @@
   xmlns="urn:hl7-org:v3">
   <!-- Begin Common Header Part -->
   <typeId root="2.16.840.1.113883.1.3" extension="POCD_HD000040" />
-  <templateId root="1.2.36.1.2001.1001.101.100.1002.132" extension="1.3" />
-  <templateId root="1.2.36.1.2001.1001.100.149" extension="1.0" />
-  <id root="1.2.36.2501047616.37544.18039.36495.170410403036391" />
-  <code code="51852-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
-    displayName="Letter" />
-  <title>Specialist Letter</title>
+  <templateId root="1.2.36.1.2001.1001.100.1002.218" extension="1.1" />
+  <templateId root="1.2.36.1.2001.1001.100.1002.32046" extension="1.0" />
+  <templateId extension="1.0" root="1.2.36.1.2001.1001.100.149" />
+  <id root="1.2.36.2501047616.37544.18039.36495.1704104030363948" />
+  <code code="100.32046" codeSystem="1.2.36.1.2001.1001.101" codeSystemName="NCTIS Data Components" displayName="Residential Care Medication Chart" />
+  <title>Residential Care Medication Chart</title>
   <effectiveTime value="20240321" />
   <confidentialityCode nullFlavor="NA" />
   <languageCode code="en-AU" />
   <setId root="C438EF1E-5125-4DB5-8E7E-CE30AD046A41" />
-  <versionNumber value="1" />
-  <ext:completionCode code="F" codeSystem="1.2.36.1.2001.1001.101.104.20104"
-    codeSystemName="NCTIS Document Status Values" displayName="Final" />
+  <versionNumber value="40712" />
+  <ext:completionCode code="F" codeSystem="1.2.36.1.2001.1001.101.104.20104" codeSystemName="NCTIS Document Status Values" displayName="Final" />
   <!-- End Common Header Part -->
   <!-- Begin recordTarget -->
   <recordTarget typeCode="RCT">
     <patientRole classCode="PAT">
-      <id root="8B2932C4-AD01-426D-935B-E3C463E8BAFD" />
+      <id root="09D3396D-6345-4C1C-A9FE-7756C0E4BAFA" />
       <addr use="H">
-        <streetAddressLine>1 Patient Street</streetAddressLine>
-        <city>Nehtaville</city>
+        <streetAddressLine>106 Barn Rvr</streetAddressLine>
+        <city>Chahpingah</city>
         <state>QLD</state>
-        <postalCode>5555</postalCode>
-        <additionalLocator>32568931</additionalLocator>
-        <country>Australia</country>
+        <postalCode>4610</postalCode>
       </addr>
       <telecom use="H" value="tel:0499999999" />
       <patient>
@@ -35,15 +32,12 @@
           <given>NA</given>
           <family>NA</family>
         </name>
-        <administrativeGenderCode code="N" codeSystem="2.16.840.1.113883.13.68"
-          codeSystemName="AS 5017-2006 Health Care Client Identifier Sex"
-          displayName="Not Stated/Inadequately Described" />
-        <birthTime value="19581009" />
-        <ethnicGroupCode code="9" codeSystem="2.16.840.1.113883.3.879.291036"
-          codeSystemName="METeOR Indigenous Status" displayName="Not stated/inadequately described" />
+        <administrativeGenderCode code="N" codeSystem="2.16.840.1.113883.13.68" codeSystemName="AS 5017-2006 Health Care Client Identifier Sex" displayName="Not Stated/Inadequately Described" />
+        <birthTime value="19940920" />
+        <ethnicGroupCode code="9" codeSystem="1.2.36.1.2001.1004.200.10012" codeSystemName="METeOR Indigenous Status" displayName="Not stated/inadequately described" />
         <ext:deceasedInd value="false" />
         <ext:asEntityIdentifier classCode="IDENT">
-          <ext:id root="1.2.36.1.2001.1003.0.8003608666976659" assigningAuthorityName="IHI" />
+          <ext:id root="1.2.36.1.2001.1003.0.8003608333647477" assigningAuthorityName="IHI" />
           <ext:assigningGeographicArea classCode="PLC">
             <ext:name>National Identifier</ext:name>
           </ext:assigningGeographicArea>
@@ -56,9 +50,7 @@
     <time value="200910201235+1000" />
     <assignedAuthor>
       <id root="3A151B56-AF80-492B-8901-A8F16EF144E4" />
-      <code code="253111" codeSystem="2.16.840.1.113883.13.62"
-        codeSystemName="1220.0 - ANZSCO - Australian and New Zealand Standard Classification of Occupations, First Edition, 2006"
-        displayName="General Medical Practitioner" />
+      <code code="253111" codeSystem="2.16.840.1.113883.13.62" codeSystemName="1220.0 - ANZSCO - Australian and New Zealand Standard Classification of Occupations, First Edition, 2006" displayName="General Medical Practitioner" />
       <addr use="WP">
         <streetAddressLine>1 Clinician Street</streetAddressLine>
         <city>Nehtaville</city>
@@ -87,8 +79,7 @@
               <wholeOrganization>
                 <name use="ORGL">Tes Health Service 838</name>
                 <ext:asEntityIdentifier classCode="IDENT">
-                  <ext:id root="1.2.36.1.2001.1003.0.8003623233372670"
-                    assigningAuthorityName="HPI-O" />
+                  <ext:id root="1.2.36.1.2001.1003.0.8003623233372670" assigningAuthorityName="HPI-O" />
                   <ext:assigningGeographicArea classCode="PLC">
                     <ext:name>National Identifier</ext:name>
                   </ext:assigningGeographicArea>
@@ -101,17 +92,14 @@
     </assignedAuthor>
   </author>
   <!-- End author -->
-
   <!-- Begin legalAuthenticator -->
   <!-- <legalAuthenticator>
     <time value="200910201235+1000" />
     <signatureCode code="S" />
     <assignedEntity>
       <id root="123F9366-78EC-11DF-861B-EE24DFD72085" />
-      <code code="253111" codeSystem="2.16.840.1.113883.13.62"
-        codeSystemName="1220.0 - ANZSCO - Australian and New Zealand Standard Classification of
-  Occupations, First Edition, Revision 1"
-        displayName="General Medical Practitioner" />
+      <code code="253111" codeSystem="2.16.840.1.113883.13.62" codeSystemName="1220.0 - ANZSCO - Australian and New Zealand Standard Classification of
+  Occupations, First Edition, Revision 1" displayName="General Medical Practitioner" />
       <addr use="WP">
         <streetAddressLine>1 Clinician Street</streetAddressLine>
         <city>Nehtaville</city>
@@ -144,8 +132,6 @@
     </assignedEntity>
   </legalAuthenticator> -->
   <!-- End legalAuthenticator -->
-
-
   <!-- Begin custodian -->
   <custodian>
     <assignedCustodian>
@@ -159,13 +145,11 @@
     </assignedCustodian>
   </custodian>
   <!-- End custodian -->
-  <participant typeCode="REFB">
-    <time value="20240321" />
-    <associatedEntity classCode="ASSIGNED">
+  <participant typeCode="PART">
+    <functionCode code="PCP" />
+    <associatedEntity classCode="PROV">
       <id root="D1AE110F-E0FE-4038-A5C8-155CC2894920" />
-      <code code="253111" codeSystem="2.16.840.1.113883.13.62"
-        codeSystemName="1220.0 - ANZSCO - Australian and New Zealand Standard Classification of Occupations, First Edition, 2006"
-        displayName="General Medical Practitioner" />
+      <code code="253111" codeSystem="2.16.840.1.113883.13.62" codeSystemName="1220.0 - ANZSCO - Australian and New Zealand Standard Classification of Occupations, First Edition, 2006" displayName="General Medical Practitioner" />
       <addr use="WP">
         <streetAddressLine>1 Clinician Street</streetAddressLine>
         <city>Nehtaville</city>
@@ -195,8 +179,7 @@
               <wholeOrganization>
                 <name use="ORGL">Tes Health Service 838</name>
                 <ext:asEntityIdentifier classCode="IDENT">
-                  <ext:id root="1.2.36.1.2001.1003.0.8003623233372670"
-                    assigningAuthorityName="HPI-O" />
+                  <ext:id root="1.2.36.1.2001.1003.0.8003623233372670" assigningAuthorityName="HPI-O" />
                   <ext:assigningGeographicArea classCode="PLC">
                     <ext:name>National Identifier</ext:name>
                   </ext:assigningGeographicArea>
@@ -221,166 +204,17 @@
   <!-- End Encounter Period -->
   <component>
     <structuredBody>
-      <!-- Start Response Details section -->
       <component>
         <section>
-          <code code="101.16611"
-            codeSystem="1.2.36.1.2001.1001.101"
-            codeSystemName="NCTIS Data Components"
-            displayName="Response Details" />
-          <title>Response Details</title>
-          <text>...</text>
-
-          <!-- Start Procedure -->
-          <entry>
-            <procedure classCode="PROC" moodCode="EVN">
-              <id root="B8EF5108-5BF2-11E0-B728-A6F8DFD72085" />
-              <code code="397956004"
-                codeSystem="2.16.840.1.113883.6.96"
-                codeSystemName="SNOMED-CT"
-                displayName="hip replacement" />
-            </procedure>
-          </entry>
-          <!-- End Procedure -->
-
-          <!-- Begin Diagnosis -->
-          <entry><!-- [diag] -->
-            <observation classCode="OBS" moodCode="EVN">
-              <!-- ID is used for system purposes such as matching -->
-              <id root="81FEB786-C465-11DE-B347-E8CA56D89593" />
-              <code code="282291009"
-                codeSystem="2.16.840.1.113883.6.96"
-                codeSystemName="Snomed CT-AU"
-                displayName="Diagnosis interpretation" />
-              <!-- Diagnosis Identification -->
-              <value xsi:type="CD"
-                code="236629009"
-                codeSystem="2.16.840.1.113883.6.96"
-                codeSystemName="SNOMED-CT"
-                codeSystemVersion="20090731"
-                displayName="Chronic radiation cystitis" />
-            </observation>
-          </entry>
-          <!-- End Diagnosis -->
-
-          <!-- Begin Other Diagnosis Procedure Entry One -->
-          <entry>
-            <act classCode="ACT" moodCode="EVN">
-              <!-- ID is used for system purposes such as matching -->
-              <id root="39655E76-C465-11DE-8B04-0BC756D89593" />
-              <code code="102.15513.132.1.1"
-                codeSystem="1.2.36.1.2001.1001.101"
-                codeSystemName="NCTIS Data Components"
-                displayName="Other Diagnosis Procedure Entry" />
-              <!-- Other Diagnosis Procedure Entry Description -->
-              <text xsi:type="ST">Text description of first Diagnosis Procedure Entry</text>
-            </act>
-          </entry>
-          <!-- End Other Diagnosis Procedure Entry One-->
-          <!-- Begin Other Diagnosis Procedure Entry Two -->
-          <entry>
-            <act classCode="ACT" moodCode="EVN">
-              <!-- ID is used for system purposes such as matching -->
-              <id root="39655E76-C465-11DE-8B04-0BC756D84443" />
-              <code code="102.15513.132.1.1"
-                codeSystem="1.2.36.1.2001.1001.101"
-                codeSystemName="NCTIS Data Components"
-                displayName="Other Diagnosis Procedure Entry" />
-              <!-- Other Diagnosis Procedure Entry Description -->
-              <text xsi:type="ST">Text description of second Diagnosis Procedure Entry </text>
-            </act>
-          </entry>
-          <!-- End Other Diagnosis Procedure Entry Two-->
-
-          <!-- Begin Narrative -->
-          <entry>
-            <act classCode="ACT" moodCode="EVN">
-              <!-- ID is used for system purposes such as matching -->
-              <id root="39655E76-C465-11DE-8B04-0BC756D89593" />
-              <code code="102.15513.132.1.2"
-                codeSystem="1.2.36.1.2001.1001.101"
-                codeSystemName="NCTIS Data Components"
-                displayName="Response Narrative" />
-              <!-- Response Narrative -->
-              <text xsi:type="ST">Text description of the Narrative</text>
-            </act>
-          </entry>
-          <!-- End Narrative -->
-        </section>
-      </component>
-      <!-- End Response Details Section -->
-      <!-- Begin Administrative Observations section -->
-      <component><!-- [admin_obs] -->
-        <section>
-          <id root="88CDBCA4-EFD1-11DF-8DE4-E4CDDFD72085" />
-          <code code="102.16080"
-            codeSystem="1.2.36.1.2001.1001.101"
-            codeSystemName="NCTIS Data Components"
-            displayName="Administrative Observations" />
-          <title>Administrative Observations</title>
-          <!-- Narrative text for Administrative Observations -->
-          <text>Hello</text>
-        </section>
-      </component><!-- [admin_obs] -->
-      <!-- End Administrative Observations section -->
-
-      <!-- Begin Recommendations section -->
-      <component>
-        <section>
-          <code code="101.16606"
-            codeSystem="1.2.36.1.2001.1001.101"
-            codeSystemName="NCTIS Data Components"
-            displayName="Recommendations" />
-          <title>Recommendations</title>
-          <text>...</text>
-
-          <!-- Recommendations Exclusion -->
-          <entry>
-            <observation classCode="OBS" moodCode="EVN">
-              <code code="102.16134" codeSystem="1.2.36.1.2001.1001.101"
-                codeSystemName="NCTIS Data Components" displayName="Recommendations Exclusion" />
-              <value xsi:type="ST">No Recommendations.</value>
-            </observation>
-          </entry>
-          <!-- End Recommendations Exclusion -->
-        </section>
-      </component>
-      <!-- End Recommendations section -->
-
-      <!-- Begin Medications section -->
-      <component><!-- [meds] -->
-        <section>
-          <code code="101.16146"
-            codeSystem="1.2.36.1.2001.1001.101"
-            codeSystemName="NCTIS Data Components"
-            displayName="Medications" />
-          <title>Medications</title>
-          <text>...</text>
-          <!-- Exclusion Statement - Medications -->
-          <entry>
-            <observation classCode="OBS" moodCode="EVN">
-              <code code="103.16302.132.1.1" codeSystem="1.2.36.1.2001.1001.101"
-                codeSystemName="NCTIS Data Components"
-                displayName="Global Statement" />
-              <value code="01" codeSystem="1.2.36.1.2001.1001.101.104.16299"
-                codeSystemName="NCTIS Global Statement Values"
-                displayName="None known" xsi:type="CD" />
-            </observation>
-          </entry>
-          <!-- End Exclusion Statement - Medications -->
-        </section>
-      </component>
-      <component>
-        <section>
-          <title>Attached Content</title>
-          <text mediaType="text/x-hl7-text+xml">
-            <renderMultiMedia referencedObject="c12070dc-bf5d-4961-a694-a919b2a6a16d">
-              <caption>Structured Body File</caption>
-            </renderMultiMedia>
+          <templateId root="1.2.36.1.2001.1001.101.101.16886"/>
+          <id root="ba2fcd7a-e4b2-43ab-b5f6-33aeb7e38552" />
+          <title>Referral to Bob</title>
+          <text>
+            <renderMultiMedia referencedObject="MM1"/>
           </text>
           <entry>
-            <observationMedia ID="c12070dc-bf5d-4961-a694-a919b2a6a16d" classCode="OBS"
-              moodCode="EVN">
+            <templateId root="1.2.36.1.2001.1001.101.102.16883"/>
+            <observationMedia ID="MM1" classCode="OBS" moodCode="EVN">
               <id root="79693654-3d41-4e12-90f6-2ea6e4c02896" />
               <value mediaType="application/pdf" integrityCheck="C0/XBGWcpUCHEldRxJ7fvGIPjQQ=">
                 <reference value="NCFU.pdf" />

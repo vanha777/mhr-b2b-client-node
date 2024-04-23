@@ -529,7 +529,10 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 				type: 'classification',
 				classifiedObject: "DOCUMENT_SYMBOLICID_01",
 				scheme: "urn:uuid:a09d5840-386c-46f2-b5ad-9c3699a4309d",
-				nodeRepresentation: "1.2.36.1.2001.1006.1.16615.27", // this is template id
+				// this is template for Special Letter
+				// nodeRepresentation: "1.2.36.1.2001.1006.1.16473.14", // this is template id
+				nodeRepresentation: "1.2.36.1.2001.1006.1.32046.2",
+				//1.2.36.1.2001.1006.1.32046.2
 				slots: [
 					{
 						name: "codingScheme",
@@ -775,9 +778,9 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 		let registryPackageMetadata = registryPackage.map((item, index) => {
 			if (item.type === 'slot') {
 				return { item: item, value: processSlot(item, document), type: "processSlot" };
-			// }
-			//  else if (item.type === 'name') {
-			// 	return { item: item, value: processName(item, document), type: "processName" };
+				// }
+				//  else if (item.type === 'name') {
+				// 	return { item: item, value: processName(item, document), type: "processName" };
 			} else if (item.type === "classification") {
 				return { item: item, value: processClassification(item, document, index), type: "classification" };
 			} else if (item.type === "externalIdentifier") {
@@ -790,7 +793,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 		let request = signRequest(
 			buildUnsignedB2BRequest(
 				buildHeader(product, user, organisation, patient, "urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b"),
-				`<ProvideAndRegisterDocumentSetRequest xmlns="urn:ihe:iti:xds-b:2007"><SubmitObjectsRequest xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0"><RegistryObjectList xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0"><ExtrinsicObject id="DOCUMENT_SYMBOLICID_01" mimeType="application/zip" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">${stableExtrinsicObjectMetadata.map(item => item.value).join('')}</ExtrinsicObject><RegistryPackage id="SUBSET_SYMBOLICID_01" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:RegistryPackage">${registryPackageMetadata.map(item => item.value).join('')}</RegistryPackage><Classification classificationNode="urn:uuid:a54d6aa5-d40d-43f9-88c5-b4633d873bdd" classifiedObject="SUBSET_SYMBOLICID_01" id="cl10" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification"/><Association associationType="urn:oasis:names:tc:ebxml-regrep:AssociationType:HasMember" id="as01" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Association" sourceObject="SUBSET_SYMBOLICID_01" targetObject="DOCUMENT_SYMBOLICID_01"><Slot name="SubmissionSetStatus"><ValueList><Value>Original</Value></ValueList></Slot></Association></RegistryObjectList></SubmitObjectsRequest><Document id="DOCUMENT_SYMBOLICID_01">${document.package.toString('base64')}</Document></ProvideAndRegisterDocumentSetRequest>`
+				`<ProvideAndRegisterDocumentSetRequest xmlns="urn:ihe:iti:xds-b:2007"><SubmitObjectsRequest xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0"><RegistryObjectList xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0"><ExtrinsicObject id="DOCUMENT_SYMBOLICID_01" mimeType="application/zip" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">${stableExtrinsicObjectMetadata.map(item => item.value).join('')}</ExtrinsicObject><RegistryPackage id="SUBSET_SYMBOLICID_01" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:RegistryPackage">${registryPackageMetadata.map(item => item.value).join('')}</RegistryPackage><Classification classificationNode="urn:uuid:a54d6aa5-d40d-43f9-88c5-b4633d873bdd" classifiedObject="SUBSET_SYMBOLICID_01" id="cl10" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" /><Association associationType="urn:oasis:names:tc:ebxml-regrep:AssociationType:HasMember" id="as01" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Association" sourceObject="SUBSET_SYMBOLICID_01" targetObject="DOCUMENT_SYMBOLICID_01"><Slot name="SubmissionSetStatus"><ValueList><Value>Original</Value></ValueList></Slot></Association></RegistryObjectList></SubmitObjectsRequest><Document id="DOCUMENT_SYMBOLICID_01">${document.package.toString('base64')}</Document></ProvideAndRegisterDocumentSetRequest>`
 			), organisation
 		);
 
@@ -810,15 +813,9 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 		};
 
 		executeRequest(organisation, "uploadDocument",
-			signRequest(
-				buildUnsignedB2BRequest(
-					buildHeader(product, user, organisation, patient, "urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b"),
-					`<ProvideAndRegisterDocumentSetRequest xmlns="urn:ihe:iti:xds-b:2007"><SubmitObjectsRequest xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0"><RegistryObjectList xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0"><ExtrinsicObject id="DOCUMENT_SYMBOLICID_01" mimeType="application/zip" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">${stableExtrinsicObjectMetadata.map(item => item.value).join('')}</ExtrinsicObject><RegistryPackage id="SUBSET_SYMBOLICID_01" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:RegistryPackage">${registryPackageMetadata.map(item => item.value).join('')}</RegistryPackage><Classification classificationNode="urn:uuid:a54d6aa5-d40d-43f9-88c5-b4633d873bdd" classifiedObject="SUBSET_SYMBOLICID_01" id="cl10" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification"/><Association associationType="urn:oasis:names:tc:ebxml-regrep:AssociationType:HasMember" id="as01" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Association" sourceObject="SUBSET_SYMBOLICID_01" targetObject="DOCUMENT_SYMBOLICID_01"><Slot name="SubmissionSetStatus"><ValueList><Value>Original</Value></ValueList></Slot></Association></RegistryObjectList></SubmitObjectsRequest><Document id="DOCUMENT_SYMBOLICID_01">${document.package.toString('base64')}</Document></ProvideAndRegisterDocumentSetRequest>`
-				),
-				organisation
-			),
+			request,
 			(error, httpResponse, body) => {
-				if (error){
+				if (error) {
 					reject(error);
 				}
 
@@ -829,29 +826,31 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 						return console.log(err);
 					}
 				});
-				
+
 				try {
 
 					let xmlDoc = libxmljs.parseXml(httpResponse.headers["content-type"].includes("multipart") ? xop(httpResponse, body) : body.toString());
 
-					if ("urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Success" === xmlDoc.get("//soap:Envelope/soap:Body/ebxmlRegRep3:RegistryResponse/@status", namespaces).value()){
+					if ("urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Success" === xmlDoc.get("//soap:Envelope/soap:Body/ebxmlRegRep3:RegistryResponse/@status", namespaces).value()) {
 						resolve({
 							result: 'success',
-							document: {...document, status: 'uploaded'}
+							document: { ...document, status: 'uploaded' }
 						});
-					}else{
+					} else {
 						reject({
 							result: "failed",
-							registryErrorList: 	xmlDoc.get("//soap:Envelope/soap:Body/ebxmlRegRep3:RegistryResponse/ebxmlRegRep3:RegistryErrorList",namespaces).childNodes().map(node => {return {
-								'codeContext':	node.attr('codeContext').value(),
-								'errorCode':	node.attr('errorCode').value(),
-								'severity':		node.attr('severity').value(),
-								'location':		node.attr('location').value()
-							}}),
+							registryErrorList: xmlDoc.get("//soap:Envelope/soap:Body/ebxmlRegRep3:RegistryResponse/ebxmlRegRep3:RegistryErrorList", namespaces).childNodes().map(node => {
+								return {
+									'codeContext': node.attr('codeContext').value(),
+									'errorCode': node.attr('errorCode').value(),
+									'severity': node.attr('severity').value(),
+									'location': node.attr('location').value()
+								}
+							}),
 							xmlContent
 						});
 					}
-				}catch (error) {
+				} catch (error) {
 					console.log(xmlContent);
 					// let xmlDoc = libxmljs.parseXml(xmlContent);
 					// reject({
@@ -860,7 +859,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 					// 	message: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RegistryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute("codeContext").value(),
 					// });
 				}
-				
+
 			}
 		);
 
