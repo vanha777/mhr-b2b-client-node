@@ -123,11 +123,11 @@ async function runServices() {
         "metadata": {
           "creationTime": "20240321",
           "serviceStartTime": "20240321",
-          "serviceStopTime": "202403210",
+          "serviceStopTime": "20240321",
           "sourcePatientId": "8003608333647477^^^&1.2.36.1.2001.1003.0&ISO",
           "hash": shasum.digest('base64'),
           "size": packageResult.byteLength,
-          "name": "Specialist Letter",
+          "name": "Residential Care Medication Chart",
           "repositoryUniqueId": "1.2.36.1.2001.1007.10.8003640002000050",
           "authorInstitution": {
             "authorInstitution": "Tes Health Service 838^^^^^^^^^1.2.36.1.2001.1003.0.8003623233372670",
@@ -143,8 +143,8 @@ async function runServices() {
           "authorSpecialty": "General Medical Practitioner",
           "class": {
             "code": "80565-5",
-            "codingScheme": "NCTIS Data Components",
-            "displayName": "Residential Care Medication Chart"
+            "codingScheme": "LOINC",
+            "displayName": "Medication Chart"
           },
           "format": {
             "codingScheme": "PCEHR_FormatCodes",
@@ -166,24 +166,24 @@ async function runServices() {
             "displayName": "Residential Care Medication Chart"
           },
           "patientId": "8003608333647477",
-          "documentId": "1.2.36.2501047616.37544.18039.36495.1704104030363948" // documentId = CheckNullValue(cdaDocument.SelectSingleNode("/cda:ClinicalDocument/cda:id/@root", xnm));
+          "documentId": "1.2.36.2501047616.37544.18039.36495.1704104030363974" // documentId = CheckNullValue(cdaDocument.SelectSingleNode("/cda:ClinicalDocument/cda:id/@root", xnm));
         },
         package: packageResult,
       },
 
       // Options to query document List
-      {
-        serviceStopTimeTo: new Date(),
-        serviceStopTimeFrom: new Date(2024, '01', '01'),
-        // documentTypes: [
-        //   '60591-5^^LOINC',
-        //   '57133-1^^LOINC',
-        //   '51852-2^^LOINC',
-        //   '18842-5^^LOINC',
-        //   '34133-9^^LOINC',
-        //   '100.17042^^NCTIS'
-        // ]
-      }
+      // {
+      //   serviceStopTimeTo: new Date(),
+      //   serviceStopTimeFrom: new Date(2024, '01', '01'),
+      //   // documentTypes: [
+      //   //   '60591-5^^LOINC',
+      //   //   '57133-1^^LOINC',
+      //   //   '51852-2^^LOINC',
+      //   //   '18842-5^^LOINC',
+      //   //   '34133-9^^LOINC',
+      //   //   '100.17042^^NCTIS'
+      //   // ]
+      // }
     );
 
     console.log('Result:', existResult);

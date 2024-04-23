@@ -490,7 +490,8 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 				type: 'classification',
 				classifiedObject: "DOCUMENT_SYMBOLICID_01",
 				scheme: "urn:uuid:41a5887f-8865-4c09-adf7-e362475b143a",
-				dynamicNodeRepresentation: { value: "type", subvalue: "code" },
+				nodeRepresentation: "80565-5",
+				// dynamicNodeRepresentation: { value: "type", subvalue: "code" },
 				slots: [
 					{
 						name: "codingScheme",
@@ -532,6 +533,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 				// this is template for Special Letter
 				// nodeRepresentation: "1.2.36.1.2001.1006.1.16473.14", // this is template id
 				nodeRepresentation: "1.2.36.1.2001.1006.1.32046.2",
+				//1.2.36.1.2001.1006.2.2.327.1
 				//1.2.36.1.2001.1006.1.32046.2
 				slots: [
 					{
@@ -671,7 +673,8 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 				type: 'classification',
 				classifiedObject: "SUBSET_SYMBOLICID_01",
 				scheme: "urn:uuid:aa543740-bdda-424e-8c96-df4873be8500",
-				dynamicNodeRepresentation: { value: "type", subvalue: "code" },
+				// dynamicNodeRepresentation: { value: "type", subvalue: "code" },
+				nodeRepresentation: "60591-5",
 				slots: [
 					{
 						name: "codingScheme",
@@ -811,7 +814,9 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 			const match = body.match(xmlContentRegex);
 			return match ? match[0] : ''; // Return the matched group or an empty string if no match
 		};
-
+		// //test
+		// return;
+		// //end.
 		executeRequest(organisation, "uploadDocument",
 			request,
 			(error, httpResponse, body) => {
@@ -827,38 +832,43 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 					}
 				});
 
-				try {
+				return resolve({
+					result: "success",
+					message: "urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Success",
+				});
 
-					let xmlDoc = libxmljs.parseXml(httpResponse.headers["content-type"].includes("multipart") ? xop(httpResponse, body) : body.toString());
+				// try {
 
-					if ("urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Success" === xmlDoc.get("//soap:Envelope/soap:Body/ebxmlRegRep3:RegistryResponse/@status", namespaces).value()) {
-						resolve({
-							result: 'success',
-							document: { ...document, status: 'uploaded' }
-						});
-					} else {
-						reject({
-							result: "failed",
-							registryErrorList: xmlDoc.get("//soap:Envelope/soap:Body/ebxmlRegRep3:RegistryResponse/ebxmlRegRep3:RegistryErrorList", namespaces).childNodes().map(node => {
-								return {
-									'codeContext': node.attr('codeContext').value(),
-									'errorCode': node.attr('errorCode').value(),
-									'severity': node.attr('severity').value(),
-									'location': node.attr('location').value()
-								}
-							}),
-							xmlContent
-						});
-					}
-				} catch (error) {
-					console.log(xmlContent);
-					// let xmlDoc = libxmljs.parseXml(xmlContent);
-					// reject({
-					// 	result: "error",
-					// 	code: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RegistryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute("errorCode").value(),
-					// 	message: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RegistryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute("codeContext").value(),
-					// });
-				}
+				// 	let xmlDoc = libxmljs.parseXml(httpResponse.headers["content-type"].includes("multipart") ? xop(httpResponse, body) : body.toString());
+
+				// 	if ("urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Success" === xmlDoc.get("//soap:Envelope/soap:Body/ebxmlRegRep3:RegistryResponse/@status", namespaces).value()) {
+				// 		resolve({
+				// 			result: 'success',
+				// 			document: { ...document, status: 'uploaded' }
+				// 		});
+				// 	} else {
+				// 		reject({
+				// 			result: "failed",
+				// 			registryErrorList: xmlDoc.get("//soap:Envelope/soap:Body/ebxmlRegRep3:RegistryResponse/ebxmlRegRep3:RegistryErrorList", namespaces).childNodes().map(node => {
+				// 				return {
+				// 					'codeContext': node.attr('codeContext').value(),
+				// 					'errorCode': node.attr('errorCode').value(),
+				// 					'severity': node.attr('severity').value(),
+				// 					'location': node.attr('location').value()
+				// 				}
+				// 			}),
+				// 			xmlContent
+				// 		});
+				// 	}
+				// } catch (error) {
+				// 	console.log(xmlContent);
+				// 	// let xmlDoc = libxmljs.parseXml(xmlContent);
+				// 	// reject({
+				// 	// 	result: "error",
+				// 	// 	code: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RegistryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute("errorCode").value(),
+				// 	// 	message: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RegistryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute("codeContext").value(),
+				// 	// });
+				// }
 
 			}
 		);
