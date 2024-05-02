@@ -34,51 +34,51 @@ async function runServices() {
       
     // console.log("Digest of the attachment: ", shasum.digest('base64'),)
 
-    const packageResult = await services.cda.package(
-      package_data.toString(),
-      {
-        name: "Strong Room",
-        id: "4991012131",
-        contact: "info@cityhospital.com",
-        privatePem,
-        publicPem,
-        ca,
-        hpio,
-      },
-      {
-        IdType: "RA",
-        id: "49910121312",
-        name: [
-          {
-            user: "L",
-            family: "Farman",
-            given: ["Philip", "James"],
-            prefix: ["Mr"],
-            suffix: ["II"],
-          }
-        ],
-        hpii: "8003611566713495"
-        // hpio: ""
-      },
-      [
-        {
-          "filename": "NCFU.pdf", 
-          "buffer": attachment  
-        }
-      ]
-    )
+    // const packageResult = await services.cda.package(
+    //   package_data.toString(),
+    //   {
+    //     name: "Strong Room",
+    //     id: "4991012131",
+    //     contact: "info@cityhospital.com",
+    //     privatePem,
+    //     publicPem,
+    //     ca,
+    //     hpio,
+    //   },
+    //   {
+    //     IdType: "RA",
+    //     id: "49910121312",
+    //     name: [
+    //       {
+    //         user: "L",
+    //         family: "Farman",
+    //         given: ["Philip", "James"],
+    //         prefix: ["Mr"],
+    //         suffix: ["II"],
+    //       }
+    //     ],
+    //     hpii: "8003611566713495"
+    //     // hpio: ""
+    //   },
+    //   [
+    //     {
+    //       "filename": "NCFU.pdf", 
+    //       "buffer": attachment  
+    //     }
+    //   ]
+    // )
 
-    shasum.update(packageResult);
+    // shasum.update(packageResult);
 
     // console.log('Result:', packageResult);
 
-    fs.writeFile("./cda_package.zip", packageResult, function (err) {
-      if (err) {
-        return console.log(err);
-      }
-    });
+    // fs.writeFile("./cda_package.zip", packageResult, function (err) {
+    //   if (err) {
+    //     return console.log(err);
+    //   }
+    // });
 
-    const existResult = await services.myHealthRecord.uploadDocument({
+    const existResult = await services.myHealthRecord.gainAccess({
       product: {
         vendor: "StrongRoom AI",
         name: "StrongCare",
@@ -113,77 +113,82 @@ async function runServices() {
       // patient
       {
         id: "patient-001",
-        medicareNumber: "8003604570631431",
-        name: "John Doe",
-        dob: "1990-01-01",
-        ihi: "8003608666976659"
+        medicareNumber: "3951336171",
+        name: "LORD Ursula",
+        dob: "1978-11-26",
+        ihi: "8003608333647469"
       },
+      //accessType
+      "accessCode",
+      //access code
+      "123456789",
+
       // this is single document
-      {
-        "metadata": {
-          "creationTime": "20240321",
-          "serviceStartTime": "20240321",
-          "serviceStopTime": "202403210",
-          "sourcePatientId": "8003608666976659^^^&1.2.36.1.2001.1003.0&ISO",
-          "hash": shasum.digest('base64'),
-          "size": packageResult.byteLength,
-          "name": "Specialist Letter",
-          "repositoryUniqueId": "1.2.36.1.2001.1007.10.8003640002000050",
-          "authorInstitution": {
-            "authorInstitution": "Tes Health Service 838^^^^^^^^^1.2.36.1.2001.1003.0.8003623233372670",
-            "organizationName": "Tes Health Service 838",
-            "organizationIdentifier": "1.2.36.1.2001.1003.0.8003623233372670"
-          },
-          "authorPerson": {
-            "authorPerson": "^FORD^Maisie^^^&1.2.36.1.2001.1003.0.8003611566713495&ISO",
-            "familyName": "FORD",
-            "firstGivenName": "Maisie",
-            "assigningAuthority": "&1.2.36.1.2001.1003.0.8003611566713495&ISO"
-          },
-          "authorSpecialty": "General Medical Practitioner",
-          "class": {
-            "code": "2.16.840.1.113883.6.1",
-            "codingScheme": "LOINC",
-            "displayName": "Letter"
-          },
-          "format": {
-            "codingScheme": "PCEHR_FormatCodes",
-            "displayName": "eDS"
-          },
-          "healthcareFacilityType": {
-            "code": "8511",
-            "codingScheme": "ANZSIC",
-            "displayName": "General Practice"
-          },
-          "practiceSetting": {
-            "code": "8511-3",
-            "codingScheme": "ANZSIC",
-            "displayName": "General practice medical clinic service"
-          },
-          "type": {
-            "code": "34133-9",
-            "codingScheme": "LOINC",
-            "displayName": "Event Summary"
-          },
-          "patientId": "8003608666976659",
-          "documentId": "1.2.36.2501047616.37544.18039.36495.170410403036391" // documentId = CheckNullValue(cdaDocument.SelectSingleNode("/cda:ClinicalDocument/cda:id/@root", xnm));
-        },
-        package: packageResult,
-      },
+      // {
+      //   "metadata": {
+      //     "creationTime": "20240321",
+      //     "serviceStartTime": "20240321",
+      //     "serviceStopTime": "202403210",
+      //     "sourcePatientId": "8003608333647469^^^&1.2.36.1.2001.1003.0&ISO",
+      //     "hash": shasum.digest('base64'),
+      //     "size": packageResult.byteLength,
+      //     "name": "Specialist Letter",
+      //     "repositoryUniqueId": "1.2.36.1.2001.1007.10.8003640002000050",
+      //     "authorInstitution": {
+      //       "authorInstitution": "Tes Health Service 838^^^^^^^^^1.2.36.1.2001.1003.0.8003623233372670",
+      //       "organizationName": "Tes Health Service 838",
+      //       "organizationIdentifier": "1.2.36.1.2001.1003.0.8003623233372670"
+      //     },
+      //     "authorPerson": {
+      //       "authorPerson": "^FORD^Maisie^^^&1.2.36.1.2001.1003.0.8003611566713495&ISO",
+      //       "familyName": "FORD",
+      //       "firstGivenName": "Maisie",
+      //       "assigningAuthority": "&1.2.36.1.2001.1003.0.8003611566713495&ISO"
+      //     },
+      //     "authorSpecialty": "General Medical Practitioner",
+      //     "class": {
+      //       "code": "2.16.840.1.113883.6.1",
+      //       "codingScheme": "LOINC",
+      //       "displayName": "Letter"
+      //     },
+      //     "format": {
+      //       "codingScheme": "PCEHR_FormatCodes",
+      //       "displayName": "eDS"
+      //     },
+      //     "healthcareFacilityType": {
+      //       "code": "8511",
+      //       "codingScheme": "ANZSIC",
+      //       "displayName": "General Practice"
+      //     },
+      //     "practiceSetting": {
+      //       "code": "8511-3",
+      //       "codingScheme": "ANZSIC",
+      //       "displayName": "General practice medical clinic service"
+      //     },
+      //     "type": {
+      //       "code": "34133-9",
+      //       "codingScheme": "LOINC",
+      //       "displayName": "Event Summary"
+      //     },
+      //     "patientId": "8003608333647469",
+      //     "documentId": "1.2.36.2501047616.37544.18039.36495.170410403036391" // documentId = CheckNullValue(cdaDocument.SelectSingleNode("/cda:ClinicalDocument/cda:id/@root", xnm));
+      //   },
+      //   package: packageResult,
+      // },
 
       // Options to query document List
-      {
-        serviceStopTimeTo: new Date(),
-        serviceStopTimeFrom: new Date(2024, '01', '01'),
-        // documentTypes: [
-        //   '60591-5^^LOINC',
-        //   '57133-1^^LOINC',
-        //   '51852-2^^LOINC',
-        //   '18842-5^^LOINC',
-        //   '34133-9^^LOINC',
-        //   '100.17042^^NCTIS'
-        // ]
-      }
+      // {
+      //   serviceStopTimeTo: new Date(),
+      //   serviceStopTimeFrom: new Date(2024, '01', '01'),
+      //   // documentTypes: [
+      //   //   '60591-5^^LOINC',
+      //   //   '57133-1^^LOINC',
+      //   //   '51852-2^^LOINC',
+      //   //   '18842-5^^LOINC',
+      //   //   '34133-9^^LOINC',
+      //   //   '100.17042^^NCTIS'
+      //   // ]
+      // }
     );
 
     console.log('Result:', existResult);

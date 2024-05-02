@@ -36,6 +36,13 @@ let getDocumentList = ({ product, user, organisation }, patient, options) => {
 
 	let documentTypeFilter = "";
 
+	// let sserviceEntryClassCode = 
+	// `<Slot name="$XDSDocumentEntryClassCode">
+	// 	<ValueList>
+	// 		<Value>('100.32 v v049^^NCTIS Data Components')</Value>
+	// 	</ValueList>
+	// </Slot>`;
+
 	let serviceStopTimeToFilter = options.serviceStopTimeTo ? `
 	<Slot name="$XDSDocumentEntryServiceStopTimeTo">
 		<ValueList>

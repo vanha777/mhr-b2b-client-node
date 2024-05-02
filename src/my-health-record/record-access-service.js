@@ -56,7 +56,7 @@ let doesPCEHRExist = ({ product, user, organisation }, patient) => {
 };
 
 
-let gainAccess = ({ product, user, organisation }, patient, accessType = "standard", accessCode = "") => {
+let gainAccess = ({ product, user, organisation }, patient, accessType , accessCode ) => {
 
 	if (!patient.ihi || patient.ihi === "") {
 		console.log("IHI number required.")
