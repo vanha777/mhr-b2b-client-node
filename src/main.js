@@ -7,7 +7,7 @@ let privatePem = fs.readFileSync("./sample/entities/certificates/fac_sign_nash_o
 let publicPem = fs.readFileSync("./sample/entities/certificates/fac_sign_nash_org_with_attributes.public.pem");
 let ca = fs.readFileSync("./sample/entities/certificates/certificate_authorities//certificates_chain.pem");
 
-const	shasum = require('crypto').createHash('sha1');
+const shasum = require('crypto').createHash('sha1');
 
 const filePath = './doc.xml';
 const attachmentPath = './NCFU.pdf';
@@ -21,17 +21,17 @@ async function runServices() {
 
     const now = new Date();
     const formattedDate = now.toISOString()
-        .replace(/[-:T]/g, '')
-        .slice(0, 14) + "00";
+      .replace(/[-:T]/g, '')
+      .slice(0, 14) + "00";
 
     let documentObjectId = "36-2501047616-37544-18039-36495-170410403036301";
 
-    let documentId = '2.25.'+BigInt('0x'+documentObjectId.replace(/-/g,'')).toString()
+    let documentId = '2.25.' + BigInt('0x' + documentObjectId.replace(/-/g, '')).toString()
 
     console.log(documentId);
 
     // shasum.update(attachment);
-      
+
     // console.log("Digest of the attachment: ", shasum.digest('base64'),)
 
     const packageResult = await services.cda.package(
@@ -62,8 +62,8 @@ async function runServices() {
       },
       [
         {
-          "filename": "NCFU.pdf", 
-          "buffer": attachment  
+          "filename": "NCFU.pdf",
+          "buffer": attachment
         }
       ]
     )
@@ -78,7 +78,7 @@ async function runServices() {
       }
     });
 
-    const existResult = await services.myHealthRecord.uploadDocument({
+    const existResult = await services.myHealthRecord.getDocumentList({
       product: {
         vendor: "StrongRoom AI",
         name: "StrongCare",
@@ -113,10 +113,10 @@ async function runServices() {
       // patient
       {
         id: "patient-001",
-        medicareNumber: "5951139631",
-        name: "Merrilee JOHNS",
-        dob: "1982-06-10",
-        ihi: "8003608000311951"
+        medicareNumber: "4951654041",
+        name: "Naomi KERR",
+        dob: "1994-09-20",
+        ihi: "8003608333647477"
       },
       // this is single document
       {
@@ -124,7 +124,7 @@ async function runServices() {
           "creationTime": "20240321",
           "serviceStartTime": "20240321",
           "serviceStopTime": "20240321",
-          "sourcePatientId": "8003608000311951^^^&1.2.36.1.2001.1003.0&ISO",
+          "sourcePatientId": "8003608333647477^^^&1.2.36.1.2001.1003.0&ISO",
           "hash": shasum.digest('base64'),
           "size": packageResult.byteLength,
           "name": "Residential Care Medication Chart",
@@ -165,25 +165,26 @@ async function runServices() {
             "codingScheme": "NCTIS Data Components",
             "displayName": "Residential Care Medication Chart"
           },
-          "patientId": "8003608000311951",
+          "patientId": "8003608333647477",
           "documentId": "1.2.36.2501047616.37544.18039.36495.17041040303639102" // documentId = CheckNullValue(cdaDocument.SelectSingleNode("/cda:ClinicalDocument/cda:id/@root", xnm));
         },
         package: packageResult,
       },
 
       // Options to query document List
-      // {
-      //   serviceStopTimeTo: new Date(),
-      //   serviceStopTimeFrom: new Date(2024, '01', '01'),
-      //   // documentTypes: [
-      //   //   '60591-5^^LOINC',
-      //   //   '57133-1^^LOINC',
-      //   //   '51852-2^^LOINC',
-      //   //   '18842-5^^LOINC',
-      //   //   '34133-9^^LOINC',
-      //   //   '100.17042^^NCTIS'
-      //   // ]
-      // }
+      {
+        serviceStopTimeTo: new Date(),
+        serviceStopTimeFrom: new Date(2024, '01', '01'),
+        documentTypes: [
+          // '60591-5^^LOINC',
+          // '57133-1^^LOINC',
+          // '51852-2^^LOINC',
+          // '18842-5^^LOINC',
+          // '34133-9^^LOINC',
+          // '100.17042^^NCTIS',
+          '100.32046^^NCTIS' // RCMC
+        ]
+      }
     );
 
     console.log('Result:', existResult);

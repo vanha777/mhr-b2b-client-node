@@ -1,0 +1,1728 @@
+<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope">
+    <env:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
+        <signature xmlns="http://ns.electronichealth.net.au/pcehr/xsd/common/CommonCoreElements/1.0">
+            <ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                <ds:SignedInfo>
+                    <ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+                    <ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+                    <ds:Reference URI="#_801d7014-3a9d-459d-a586-e6b7cbccd3eb">
+                        <ds:Transforms>
+                            <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+                        </ds:Transforms>
+                        <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+                        <ds:DigestValue>YsoxvFVtmLW37eunZl9WDx5kL0Q=</ds:DigestValue>
+                    </ds:Reference>
+                </ds:SignedInfo>
+                <ds:SignatureValue>C2Os7d1c4IoEOeBPjUmHVjXiuKc8eFH0fH4mJqY7DvFnINc177MA9b6akKE6FuceHOnGmYm5BNfXeP4E91Uta028RIyNdGoGR4ngGtNZHzZ2Rq88Di55DgKz6KgXnjnZDu8FtZ9HMz4D+SnkfhKG07YjyaBOmnI+1g46ylp4SbEMSyN33of2shTZusUesMce0+mVpxwrSwa0GwdOpkVKoFQX5OE0bb/8upFstdqIYoStC2tHGmok2NQGDJz0GjBfZtu6DdDZsLPyMA5F5J7c3ORUhXGHMi4J/dRFZD0xqfZSrgqlQLKn3dDTcTqNQDGHBScRE6ZEnEDcq0FqmAESUg==</ds:SignatureValue>
+                <ds:KeyInfo>
+                    <ds:X509Data>
+                        <ds:X509Certificate>MIIHbzCCBlegAwIBAgIQB+9jX2szumrgQa5lCLvtWTANBgkqhkiG9w0BAQsFADBPMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMSkwJwYDVQQDEyBEaWdpQ2VydCBUTFMgUlNBIFNIQTI1NiAyMDIwIENBMTAeFw0yNDA0MTkwMDAwMDBaFw0yNTA0MTkyMzU5NTlaMIGTMQswCQYDVQQGEwJBVTEYMBYGA1UECBMPTmV3IFNvdXRoIFdhbGVzMQ8wDQYDVQQHEwZTeWRuZXkxKTAnBgNVBAoTIEF1c3RyYWxpYW4gRGlnaXRhbCBIZWFsdGggQWdlbmN5MS4wLAYDVQQDEyVzZXJ2aWNlcy5zaXQuZ3cubXloZWFsdGhyZWNvcmQuZ292LmF1MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA00Q9N87XeL+zYUa/WSWZTk2fhEaXa7FHo9BaqZsXyvGlKuAqVXbMg4oD6sn7SdmJB1SMUBV41P7qPjlLmwrbraUzW933ekvFYY3+X0mpYhz911fCnu5suq/ymvWnjqe9xXFR6p8ymOnNa111DHR3b+qQo5jUZB4iaqe44eeCr7miwtZZBgSJqWe3vQK4YyPd0Wu7ZyNYs84Ysu71loTpfVePa8MJHLueFXHSYChw4LK4vmLL5XUTcQOHELK6GjdGP/U/NDSXwzs1dFaZp03fba6jcCgwE8Fo1tGAFRnRo18YCILnH0t1UTIUA3nSw6vSzZMKXBrZFxg3IB/h1JSFaQIDAQABo4IEADCCA/wwHwYDVR0jBBgwFoAUt2ui6qiqhIx56rTaD5iyxZV2ufQwHQYDVR0OBBYEFJR+c5YRx7RlurWntZyiSlvNgqa1MIGnBgNVHREEgZ8wgZyCJXNlcnZpY2VzLnNpdC5ndy5teWhlYWx0aHJlY29yZC5nb3YuYXWCJXNlcnZpY2VzLnBzcC5ndy5teWhlYWx0aHJlY29yZC5nb3YuYXWCJXNlcnZpY2VzLnBmYS5ndy5teWhlYWx0aHJlY29yZC5nb3YuYXWCJXNlcnZpY2VzLnN2dC5ndy5teWhlYWx0aHJlY29yZC5nb3YuYXUwPgYDVR0gBDcwNTAzBgZngQwBAgIwKTAnBggrBgEFBQcCARYbaHR0cDovL3d3dy5kaWdpY2VydC5jb20vQ1BTMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwgY8GA1UdHwSBhzCBhDBAoD6gPIY6aHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0VExTUlNBU0hBMjU2MjAyMENBMS00LmNybDBAoD6gPIY6aHR0cDovL2NybDQuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0VExTUlNBU0hBMjU2MjAyMENBMS00LmNybDB/BggrBgEFBQcBAQRzMHEwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmRpZ2ljZXJ0LmNvbTBJBggrBgEFBQcwAoY9aHR0cDovL2NhY2VydHMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0VExTUlNBU0hBMjU2MjAyMENBMS0xLmNydDAMBgNVHRMBAf8EAjAAMIIBfgYKKwYBBAHWeQIEAgSCAW4EggFqAWgAdgBOdaMnXJoQwzhbbNTfP1LrHfDgjhuNacCx+mSxYpo53wAAAY70dm/xAAAEAwBHMEUCIQCtyBzCLRpPX22zeOZouNnp7NmOOBiDpHfqDTZVtW0VnQIgGU08yzIyrZ+L7ng2gx2nHO0qOogCx2qXyMcOzAInEhAAdgDm0jFjQHeMwRBBBtdxuc7B0kD2loSG+7qHMh39HjeOUAAAAY70dnBEAAAEAwBHMEUCIDJvzNbaeEEZxe55juWhpyIl8AAfrz+yxSZtwJMtigdUAiEA8LTjSMhx36ZKOIDt2LOgCKNQoRIa13YDVXkLMw+M2X0AdgDPEVbu1S58r/OHW9lpLpvpGnFnSrAX7KwB0lt3zsw7CAAAAY70dnBiAAAEAwBHMEUCIQDJA0Oa7njG93S70dZaOgI6zAsPEq60XkW6OZe3i73f6wIgEKUbBuL6vFA31s7PzrF9Rti4L+CzEzJypcDWK7D/6c8wDQYJKoZIhvcNAQELBQADggEBALBB+2p8P6zRqCZ3NgBbhlbbiw4PtUBB14D8J1XNJKJwWBe5bNf1TmZS4BzlNMzJNHd3LisizO4MDEqe9l/PX1R0By5r5eW5z0PRrqZWB43dbuQSsfL2kUUqmx8scjQEafVRbYIbLddlHEgGK87xV8qXW4GQ/A5Rqe/wYzl9uOPFo/P9mQTXAKj2GAz3HCeDylkmwO5VBI2sNoyBRFAnZZjcpKGfqAFzUid7jtx3F5hcQPq5n22zB9vOfB2KQFFF4jMFdULmf/MRQ/ldeS0NhDch0/e0zldKRuRpp+UGJZalZj0DgsAphFybVEMS1g1noN1DSkWR5tTyp8XebPWrMEY=</ds:X509Certificate>
+                    </ds:X509Data>
+                </ds:KeyInfo>
+            </ds:Signature>
+        </signature>
+        <wsa:To env:mustUnderstand="true">http://www.w3.org/2005/08/addressing/anonymous</wsa:To>
+        <wsa:Action>urn:ihe:iti:2007:RegistryStoredQueryResponse</wsa:Action>
+        <wsa:MessageID>65cb29cb-7ac4-4077-8770-138370630d29</wsa:MessageID>
+        <wsa:RelatesTo>urn:uuid:2ccf467e-ea60-472f-9c5c-62f7aafe83ce</wsa:RelatesTo>
+    </env:Header>
+    <env:Body xml:id="_801d7014-3a9d-459d-a586-e6b7cbccd3eb">
+        <ns1:AdhocQueryResponse xmlns:ns0="urn:registry.docx.pcehr.au"
+            xmlns:ns1="urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0"
+            xmlns:ns2="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0"
+            xmlns:ns3="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0" status="urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Success">
+            <ns3:RegistryObjectList>
+                <ns3:ExtrinsicObject id="urn:uuid:b47e82e7-c131-473c-83e7-6f29b081d1cd" isOpaque="false" lid="urn:uuid:b47e82e7-c131-473c-83e7-6f29b081d1cd" mimeType="application/zip" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">
+                    <ns3:Slot name="creationTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="languageCode">
+                        <ns3:ValueList>
+                            <ns3:Value>en-AU</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="serviceStartTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="serviceStopTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="sourcePatientId">
+                        <ns3:ValueList>
+                            <ns3:Value>8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="hash">
+                        <ns3:ValueList>
+                            <ns3:Value>00ff2df11054a8bb5320c5e380b7b6efb39e9a19</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="size">
+                        <ns3:ValueList>
+                            <ns3:Value>39405</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="repositoryUniqueId">
+                        <ns3:ValueList>
+                            <ns3:Value>1.2.36.1.2001.1007.10.8003640002000050</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Name>
+                        <ns3:LocalizedString charset="UTF-8" value="Specialist Letter" xml:lang="en-us"/>
+                    </ns3:Name>
+                    <ns3:VersionInfo versionName="1"/>
+                    <ns3:Classification classificationScheme="urn:uuid:93606bcf-9494-43ec-9b4e-a7748d1a838d" classifiedObject="urn:uuid:b47e82e7-c131-473c-83e7-6f29b081d1cd" id="urn:uuid:4b76ca50-7dec-494b-afa2-21a0b214dc6e" lid="urn:uuid:4b76ca50-7dec-494b-afa2-21a0b214dc6e" nodeRepresentation="" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="authorInstitution">
+                            <ns3:ValueList>
+                                <ns3:Value>Tes Health Service 838^^^^^^^^^1.2.36.1.2001.1003.0.8003623233372670</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Slot name="authorPerson">
+                            <ns3:ValueList>
+                                <ns3:Value>^FORD^Maisie^^^&amp;1.2.36.1.2001.1003.0.8003611566713495&amp;ISO</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Slot name="authorSpecialty">
+                            <ns3:ValueList>
+                                <ns3:Value>General Medical Practitioner</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:41a5887f-8865-4c09-adf7-e362475b143a" classifiedObject="urn:uuid:b47e82e7-c131-473c-83e7-6f29b081d1cd" id="urn:uuid:f4cc97dc-75d2-4f90-a7bd-e36a7aaf487b" lid="urn:uuid:f4cc97dc-75d2-4f90-a7bd-e36a7aaf487b" nodeRepresentation="80565-5" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>LOINC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Medication Chart"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:a09d5840-386c-46f2-b5ad-9c3699a4309d" classifiedObject="urn:uuid:b47e82e7-c131-473c-83e7-6f29b081d1cd" id="urn:uuid:89725bb4-fd57-4332-9b14-1a4b4f5d2d49" lid="urn:uuid:89725bb4-fd57-4332-9b14-1a4b4f5d2d49" nodeRepresentation="1.2.36.1.2001.1006.1.32046.2" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>PCEHR_FormatCodes</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="eDS"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:f33fb8ac-18af-42cc-ae0e-ed0b0bdb91e1" classifiedObject="urn:uuid:b47e82e7-c131-473c-83e7-6f29b081d1cd" id="urn:uuid:58879068-4345-4753-b9fd-7874b9e6ce5e" lid="urn:uuid:58879068-4345-4753-b9fd-7874b9e6ce5e" nodeRepresentation="8511" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>ANZSIC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="General Practice"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:cccf5598-8b07-4b77-a05e-ae952c785ead" classifiedObject="urn:uuid:b47e82e7-c131-473c-83e7-6f29b081d1cd" id="urn:uuid:c71af56a-8fb5-44cf-85e2-12d3e7539bdc" lid="urn:uuid:c71af56a-8fb5-44cf-85e2-12d3e7539bdc" nodeRepresentation="8511-3" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>ANZSIC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="General practice medical clinic service"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:f0306f51-975f-434e-a61c-c59651d33983" classifiedObject="urn:uuid:b47e82e7-c131-473c-83e7-6f29b081d1cd" id="urn:uuid:6ee8d69f-3b4a-4282-b162-365117197466" lid="urn:uuid:6ee8d69f-3b4a-4282-b162-365117197466" nodeRepresentation="100.32046" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>NCTIS Data Components</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Residential Care Medication Chart"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:ExternalIdentifier id="urn:uuid:2fb7e21f-16b9-45b4-afad-5241da342c19" identificationScheme="urn:uuid:58a6f841-87b3-4a3e-92fd-a8ffeff98427" lid="urn:uuid:2fb7e21f-16b9-45b4-afad-5241da342c19" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:2f8cb9c3-818f-4af3-a6f2-3b0b36445f9e" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO">
+                        <ns3:Name>
+                            <ns3:LocalizedString value="XDSDocumentEntry.patientId"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:ExternalIdentifier>
+                    <ns3:ExternalIdentifier id="urn:uuid:417a10de-b471-41c4-a5df-a7c9987d68ae" identificationScheme="urn:uuid:2e82c1f6-a085-4c72-9da3-8640a32e42ab" lid="urn:uuid:417a10de-b471-41c4-a5df-a7c9987d68ae" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:2f8cb9c3-818f-4af3-a6f2-3b0b36445f9e" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="1.2.36.2501047616.37544.18039.36495.1704104030363986">
+                        <ns3:Name>
+                            <ns3:LocalizedString value="XDSDocumentEntry.uniqueId"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:ExternalIdentifier>
+                </ns3:ExtrinsicObject>
+                <ns3:ExtrinsicObject id="urn:uuid:83d0b7e9-368e-4033-9503-413bb2b0ce7d" isOpaque="false" lid="urn:uuid:83d0b7e9-368e-4033-9503-413bb2b0ce7d" mimeType="application/zip" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">
+                    <ns3:Slot name="creationTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="languageCode">
+                        <ns3:ValueList>
+                            <ns3:Value>en-AU</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="serviceStartTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="serviceStopTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="sourcePatientId">
+                        <ns3:ValueList>
+                            <ns3:Value>8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="hash">
+                        <ns3:ValueList>
+                            <ns3:Value>3f08ff6e4aae127a32bedca64b9e6a926b6890a4</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="size">
+                        <ns3:ValueList>
+                            <ns3:Value>39320</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="repositoryUniqueId">
+                        <ns3:ValueList>
+                            <ns3:Value>1.2.36.1.2001.1007.10.8003640002000050</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Name>
+                        <ns3:LocalizedString charset="UTF-8" value="Residential Care Medication Chart" xml:lang="en-us"/>
+                    </ns3:Name>
+                    <ns3:VersionInfo versionName="1"/>
+                    <ns3:Classification classificationScheme="urn:uuid:93606bcf-9494-43ec-9b4e-a7748d1a838d" classifiedObject="urn:uuid:83d0b7e9-368e-4033-9503-413bb2b0ce7d" id="urn:uuid:67703fac-510a-4e9b-8a80-7956de7e9136" lid="urn:uuid:67703fac-510a-4e9b-8a80-7956de7e9136" nodeRepresentation="" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="authorInstitution">
+                            <ns3:ValueList>
+                                <ns3:Value>Tes Health Service 838^^^^^^^^^1.2.36.1.2001.1003.0.8003623233372670</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Slot name="authorPerson">
+                            <ns3:ValueList>
+                                <ns3:Value>^FORD^Maisie^^^Ms^^^&amp;1.2.36.1.2001.1003.0.8003611566713495&amp;ISO</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Slot name="authorSpecialty">
+                            <ns3:ValueList>
+                                <ns3:Value>General Medical Practitioner</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:41a5887f-8865-4c09-adf7-e362475b143a" classifiedObject="urn:uuid:83d0b7e9-368e-4033-9503-413bb2b0ce7d" id="urn:uuid:58a9b2eb-3655-4d8d-9856-003963e75ba6" lid="urn:uuid:58a9b2eb-3655-4d8d-9856-003963e75ba6" nodeRepresentation="80565-5" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>LOINC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Medication Chart"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:a09d5840-386c-46f2-b5ad-9c3699a4309d" classifiedObject="urn:uuid:83d0b7e9-368e-4033-9503-413bb2b0ce7d" id="urn:uuid:ea73f4b9-d29a-4168-91c8-423b66cf9b4e" lid="urn:uuid:ea73f4b9-d29a-4168-91c8-423b66cf9b4e" nodeRepresentation="1.2.36.1.2001.1006.1.32046.2" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>PCEHR_FormatCodes</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="eDS"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:f33fb8ac-18af-42cc-ae0e-ed0b0bdb91e1" classifiedObject="urn:uuid:83d0b7e9-368e-4033-9503-413bb2b0ce7d" id="urn:uuid:7f686a78-d4c1-4e5f-9ea0-e6f8db4b4473" lid="urn:uuid:7f686a78-d4c1-4e5f-9ea0-e6f8db4b4473" nodeRepresentation="8511" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>ANZSIC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="General Practice"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:cccf5598-8b07-4b77-a05e-ae952c785ead" classifiedObject="urn:uuid:83d0b7e9-368e-4033-9503-413bb2b0ce7d" id="urn:uuid:b534f3e0-27d0-489d-8f69-22b635e0e1fc" lid="urn:uuid:b534f3e0-27d0-489d-8f69-22b635e0e1fc" nodeRepresentation="8511-3" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>ANZSIC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="General practice medical clinic service"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:f0306f51-975f-434e-a61c-c59651d33983" classifiedObject="urn:uuid:83d0b7e9-368e-4033-9503-413bb2b0ce7d" id="urn:uuid:609e01a2-38bb-49b8-929f-b03d02cb9746" lid="urn:uuid:609e01a2-38bb-49b8-929f-b03d02cb9746" nodeRepresentation="100.32046" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>NCTIS Data Components</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Residential Care Medication Chart"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:ExternalIdentifier id="urn:uuid:c757e14d-6129-44cc-9b6b-9d4e6df8ef22" identificationScheme="urn:uuid:58a6f841-87b3-4a3e-92fd-a8ffeff98427" lid="urn:uuid:c757e14d-6129-44cc-9b6b-9d4e6df8ef22" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:034bc4b9-c83e-40ec-9144-da6afc7cf32a" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO">
+                        <ns3:Name>
+                            <ns3:LocalizedString value="XDSDocumentEntry.patientId"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:ExternalIdentifier>
+                    <ns3:ExternalIdentifier id="urn:uuid:7a0c2daa-c02f-4f5b-af89-bb5d05b49ead" identificationScheme="urn:uuid:2e82c1f6-a085-4c72-9da3-8640a32e42ab" lid="urn:uuid:7a0c2daa-c02f-4f5b-af89-bb5d05b49ead" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:034bc4b9-c83e-40ec-9144-da6afc7cf32a" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="1.2.36.2501047616.37544.18039.36495.17041040303639106">
+                        <ns3:Name>
+                            <ns3:LocalizedString value="XDSDocumentEntry.uniqueId"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:ExternalIdentifier>
+                </ns3:ExtrinsicObject>
+                <ns3:ExtrinsicObject id="urn:uuid:f11662c1-c136-4688-a18c-64556d0329dd" isOpaque="false" lid="urn:uuid:f11662c1-c136-4688-a18c-64556d0329dd" mimeType="application/zip" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">
+                    <ns3:Slot name="creationTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="languageCode">
+                        <ns3:ValueList>
+                            <ns3:Value>en-AU</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="serviceStartTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="serviceStopTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="sourcePatientId">
+                        <ns3:ValueList>
+                            <ns3:Value>8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="hash">
+                        <ns3:ValueList>
+                            <ns3:Value>88bcbf28924d1107d748ce91deb955b3b5ea3198</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="size">
+                        <ns3:ValueList>
+                            <ns3:Value>39320</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="repositoryUniqueId">
+                        <ns3:ValueList>
+                            <ns3:Value>1.2.36.1.2001.1007.10.8003640002000050</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Name>
+                        <ns3:LocalizedString charset="UTF-8" value="Residential Care Medication Chart" xml:lang="en-us"/>
+                    </ns3:Name>
+                    <ns3:VersionInfo versionName="1"/>
+                    <ns3:Classification classificationScheme="urn:uuid:93606bcf-9494-43ec-9b4e-a7748d1a838d" classifiedObject="urn:uuid:f11662c1-c136-4688-a18c-64556d0329dd" id="urn:uuid:290a21a8-07da-4c86-abea-dc2598a5c079" lid="urn:uuid:290a21a8-07da-4c86-abea-dc2598a5c079" nodeRepresentation="" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="authorInstitution">
+                            <ns3:ValueList>
+                                <ns3:Value>Tes Health Service 838^^^^^^^^^1.2.36.1.2001.1003.0.8003623233372670</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Slot name="authorPerson">
+                            <ns3:ValueList>
+                                <ns3:Value>^FORD^Maisie^^^Ms^^^&amp;1.2.36.1.2001.1003.0.8003611566713495&amp;ISO</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Slot name="authorSpecialty">
+                            <ns3:ValueList>
+                                <ns3:Value>General Medical Practitioner</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:41a5887f-8865-4c09-adf7-e362475b143a" classifiedObject="urn:uuid:f11662c1-c136-4688-a18c-64556d0329dd" id="urn:uuid:94b2d454-25a4-40dd-8818-8b28c4d2c55a" lid="urn:uuid:94b2d454-25a4-40dd-8818-8b28c4d2c55a" nodeRepresentation="80565-5" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>LOINC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Residential Care Medication Chart"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:a09d5840-386c-46f2-b5ad-9c3699a4309d" classifiedObject="urn:uuid:f11662c1-c136-4688-a18c-64556d0329dd" id="urn:uuid:72dafd0d-99a9-4813-a49f-1e1fe74b5e0a" lid="urn:uuid:72dafd0d-99a9-4813-a49f-1e1fe74b5e0a" nodeRepresentation="1.2.36.1.2001.1006.1.32046.2" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>PCEHR_FormatCodes</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="eDS"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:f33fb8ac-18af-42cc-ae0e-ed0b0bdb91e1" classifiedObject="urn:uuid:f11662c1-c136-4688-a18c-64556d0329dd" id="urn:uuid:54859411-214c-450c-a61b-3cf68b7ba6e5" lid="urn:uuid:54859411-214c-450c-a61b-3cf68b7ba6e5" nodeRepresentation="8511" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>ANZSIC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="General Practice"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:cccf5598-8b07-4b77-a05e-ae952c785ead" classifiedObject="urn:uuid:f11662c1-c136-4688-a18c-64556d0329dd" id="urn:uuid:77159b6f-b508-4049-a8be-470fcd90c25d" lid="urn:uuid:77159b6f-b508-4049-a8be-470fcd90c25d" nodeRepresentation="8511-3" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>ANZSIC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="General practice medical clinic service"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:f0306f51-975f-434e-a61c-c59651d33983" classifiedObject="urn:uuid:f11662c1-c136-4688-a18c-64556d0329dd" id="urn:uuid:0487c877-1920-41f1-8bf6-9e4395b2a53f" lid="urn:uuid:0487c877-1920-41f1-8bf6-9e4395b2a53f" nodeRepresentation="100.32046" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>NCTIS Data Components</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Residential Care Medication Chart"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:ExternalIdentifier id="urn:uuid:f1dcc03f-d12c-48d3-a44c-13f417bd9267" identificationScheme="urn:uuid:58a6f841-87b3-4a3e-92fd-a8ffeff98427" lid="urn:uuid:f1dcc03f-d12c-48d3-a44c-13f417bd9267" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:e69bce1f-bfc5-4bd2-a33f-e061ad51f028" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO">
+                        <ns3:Name>
+                            <ns3:LocalizedString value="XDSDocumentEntry.patientId"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:ExternalIdentifier>
+                    <ns3:ExternalIdentifier id="urn:uuid:321ff7fc-5ef4-4800-99ff-7ed740cd8c49" identificationScheme="urn:uuid:2e82c1f6-a085-4c72-9da3-8640a32e42ab" lid="urn:uuid:321ff7fc-5ef4-4800-99ff-7ed740cd8c49" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:e69bce1f-bfc5-4bd2-a33f-e061ad51f028" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="1.2.36.2501047616.37544.18039.36495.17041040303639104">
+                        <ns3:Name>
+                            <ns3:LocalizedString value="XDSDocumentEntry.uniqueId"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:ExternalIdentifier>
+                </ns3:ExtrinsicObject>
+                <ns3:ExtrinsicObject id="urn:uuid:0aa3e1d3-d127-4184-9376-1d1b378dbf31" isOpaque="false" lid="urn:uuid:0aa3e1d3-d127-4184-9376-1d1b378dbf31" mimeType="application/zip" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">
+                    <ns3:Slot name="creationTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="languageCode">
+                        <ns3:ValueList>
+                            <ns3:Value>en-AU</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="serviceStartTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="serviceStopTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="sourcePatientId">
+                        <ns3:ValueList>
+                            <ns3:Value>8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="hash">
+                        <ns3:ValueList>
+                            <ns3:Value>21893d9c3f68734464ef10333293abfcb518c6be</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="size">
+                        <ns3:ValueList>
+                            <ns3:Value>39321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="repositoryUniqueId">
+                        <ns3:ValueList>
+                            <ns3:Value>1.2.36.1.2001.1007.10.8003640002000050</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Name>
+                        <ns3:LocalizedString charset="UTF-8" value="Residential Care Medication Chart" xml:lang="en-us"/>
+                    </ns3:Name>
+                    <ns3:VersionInfo versionName="1"/>
+                    <ns3:Classification classificationScheme="urn:uuid:93606bcf-9494-43ec-9b4e-a7748d1a838d" classifiedObject="urn:uuid:0aa3e1d3-d127-4184-9376-1d1b378dbf31" id="urn:uuid:02b1a432-2944-4ceb-8ded-2a7af7f89be7" lid="urn:uuid:02b1a432-2944-4ceb-8ded-2a7af7f89be7" nodeRepresentation="" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="authorInstitution">
+                            <ns3:ValueList>
+                                <ns3:Value>Tes Health Service 838^^^^^^^^^1.2.36.1.2001.1003.0.8003623233372670</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Slot name="authorPerson">
+                            <ns3:ValueList>
+                                <ns3:Value>^FORD^Maisie^^^Ms^^^&amp;1.2.36.1.2001.1003.0.8003611566713495&amp;ISO</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Slot name="authorSpecialty">
+                            <ns3:ValueList>
+                                <ns3:Value>General Medical Practitioner</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:41a5887f-8865-4c09-adf7-e362475b143a" classifiedObject="urn:uuid:0aa3e1d3-d127-4184-9376-1d1b378dbf31" id="urn:uuid:3a5e37ed-0208-450c-bc5d-c83a39015aac" lid="urn:uuid:3a5e37ed-0208-450c-bc5d-c83a39015aac" nodeRepresentation="80565-5" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>LOINC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Residential Care Medication Chart"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:a09d5840-386c-46f2-b5ad-9c3699a4309d" classifiedObject="urn:uuid:0aa3e1d3-d127-4184-9376-1d1b378dbf31" id="urn:uuid:daede0cf-3f39-476f-9353-7ec0b7865e8b" lid="urn:uuid:daede0cf-3f39-476f-9353-7ec0b7865e8b" nodeRepresentation="1.2.36.1.2001.1006.1.32046.2" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>PCEHR_FormatCodes</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="eDS"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:f33fb8ac-18af-42cc-ae0e-ed0b0bdb91e1" classifiedObject="urn:uuid:0aa3e1d3-d127-4184-9376-1d1b378dbf31" id="urn:uuid:2827fe74-bafd-4fe2-ad9f-cde14b510888" lid="urn:uuid:2827fe74-bafd-4fe2-ad9f-cde14b510888" nodeRepresentation="8511" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>ANZSIC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="General Practice"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:cccf5598-8b07-4b77-a05e-ae952c785ead" classifiedObject="urn:uuid:0aa3e1d3-d127-4184-9376-1d1b378dbf31" id="urn:uuid:524b88ef-5870-4169-acdd-73c308991e90" lid="urn:uuid:524b88ef-5870-4169-acdd-73c308991e90" nodeRepresentation="8511-3" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>ANZSIC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="General practice medical clinic service"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:f0306f51-975f-434e-a61c-c59651d33983" classifiedObject="urn:uuid:0aa3e1d3-d127-4184-9376-1d1b378dbf31" id="urn:uuid:66292aa6-7f62-47b3-b5ee-dab533ce723b" lid="urn:uuid:66292aa6-7f62-47b3-b5ee-dab533ce723b" nodeRepresentation="100.32046" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>NCTIS Data Components</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Residential Care Medication Chart"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:ExternalIdentifier id="urn:uuid:ed771ae3-d24b-41b1-92af-416309a601c4" identificationScheme="urn:uuid:58a6f841-87b3-4a3e-92fd-a8ffeff98427" lid="urn:uuid:ed771ae3-d24b-41b1-92af-416309a601c4" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:43e2fccf-49ab-432f-b149-f03c2f89fecc" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO">
+                        <ns3:Name>
+                            <ns3:LocalizedString value="XDSDocumentEntry.patientId"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:ExternalIdentifier>
+                    <ns3:ExternalIdentifier id="urn:uuid:771d096a-4f95-4b20-8445-582ad53e2c3e" identificationScheme="urn:uuid:2e82c1f6-a085-4c72-9da3-8640a32e42ab" lid="urn:uuid:771d096a-4f95-4b20-8445-582ad53e2c3e" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:43e2fccf-49ab-432f-b149-f03c2f89fecc" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="1.2.36.2501047616.37544.18039.36495.17041040303639103">
+                        <ns3:Name>
+                            <ns3:LocalizedString value="XDSDocumentEntry.uniqueId"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:ExternalIdentifier>
+                </ns3:ExtrinsicObject>
+                <ns3:ExtrinsicObject id="urn:uuid:03228689-b0e7-44ca-bac2-4756da2ab647" isOpaque="false" lid="urn:uuid:03228689-b0e7-44ca-bac2-4756da2ab647" mimeType="application/zip" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">
+                    <ns3:Slot name="creationTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="languageCode">
+                        <ns3:ValueList>
+                            <ns3:Value>en-AU</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="serviceStartTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="serviceStopTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="sourcePatientId">
+                        <ns3:ValueList>
+                            <ns3:Value>8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="hash">
+                        <ns3:ValueList>
+                            <ns3:Value>7b2fba983100f50961b262298e0cb6bbbea8e421</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="size">
+                        <ns3:ValueList>
+                            <ns3:Value>39320</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="repositoryUniqueId">
+                        <ns3:ValueList>
+                            <ns3:Value>1.2.36.1.2001.1007.10.8003640002000050</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Name>
+                        <ns3:LocalizedString charset="UTF-8" value="Residential Care Medication Chart" xml:lang="en-us"/>
+                    </ns3:Name>
+                    <ns3:VersionInfo versionName="1"/>
+                    <ns3:Classification classificationScheme="urn:uuid:93606bcf-9494-43ec-9b4e-a7748d1a838d" classifiedObject="urn:uuid:03228689-b0e7-44ca-bac2-4756da2ab647" id="urn:uuid:4a377d55-8a8f-488b-8cf9-f7665dd00381" lid="urn:uuid:4a377d55-8a8f-488b-8cf9-f7665dd00381" nodeRepresentation="" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="authorInstitution">
+                            <ns3:ValueList>
+                                <ns3:Value>Tes Health Service 838^^^^^^^^^1.2.36.1.2001.1003.0.8003623233372670</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Slot name="authorPerson">
+                            <ns3:ValueList>
+                                <ns3:Value>^FORD^Maisie^^^Ms^^^&amp;1.2.36.1.2001.1003.0.8003611566713495&amp;ISO</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Slot name="authorSpecialty">
+                            <ns3:ValueList>
+                                <ns3:Value>General Medical Practitioner</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:41a5887f-8865-4c09-adf7-e362475b143a" classifiedObject="urn:uuid:03228689-b0e7-44ca-bac2-4756da2ab647" id="urn:uuid:02d56826-0731-4de7-8b7d-b4288fdc5e4a" lid="urn:uuid:02d56826-0731-4de7-8b7d-b4288fdc5e4a" nodeRepresentation="80565-5" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>LOINC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Residential Care Medication Chart"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:a09d5840-386c-46f2-b5ad-9c3699a4309d" classifiedObject="urn:uuid:03228689-b0e7-44ca-bac2-4756da2ab647" id="urn:uuid:346527bc-c047-41b4-bc18-4c1cd828a5bc" lid="urn:uuid:346527bc-c047-41b4-bc18-4c1cd828a5bc" nodeRepresentation="1.2.36.1.2001.1006.1.32046.2" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>PCEHR_FormatCodes</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="eDS"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:f33fb8ac-18af-42cc-ae0e-ed0b0bdb91e1" classifiedObject="urn:uuid:03228689-b0e7-44ca-bac2-4756da2ab647" id="urn:uuid:0757fae7-97dc-45ea-aea9-94cd82bcf7cb" lid="urn:uuid:0757fae7-97dc-45ea-aea9-94cd82bcf7cb" nodeRepresentation="8511" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>ANZSIC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="General Practice"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:cccf5598-8b07-4b77-a05e-ae952c785ead" classifiedObject="urn:uuid:03228689-b0e7-44ca-bac2-4756da2ab647" id="urn:uuid:19a000a2-3f88-44e2-92ab-4fbd21b5f4af" lid="urn:uuid:19a000a2-3f88-44e2-92ab-4fbd21b5f4af" nodeRepresentation="8511-3" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>ANZSIC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="General practice medical clinic service"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:f0306f51-975f-434e-a61c-c59651d33983" classifiedObject="urn:uuid:03228689-b0e7-44ca-bac2-4756da2ab647" id="urn:uuid:fbe1c450-0f7f-43fe-bd39-e8c5cefb9c87" lid="urn:uuid:fbe1c450-0f7f-43fe-bd39-e8c5cefb9c87" nodeRepresentation="100.32046" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>NCTIS Data Components</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Residential Care Medication Chart"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:ExternalIdentifier id="urn:uuid:89d5dac4-d000-4d71-8189-f7b0dd3e898b" identificationScheme="urn:uuid:58a6f841-87b3-4a3e-92fd-a8ffeff98427" lid="urn:uuid:89d5dac4-d000-4d71-8189-f7b0dd3e898b" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:8bbd0077-d1e6-4d41-9408-fe7d2ec1ddd1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO">
+                        <ns3:Name>
+                            <ns3:LocalizedString value="XDSDocumentEntry.patientId"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:ExternalIdentifier>
+                    <ns3:ExternalIdentifier id="urn:uuid:ed124204-4e10-440f-8480-854a4f0dd4ed" identificationScheme="urn:uuid:2e82c1f6-a085-4c72-9da3-8640a32e42ab" lid="urn:uuid:ed124204-4e10-440f-8480-854a4f0dd4ed" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:8bbd0077-d1e6-4d41-9408-fe7d2ec1ddd1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="1.2.36.2501047616.37544.18039.36495.1704104030363994">
+                        <ns3:Name>
+                            <ns3:LocalizedString value="XDSDocumentEntry.uniqueId"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:ExternalIdentifier>
+                </ns3:ExtrinsicObject>
+                <ns3:ExtrinsicObject id="urn:uuid:58f79c3d-ba88-49a9-a81d-ab7e293e164b" isOpaque="false" lid="urn:uuid:58f79c3d-ba88-49a9-a81d-ab7e293e164b" mimeType="application/zip" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">
+                    <ns3:Slot name="creationTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="languageCode">
+                        <ns3:ValueList>
+                            <ns3:Value>en-AU</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="serviceStartTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="serviceStopTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="sourcePatientId">
+                        <ns3:ValueList>
+                            <ns3:Value>8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="hash">
+                        <ns3:ValueList>
+                            <ns3:Value>c674a1f30c51f672b6ddb7afde32b51ebe4ae603</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="size">
+                        <ns3:ValueList>
+                            <ns3:Value>39321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="repositoryUniqueId">
+                        <ns3:ValueList>
+                            <ns3:Value>1.2.36.1.2001.1007.10.8003640002000050</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Name>
+                        <ns3:LocalizedString charset="UTF-8" value="Residential Care Medication Chart" xml:lang="en-us"/>
+                    </ns3:Name>
+                    <ns3:VersionInfo versionName="1"/>
+                    <ns3:Classification classificationScheme="urn:uuid:93606bcf-9494-43ec-9b4e-a7748d1a838d" classifiedObject="urn:uuid:58f79c3d-ba88-49a9-a81d-ab7e293e164b" id="urn:uuid:11a2036d-5028-4484-82de-0931ea5bec16" lid="urn:uuid:11a2036d-5028-4484-82de-0931ea5bec16" nodeRepresentation="" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="authorInstitution">
+                            <ns3:ValueList>
+                                <ns3:Value>Tes Health Service 838^^^^^^^^^1.2.36.1.2001.1003.0.8003623233372670</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Slot name="authorPerson">
+                            <ns3:ValueList>
+                                <ns3:Value>^FORD^Maisie^^^&amp;1.2.36.1.2001.1003.0.8003611566713495&amp;ISO</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Slot name="authorSpecialty">
+                            <ns3:ValueList>
+                                <ns3:Value>General Medical Practitioner</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:41a5887f-8865-4c09-adf7-e362475b143a" classifiedObject="urn:uuid:58f79c3d-ba88-49a9-a81d-ab7e293e164b" id="urn:uuid:eda6e54f-8281-4701-83c8-fc6f79f9c649" lid="urn:uuid:eda6e54f-8281-4701-83c8-fc6f79f9c649" nodeRepresentation="80565-5" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>LOINC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Medication Chart"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:a09d5840-386c-46f2-b5ad-9c3699a4309d" classifiedObject="urn:uuid:58f79c3d-ba88-49a9-a81d-ab7e293e164b" id="urn:uuid:090eec3c-9ca6-41bb-8d83-eaf1d228d39a" lid="urn:uuid:090eec3c-9ca6-41bb-8d83-eaf1d228d39a" nodeRepresentation="1.2.36.1.2001.1006.1.32046.2" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>PCEHR_FormatCodes</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="eDS"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:f33fb8ac-18af-42cc-ae0e-ed0b0bdb91e1" classifiedObject="urn:uuid:58f79c3d-ba88-49a9-a81d-ab7e293e164b" id="urn:uuid:ce7f8f52-971d-4d3f-a486-5adbd5785eb0" lid="urn:uuid:ce7f8f52-971d-4d3f-a486-5adbd5785eb0" nodeRepresentation="8511" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>ANZSIC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="General Practice"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:cccf5598-8b07-4b77-a05e-ae952c785ead" classifiedObject="urn:uuid:58f79c3d-ba88-49a9-a81d-ab7e293e164b" id="urn:uuid:56e768ab-11ec-4015-8f78-485f4aa01115" lid="urn:uuid:56e768ab-11ec-4015-8f78-485f4aa01115" nodeRepresentation="8511-3" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>ANZSIC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="General practice medical clinic service"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:f0306f51-975f-434e-a61c-c59651d33983" classifiedObject="urn:uuid:58f79c3d-ba88-49a9-a81d-ab7e293e164b" id="urn:uuid:f650c3da-d5d9-49c8-b42d-a8745eea79ec" lid="urn:uuid:f650c3da-d5d9-49c8-b42d-a8745eea79ec" nodeRepresentation="100.32046" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>NCTIS Data Components</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Residential Care Medication Chart"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:ExternalIdentifier id="urn:uuid:aa650905-3ccd-4fbc-9d23-85781fd44206" identificationScheme="urn:uuid:58a6f841-87b3-4a3e-92fd-a8ffeff98427" lid="urn:uuid:aa650905-3ccd-4fbc-9d23-85781fd44206" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:2bc7ba88-1df3-4975-b4d6-6da77345b65a" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO">
+                        <ns3:Name>
+                            <ns3:LocalizedString value="XDSDocumentEntry.patientId"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:ExternalIdentifier>
+                    <ns3:ExternalIdentifier id="urn:uuid:273d93e6-e5dc-4c18-964d-1e569b373d6f" identificationScheme="urn:uuid:2e82c1f6-a085-4c72-9da3-8640a32e42ab" lid="urn:uuid:273d93e6-e5dc-4c18-964d-1e569b373d6f" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:2bc7ba88-1df3-4975-b4d6-6da77345b65a" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="1.2.36.2501047616.37544.18039.36495.1704104030363974">
+                        <ns3:Name>
+                            <ns3:LocalizedString value="XDSDocumentEntry.uniqueId"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:ExternalIdentifier>
+                </ns3:ExtrinsicObject>
+                <ns3:ExtrinsicObject id="urn:uuid:0bf403e1-d4e6-4b16-bede-b64ab3dfa06a" isOpaque="false" lid="urn:uuid:0bf403e1-d4e6-4b16-bede-b64ab3dfa06a" mimeType="application/zip" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">
+                    <ns3:Slot name="creationTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="languageCode">
+                        <ns3:ValueList>
+                            <ns3:Value>en-AU</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="serviceStartTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="serviceStopTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="sourcePatientId">
+                        <ns3:ValueList>
+                            <ns3:Value>8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="hash">
+                        <ns3:ValueList>
+                            <ns3:Value>520389c10e616026dbc48a83fc7b58e887988f23</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="size">
+                        <ns3:ValueList>
+                            <ns3:Value>39408</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="repositoryUniqueId">
+                        <ns3:ValueList>
+                            <ns3:Value>1.2.36.1.2001.1007.10.8003640002000050</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Name>
+                        <ns3:LocalizedString charset="UTF-8" value="Specialist Letter" xml:lang="en-us"/>
+                    </ns3:Name>
+                    <ns3:VersionInfo versionName="1"/>
+                    <ns3:Classification classificationScheme="urn:uuid:93606bcf-9494-43ec-9b4e-a7748d1a838d" classifiedObject="urn:uuid:0bf403e1-d4e6-4b16-bede-b64ab3dfa06a" id="urn:uuid:67952651-a1a3-4204-9195-cff8d314b0b0" lid="urn:uuid:67952651-a1a3-4204-9195-cff8d314b0b0" nodeRepresentation="" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="authorInstitution">
+                            <ns3:ValueList>
+                                <ns3:Value>Tes Health Service 838^^^^^^^^^1.2.36.1.2001.1003.0.8003623233372670</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Slot name="authorPerson">
+                            <ns3:ValueList>
+                                <ns3:Value>^FORD^Maisie^^^&amp;1.2.36.1.2001.1003.0.8003611566713495&amp;ISO</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Slot name="authorSpecialty">
+                            <ns3:ValueList>
+                                <ns3:Value>General Medical Practitioner</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:41a5887f-8865-4c09-adf7-e362475b143a" classifiedObject="urn:uuid:0bf403e1-d4e6-4b16-bede-b64ab3dfa06a" id="urn:uuid:f42b959d-c334-401f-88cc-1542f7ad0d86" lid="urn:uuid:f42b959d-c334-401f-88cc-1542f7ad0d86" nodeRepresentation="80565-5" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>LOINC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Medication Chart"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:a09d5840-386c-46f2-b5ad-9c3699a4309d" classifiedObject="urn:uuid:0bf403e1-d4e6-4b16-bede-b64ab3dfa06a" id="urn:uuid:64d7b479-5c4e-4aa7-a1c5-c2d7f9273ae7" lid="urn:uuid:64d7b479-5c4e-4aa7-a1c5-c2d7f9273ae7" nodeRepresentation="1.2.36.1.2001.1006.1.32046.2" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>PCEHR_FormatCodes</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="eDS"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:f33fb8ac-18af-42cc-ae0e-ed0b0bdb91e1" classifiedObject="urn:uuid:0bf403e1-d4e6-4b16-bede-b64ab3dfa06a" id="urn:uuid:a6c565f9-8b48-4b01-b3a9-fe2a7121528c" lid="urn:uuid:a6c565f9-8b48-4b01-b3a9-fe2a7121528c" nodeRepresentation="8511" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>ANZSIC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="General Practice"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:cccf5598-8b07-4b77-a05e-ae952c785ead" classifiedObject="urn:uuid:0bf403e1-d4e6-4b16-bede-b64ab3dfa06a" id="urn:uuid:f206f617-2a44-432a-b5f1-455d4f427603" lid="urn:uuid:f206f617-2a44-432a-b5f1-455d4f427603" nodeRepresentation="8511-3" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>ANZSIC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="General practice medical clinic service"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:f0306f51-975f-434e-a61c-c59651d33983" classifiedObject="urn:uuid:0bf403e1-d4e6-4b16-bede-b64ab3dfa06a" id="urn:uuid:894445a1-d2b1-4bd8-b70c-c65c3209a3ff" lid="urn:uuid:894445a1-d2b1-4bd8-b70c-c65c3209a3ff" nodeRepresentation="100.32046" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>NCTIS Data Components</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Residential Care Medication Chart"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:ExternalIdentifier id="urn:uuid:6c38b14c-5f81-4cb1-82d5-16eed4d99fe3" identificationScheme="urn:uuid:58a6f841-87b3-4a3e-92fd-a8ffeff98427" lid="urn:uuid:6c38b14c-5f81-4cb1-82d5-16eed4d99fe3" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:3e1f8dae-3ccf-45f3-b8da-3ff21d381867" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO">
+                        <ns3:Name>
+                            <ns3:LocalizedString value="XDSDocumentEntry.patientId"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:ExternalIdentifier>
+                    <ns3:ExternalIdentifier id="urn:uuid:d74f1e06-0270-4071-af07-061ad85b1bf4" identificationScheme="urn:uuid:2e82c1f6-a085-4c72-9da3-8640a32e42ab" lid="urn:uuid:d74f1e06-0270-4071-af07-061ad85b1bf4" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:3e1f8dae-3ccf-45f3-b8da-3ff21d381867" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="1.2.36.2501047616.37544.18039.36495.1704104030363985">
+                        <ns3:Name>
+                            <ns3:LocalizedString value="XDSDocumentEntry.uniqueId"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:ExternalIdentifier>
+                </ns3:ExtrinsicObject>
+                <ns3:ExtrinsicObject id="urn:uuid:e350864a-538e-4c09-8ba5-e6d2eaebc476" isOpaque="false" lid="urn:uuid:e350864a-538e-4c09-8ba5-e6d2eaebc476" mimeType="application/zip" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">
+                    <ns3:Slot name="creationTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="languageCode">
+                        <ns3:ValueList>
+                            <ns3:Value>en-AU</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="serviceStartTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="serviceStopTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="sourcePatientId">
+                        <ns3:ValueList>
+                            <ns3:Value>8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="hash">
+                        <ns3:ValueList>
+                            <ns3:Value>9616b980a0e24635afa2184485ff6a81c66706f2</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="size">
+                        <ns3:ValueList>
+                            <ns3:Value>39313</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="repositoryUniqueId">
+                        <ns3:ValueList>
+                            <ns3:Value>1.2.36.1.2001.1007.10.8003640002000050</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Name>
+                        <ns3:LocalizedString charset="UTF-8" value="Residential Care Medication Chart" xml:lang="en-us"/>
+                    </ns3:Name>
+                    <ns3:VersionInfo versionName="1"/>
+                    <ns3:Classification classificationScheme="urn:uuid:93606bcf-9494-43ec-9b4e-a7748d1a838d" classifiedObject="urn:uuid:e350864a-538e-4c09-8ba5-e6d2eaebc476" id="urn:uuid:333f30d2-d4a4-4a68-8dfd-88534280a518" lid="urn:uuid:333f30d2-d4a4-4a68-8dfd-88534280a518" nodeRepresentation="" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="authorInstitution">
+                            <ns3:ValueList>
+                                <ns3:Value>Tes Health Service 838^^^^^^^^^1.2.36.1.2001.1003.0.8003623233372670</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Slot name="authorPerson">
+                            <ns3:ValueList>
+                                <ns3:Value>^FORD^Maisie^^^Ms^^^&amp;1.2.36.1.2001.1003.0.8003611566713495&amp;ISO</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Slot name="authorSpecialty">
+                            <ns3:ValueList>
+                                <ns3:Value>General Medical Practitioner</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:41a5887f-8865-4c09-adf7-e362475b143a" classifiedObject="urn:uuid:e350864a-538e-4c09-8ba5-e6d2eaebc476" id="urn:uuid:a9c5f6f7-5d0f-4219-8be2-64d6949c2e96" lid="urn:uuid:a9c5f6f7-5d0f-4219-8be2-64d6949c2e96" nodeRepresentation="80565-5" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>LOINC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Residential Care Medication Chart"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:a09d5840-386c-46f2-b5ad-9c3699a4309d" classifiedObject="urn:uuid:e350864a-538e-4c09-8ba5-e6d2eaebc476" id="urn:uuid:cc5202ce-ce40-4cee-b06c-6be371b4fa38" lid="urn:uuid:cc5202ce-ce40-4cee-b06c-6be371b4fa38" nodeRepresentation="1.2.36.1.2001.1006.1.32046.2" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>PCEHR_FormatCodes</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="eDS"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:f33fb8ac-18af-42cc-ae0e-ed0b0bdb91e1" classifiedObject="urn:uuid:e350864a-538e-4c09-8ba5-e6d2eaebc476" id="urn:uuid:5fe512f6-d657-4a58-9ed4-06f1266ccc0b" lid="urn:uuid:5fe512f6-d657-4a58-9ed4-06f1266ccc0b" nodeRepresentation="8511" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>ANZSIC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="General Practice"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:cccf5598-8b07-4b77-a05e-ae952c785ead" classifiedObject="urn:uuid:e350864a-538e-4c09-8ba5-e6d2eaebc476" id="urn:uuid:d2b7554a-9510-4f9d-920c-a4e918220793" lid="urn:uuid:d2b7554a-9510-4f9d-920c-a4e918220793" nodeRepresentation="8511-3" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>ANZSIC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="General practice medical clinic service"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:f0306f51-975f-434e-a61c-c59651d33983" classifiedObject="urn:uuid:e350864a-538e-4c09-8ba5-e6d2eaebc476" id="urn:uuid:2e4f3fa4-986c-497a-b7e2-32c3a61473b1" lid="urn:uuid:2e4f3fa4-986c-497a-b7e2-32c3a61473b1" nodeRepresentation="100.32046" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>NCTIS Data Components</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Residential Care Medication Chart"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:ExternalIdentifier id="urn:uuid:d410ab8d-26d6-4786-b424-8eb99f9ef2cc" identificationScheme="urn:uuid:58a6f841-87b3-4a3e-92fd-a8ffeff98427" lid="urn:uuid:d410ab8d-26d6-4786-b424-8eb99f9ef2cc" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:6039c62a-4d1c-4d35-9d4f-4b9f6af2718a" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO">
+                        <ns3:Name>
+                            <ns3:LocalizedString value="XDSDocumentEntry.patientId"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:ExternalIdentifier>
+                    <ns3:ExternalIdentifier id="urn:uuid:cff02f69-2912-4894-b9dd-b2bd4099c7fc" identificationScheme="urn:uuid:2e82c1f6-a085-4c72-9da3-8640a32e42ab" lid="urn:uuid:cff02f69-2912-4894-b9dd-b2bd4099c7fc" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:6039c62a-4d1c-4d35-9d4f-4b9f6af2718a" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="1.2.36.2501047616.37544.18039.36495.1704104030363975">
+                        <ns3:Name>
+                            <ns3:LocalizedString value="XDSDocumentEntry.uniqueId"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:ExternalIdentifier>
+                </ns3:ExtrinsicObject>
+                <ns3:ExtrinsicObject id="urn:uuid:6758f70c-7241-4f4c-9eef-cbc78e97c646" isOpaque="false" lid="urn:uuid:6758f70c-7241-4f4c-9eef-cbc78e97c646" mimeType="application/zip" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">
+                    <ns3:Slot name="creationTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="languageCode">
+                        <ns3:ValueList>
+                            <ns3:Value>en-AU</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="serviceStartTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="serviceStopTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="sourcePatientId">
+                        <ns3:ValueList>
+                            <ns3:Value>8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="hash">
+                        <ns3:ValueList>
+                            <ns3:Value>2c8182f9ec9adf4cfada5c0139626849445d7b79</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="size">
+                        <ns3:ValueList>
+                            <ns3:Value>39323</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="repositoryUniqueId">
+                        <ns3:ValueList>
+                            <ns3:Value>1.2.36.1.2001.1007.10.8003640002000050</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Name>
+                        <ns3:LocalizedString charset="UTF-8" value="Residential Care Medication Chart" xml:lang="en-us"/>
+                    </ns3:Name>
+                    <ns3:VersionInfo versionName="1"/>
+                    <ns3:Classification classificationScheme="urn:uuid:93606bcf-9494-43ec-9b4e-a7748d1a838d" classifiedObject="urn:uuid:6758f70c-7241-4f4c-9eef-cbc78e97c646" id="urn:uuid:78b80233-254e-4863-848c-03243754728b" lid="urn:uuid:78b80233-254e-4863-848c-03243754728b" nodeRepresentation="" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="authorInstitution">
+                            <ns3:ValueList>
+                                <ns3:Value>Tes Health Service 838^^^^^^^^^1.2.36.1.2001.1003.0.8003623233372670</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Slot name="authorPerson">
+                            <ns3:ValueList>
+                                <ns3:Value>^FORD^Maisie^^^Ms^^^&amp;1.2.36.1.2001.1003.0.8003611566713495&amp;ISO</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Slot name="authorSpecialty">
+                            <ns3:ValueList>
+                                <ns3:Value>General Medical Practitioner</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:41a5887f-8865-4c09-adf7-e362475b143a" classifiedObject="urn:uuid:6758f70c-7241-4f4c-9eef-cbc78e97c646" id="urn:uuid:e4e1a0c7-dbe9-428f-9993-98f424c25de4" lid="urn:uuid:e4e1a0c7-dbe9-428f-9993-98f424c25de4" nodeRepresentation="80565-5" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>LOINC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Residential Care Medication Chart"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:a09d5840-386c-46f2-b5ad-9c3699a4309d" classifiedObject="urn:uuid:6758f70c-7241-4f4c-9eef-cbc78e97c646" id="urn:uuid:857f53d6-19cc-4e84-a583-1e37c9b92368" lid="urn:uuid:857f53d6-19cc-4e84-a583-1e37c9b92368" nodeRepresentation="1.2.36.1.2001.1006.1.32046.2" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>PCEHR_FormatCodes</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="eDS"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:f33fb8ac-18af-42cc-ae0e-ed0b0bdb91e1" classifiedObject="urn:uuid:6758f70c-7241-4f4c-9eef-cbc78e97c646" id="urn:uuid:7f7f8e4e-4042-46fc-bf5c-251622cbda8a" lid="urn:uuid:7f7f8e4e-4042-46fc-bf5c-251622cbda8a" nodeRepresentation="8511" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>ANZSIC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="General Practice"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:cccf5598-8b07-4b77-a05e-ae952c785ead" classifiedObject="urn:uuid:6758f70c-7241-4f4c-9eef-cbc78e97c646" id="urn:uuid:472be01f-0841-4f9b-960e-d4417f043ad3" lid="urn:uuid:472be01f-0841-4f9b-960e-d4417f043ad3" nodeRepresentation="8511-3" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>ANZSIC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="General practice medical clinic service"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:f0306f51-975f-434e-a61c-c59651d33983" classifiedObject="urn:uuid:6758f70c-7241-4f4c-9eef-cbc78e97c646" id="urn:uuid:0d50bbfa-6477-4976-a3bd-4a6166118fe0" lid="urn:uuid:0d50bbfa-6477-4976-a3bd-4a6166118fe0" nodeRepresentation="100.32046" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>NCTIS Data Components</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Residential Care Medication Chart"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:ExternalIdentifier id="urn:uuid:6d609af0-2130-420d-869d-3cb23a6e207f" identificationScheme="urn:uuid:58a6f841-87b3-4a3e-92fd-a8ffeff98427" lid="urn:uuid:6d609af0-2130-420d-869d-3cb23a6e207f" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:84bdb5c5-30ce-4d79-93bc-f7ff12a854fc" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO">
+                        <ns3:Name>
+                            <ns3:LocalizedString value="XDSDocumentEntry.patientId"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:ExternalIdentifier>
+                    <ns3:ExternalIdentifier id="urn:uuid:b2d8e856-5758-4e1a-b136-08e353fa421a" identificationScheme="urn:uuid:2e82c1f6-a085-4c72-9da3-8640a32e42ab" lid="urn:uuid:b2d8e856-5758-4e1a-b136-08e353fa421a" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:84bdb5c5-30ce-4d79-93bc-f7ff12a854fc" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="1.2.36.2501047616.37544.18039.36495.1704104030363992">
+                        <ns3:Name>
+                            <ns3:LocalizedString value="XDSDocumentEntry.uniqueId"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:ExternalIdentifier>
+                </ns3:ExtrinsicObject>
+                <ns3:ExtrinsicObject id="urn:uuid:ab7d96be-ebeb-454b-9f4f-1dc8013908bd" isOpaque="false" lid="urn:uuid:ab7d96be-ebeb-454b-9f4f-1dc8013908bd" mimeType="application/zip" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">
+                    <ns3:Slot name="creationTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="languageCode">
+                        <ns3:ValueList>
+                            <ns3:Value>en-AU</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="serviceStartTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="serviceStopTime">
+                        <ns3:ValueList>
+                            <ns3:Value>20240321</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="sourcePatientId">
+                        <ns3:ValueList>
+                            <ns3:Value>8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="hash">
+                        <ns3:ValueList>
+                            <ns3:Value>a5d1e9c3fbca59a0500cf1271be5fa63755fc7c9</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="size">
+                        <ns3:ValueList>
+                            <ns3:Value>39316</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="repositoryUniqueId">
+                        <ns3:ValueList>
+                            <ns3:Value>1.2.36.1.2001.1007.10.8003640002000050</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Name>
+                        <ns3:LocalizedString charset="UTF-8" value="Residential Care Medication Chart" xml:lang="en-us"/>
+                    </ns3:Name>
+                    <ns3:VersionInfo versionName="1"/>
+                    <ns3:Classification classificationScheme="urn:uuid:93606bcf-9494-43ec-9b4e-a7748d1a838d" classifiedObject="urn:uuid:ab7d96be-ebeb-454b-9f4f-1dc8013908bd" id="urn:uuid:bd196d55-b506-4055-8470-b393f022031c" lid="urn:uuid:bd196d55-b506-4055-8470-b393f022031c" nodeRepresentation="" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="authorInstitution">
+                            <ns3:ValueList>
+                                <ns3:Value>Tes Health Service 838^^^^^^^^^1.2.36.1.2001.1003.0.8003623233372670</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Slot name="authorPerson">
+                            <ns3:ValueList>
+                                <ns3:Value>^FORD^Maisie^^^Ms^^^&amp;1.2.36.1.2001.1003.0.8003611566713495&amp;ISO</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Slot name="authorSpecialty">
+                            <ns3:ValueList>
+                                <ns3:Value>General Medical Practitioner</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:41a5887f-8865-4c09-adf7-e362475b143a" classifiedObject="urn:uuid:ab7d96be-ebeb-454b-9f4f-1dc8013908bd" id="urn:uuid:b724f84c-54fd-44f3-9e6b-7be42e6ac0a8" lid="urn:uuid:b724f84c-54fd-44f3-9e6b-7be42e6ac0a8" nodeRepresentation="80565-5" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>LOINC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Medication Chart"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:a09d5840-386c-46f2-b5ad-9c3699a4309d" classifiedObject="urn:uuid:ab7d96be-ebeb-454b-9f4f-1dc8013908bd" id="urn:uuid:e626493c-41c2-4386-807b-9cb85f9d0184" lid="urn:uuid:e626493c-41c2-4386-807b-9cb85f9d0184" nodeRepresentation="1.2.36.1.2001.1006.1.32046.2" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>PCEHR_FormatCodes</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="eDS"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:f33fb8ac-18af-42cc-ae0e-ed0b0bdb91e1" classifiedObject="urn:uuid:ab7d96be-ebeb-454b-9f4f-1dc8013908bd" id="urn:uuid:b5bf2350-0d6f-42ee-ae53-113599ce214e" lid="urn:uuid:b5bf2350-0d6f-42ee-ae53-113599ce214e" nodeRepresentation="8511" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>ANZSIC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="General Practice"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:cccf5598-8b07-4b77-a05e-ae952c785ead" classifiedObject="urn:uuid:ab7d96be-ebeb-454b-9f4f-1dc8013908bd" id="urn:uuid:7ce3fe10-3c55-4f77-b0e2-c2606b853112" lid="urn:uuid:7ce3fe10-3c55-4f77-b0e2-c2606b853112" nodeRepresentation="8511-3" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>ANZSIC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="General practice medical clinic service"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:f0306f51-975f-434e-a61c-c59651d33983" classifiedObject="urn:uuid:ab7d96be-ebeb-454b-9f4f-1dc8013908bd" id="urn:uuid:9fdff29e-290d-41f4-9b04-aa318676182e" lid="urn:uuid:9fdff29e-290d-41f4-9b04-aa318676182e" nodeRepresentation="100.32046" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>NCTIS Data Components</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Residential Care Medication Chart"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:ExternalIdentifier id="urn:uuid:f49ed42d-1794-422b-a35b-e6812d9fa519" identificationScheme="urn:uuid:58a6f841-87b3-4a3e-92fd-a8ffeff98427" lid="urn:uuid:f49ed42d-1794-422b-a35b-e6812d9fa519" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:2b0551af-c446-45b3-8c71-a4e5753816ce" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO">
+                        <ns3:Name>
+                            <ns3:LocalizedString value="XDSDocumentEntry.patientId"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:ExternalIdentifier>
+                    <ns3:ExternalIdentifier id="urn:uuid:447c89d2-0b96-408b-b63c-82c6251f2b36" identificationScheme="urn:uuid:2e82c1f6-a085-4c72-9da3-8640a32e42ab" lid="urn:uuid:447c89d2-0b96-408b-b63c-82c6251f2b36" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:2b0551af-c446-45b3-8c71-a4e5753816ce" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="1.2.36.2501047616.37544.18039.36495.1704104030363999">
+                        <ns3:Name>
+                            <ns3:LocalizedString value="XDSDocumentEntry.uniqueId"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:ExternalIdentifier>
+                </ns3:ExtrinsicObject>
+                <ns3:ExtrinsicObject id="urn:uuid:9dbdb9c0-1ef5-4273-8c7b-98c7d78f8f8f" isOpaque="false" lid="urn:uuid:9dbdb9c0-1ef5-4273-8c7b-98c7d78f8f8f" mimeType="application/zip" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">
+                    <ns3:Slot name="creationTime">
+                        <ns3:ValueList>
+                            <ns3:Value>202403201752</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="languageCode">
+                        <ns3:ValueList>
+                            <ns3:Value>en-AU</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="serviceStartTime">
+                        <ns3:ValueList>
+                            <ns3:Value>202403201752</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="serviceStopTime">
+                        <ns3:ValueList>
+                            <ns3:Value>202403201752</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="sourcePatientId">
+                        <ns3:ValueList>
+                            <ns3:Value>8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="hash">
+                        <ns3:ValueList>
+                            <ns3:Value>2356e90299d3680fc98d6bf65e5ecebb5f4e55a5</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="size">
+                        <ns3:ValueList>
+                            <ns3:Value>9947</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:Slot name="repositoryUniqueId">
+                        <ns3:ValueList>
+                            <ns3:Value>1.2.36.1.2001.1007.10.8003640002000050</ns3:Value>
+                        </ns3:ValueList>
+                    </ns3:Slot>
+                    <ns3:VersionInfo versionName="1"/>
+                    <ns3:Classification classificationScheme="urn:uuid:93606bcf-9494-43ec-9b4e-a7748d1a838d" classifiedObject="urn:uuid:9dbdb9c0-1ef5-4273-8c7b-98c7d78f8f8f" id="urn:uuid:830a7a82-9dd2-4af1-aa2a-0831dcfe929d" lid="urn:uuid:830a7a82-9dd2-4af1-aa2a-0831dcfe929d" nodeRepresentation="" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="authorInstitution">
+                            <ns3:ValueList>
+                                <ns3:Value>Tes Health Service 838^^^^^^^^^1.2.36.1.2001.1003.0.8003623233372670</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Slot name="authorPerson">
+                            <ns3:ValueList>
+                                <ns3:Value>^SHS^Athor^^^Dr.^^^&amp;1.2.36.1.2001.1003.0.8003611566713495&amp;ISO</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Slot name="authorSpecialty">
+                            <ns3:ValueList>
+                                <ns3:Value>General Medical Practitioner</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:41a5887f-8865-4c09-adf7-e362475b143a" classifiedObject="urn:uuid:9dbdb9c0-1ef5-4273-8c7b-98c7d78f8f8f" id="urn:uuid:5a7f3df6-e160-4c09-9760-50a749a11ddb" lid="urn:uuid:5a7f3df6-e160-4c09-9760-50a749a11ddb" nodeRepresentation="80565-5" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>LOINC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Residential Care Medication Chart"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:a09d5840-386c-46f2-b5ad-9c3699a4309d" classifiedObject="urn:uuid:9dbdb9c0-1ef5-4273-8c7b-98c7d78f8f8f" id="urn:uuid:693c0c44-0674-4054-bd7a-b8b627fe27f8" lid="urn:uuid:693c0c44-0674-4054-bd7a-b8b627fe27f8" nodeRepresentation="1.2.36.1.2001.1006.1.32046.2" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>PCEHR_FormatCodes</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Residential Care Medication Chart"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:f33fb8ac-18af-42cc-ae0e-ed0b0bdb91e1" classifiedObject="urn:uuid:9dbdb9c0-1ef5-4273-8c7b-98c7d78f8f8f" id="urn:uuid:9f1e11f6-6f40-4caf-9d58-a245e37b9a37" lid="urn:uuid:9f1e11f6-6f40-4caf-9d58-a245e37b9a37" nodeRepresentation="8401" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>ANZSIC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Hospitals (except Psychiatric Hospitals)"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:cccf5598-8b07-4b77-a05e-ae952c785ead" classifiedObject="urn:uuid:9dbdb9c0-1ef5-4273-8c7b-98c7d78f8f8f" id="urn:uuid:4e5e5f90-39d8-4035-9264-16ba28884fc4" lid="urn:uuid:4e5e5f90-39d8-4035-9264-16ba28884fc4" nodeRepresentation="8401-6" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>ANZSIC</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Hospitals (except Psychiatric Hospitals)"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:Classification classificationScheme="urn:uuid:f0306f51-975f-434e-a61c-c59651d33983" classifiedObject="urn:uuid:9dbdb9c0-1ef5-4273-8c7b-98c7d78f8f8f" id="urn:uuid:8d10edc9-c62f-409c-833d-e57e147e3d58" lid="urn:uuid:8d10edc9-c62f-409c-833d-e57e147e3d58" nodeRepresentation="100.32046" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted">
+                        <ns3:Slot name="codingScheme">
+                            <ns3:ValueList>
+                                <ns3:Value>NCTIS Data Components</ns3:Value>
+                            </ns3:ValueList>
+                        </ns3:Slot>
+                        <ns3:Name>
+                            <ns3:LocalizedString value="Residential Care Medication Chart"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:Classification>
+                    <ns3:ExternalIdentifier id="urn:uuid:3be76d0e-1936-4641-ae6d-dd8e61fa8686" identificationScheme="urn:uuid:58a6f841-87b3-4a3e-92fd-a8ffeff98427" lid="urn:uuid:3be76d0e-1936-4641-ae6d-dd8e61fa8686" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:9dbdb9c0-1ef5-4273-8c7b-98c7d78f8f8f" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO">
+                        <ns3:Name>
+                            <ns3:LocalizedString value="XDSDocumentEntry.patientId"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:ExternalIdentifier>
+                    <ns3:ExternalIdentifier id="urn:uuid:a6d2c78e-ca28-4df2-85f7-3148aad910b4" identificationScheme="urn:uuid:2e82c1f6-a085-4c72-9da3-8640a32e42ab" lid="urn:uuid:a6d2c78e-ca28-4df2-85f7-3148aad910b4" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="urn:uuid:9dbdb9c0-1ef5-4273-8c7b-98c7d78f8f8f" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="1.2.36.1530082295.32180.18610.42803.39911307188844">
+                        <ns3:Name>
+                            <ns3:LocalizedString value="XDSDocumentEntry.uniqueId"/>
+                        </ns3:Name>
+                        <ns3:VersionInfo versionName="1"/>
+                    </ns3:ExternalIdentifier>
+                </ns3:ExtrinsicObject>
+                <ExtrinsicObject xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0"
+                    xmlns:ns1="urn:registry.docx.pcehr.au"
+                    xmlns:ns2="urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0"
+                    xmlns:ns4="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0" id="urn:uuid:e3f0d69c-39f4-411e-b59f-3e43a0d4dea0" lid="urn:uuid:e3f0d69c-39f4-411e-b59f-3e43a0d4dea0" mimeType="application/zip" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">
+                    <Slot name="creationTime">
+                        <ValueList>
+                            <Value>20240506231502</Value>
+                        </ValueList>
+                    </Slot>
+                    <Slot name="languageCode">
+                        <ValueList>
+                            <Value>en-AU</Value>
+                        </ValueList>
+                    </Slot>
+                    <Slot name="serviceStartTime">
+                        <ValueList>
+                            <Value>20240507</Value>
+                        </ValueList>
+                    </Slot>
+                    <Slot name="serviceStopTime">
+                        <ValueList>
+                            <Value>20240507</Value>
+                        </ValueList>
+                    </Slot>
+                    <Slot name="sourcePatientId">
+                        <ValueList>
+                            <Value>8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO</Value>
+                        </ValueList>
+                    </Slot>
+                    <Slot name="hash">
+                        <ValueList>
+                            <Value>da39a3ee5e6b4b0d3255bfef95601890afd80709</Value>
+                        </ValueList>
+                    </Slot>
+                    <Slot name="size">
+                        <ValueList>
+                            <Value>0</Value>
+                        </ValueList>
+                    </Slot>
+                    <Slot name="repositoryUniqueId">
+                        <ValueList>
+                            <Value>1.2.36.1.2001.1007.10.8003640002000092</Value>
+                        </ValueList>
+                    </Slot>
+                    <VersionInfo versionName="1"/>
+                    <Classification classificationScheme="urn:uuid:93606bcf-9494-43ec-9b4e-a7748d1a838d" classifiedObject="urn:uuid:e3f0d69c-39f4-411e-b59f-3e43a0d4dea0" id="urn:uuid:ce3e885f-c4f2-48da-a0d8-36c68581eb3f" lid="urn:uuid:ce3e885f-c4f2-48da-a0d8-36c68581eb3f" nodeRepresentation="" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification">
+                        <Slot name="authorInstitution">
+                            <ValueList>
+                                <Value>My Health Record^^^^^^^^^1.2.36.1.2001.1007.1.8003640001000036</Value>
+                            </ValueList>
+                        </Slot>
+                        <Slot name="authorPerson">
+                            <ValueList>
+                                <Value>^^My Health Record^^^^&amp;1.2.36.1.2001.1007.20.8003640003000026&amp;ISO</Value>
+                            </ValueList>
+                        </Slot>
+                        <VersionInfo versionName="1"/>
+                    </Classification>
+                    <Classification classificationScheme="urn:uuid:41a5887f-8865-4c09-adf7-e362475b143a" classifiedObject="urn:uuid:e3f0d69c-39f4-411e-b59f-3e43a0d4dea0" id="urn:uuid:5978901d-00e5-40a7-a4c4-cd96a44b0337" lid="urn:uuid:5978901d-00e5-40a7-a4c4-cd96a44b0337" nodeRepresentation="100.32002" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification">
+                        <Slot name="codingScheme">
+                            <ValueList>
+                                <Value>NCTIS Data Components</Value>
+                            </ValueList>
+                        </Slot>
+                        <Name>
+                            <LocalizedString value="Medicines View"/>
+                        </Name>
+                        <VersionInfo versionName="1"/>
+                    </Classification>
+                    <Classification classificationScheme="urn:uuid:a09d5840-386c-46f2-b5ad-9c3699a4309d" classifiedObject="urn:uuid:e3f0d69c-39f4-411e-b59f-3e43a0d4dea0" id="urn:uuid:8f07f8a5-bcf8-4c91-a63b-f69419b80490" lid="urn:uuid:8f07f8a5-bcf8-4c91-a63b-f69419b80490" nodeRepresentation="1.2.36.1.2001.1005.59" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification">
+                        <Slot name="codingScheme">
+                            <ValueList>
+                                <Value>PCEHR_FormatCodes</Value>
+                            </ValueList>
+                        </Slot>
+                        <Name>
+                            <LocalizedString value="Medicines View"/>
+                        </Name>
+                        <VersionInfo versionName="1"/>
+                    </Classification>
+                    <Classification classificationScheme="urn:uuid:f33fb8ac-18af-42cc-ae0e-ed0b0bdb91e1" classifiedObject="urn:uuid:e3f0d69c-39f4-411e-b59f-3e43a0d4dea0" id="urn:uuid:c5753b3e-c924-4cd7-8dd7-75790a96f0bb" lid="urn:uuid:c5753b3e-c924-4cd7-8dd7-75790a96f0bb" nodeRepresentation="7562" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification">
+                        <Slot name="codingScheme">
+                            <ValueList>
+                                <Value>ANZSIC</Value>
+                            </ValueList>
+                        </Slot>
+                        <Name>
+                            <LocalizedString value="Provision and administration of public health program"/>
+                        </Name>
+                        <VersionInfo versionName="1"/>
+                    </Classification>
+                    <Classification classificationScheme="urn:uuid:cccf5598-8b07-4b77-a05e-ae952c785ead" classifiedObject="urn:uuid:e3f0d69c-39f4-411e-b59f-3e43a0d4dea0" id="urn:uuid:b6b90cd1-e096-460e-9d05-fb61eadc9b71" lid="urn:uuid:b6b90cd1-e096-460e-9d05-fb61eadc9b71" nodeRepresentation="7562-1" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification">
+                        <Slot name="codingScheme">
+                            <ValueList>
+                                <Value>ANZSIC</Value>
+                            </ValueList>
+                        </Slot>
+                        <Name>
+                            <LocalizedString value="Provision and administration of public health program"/>
+                        </Name>
+                        <VersionInfo versionName="1"/>
+                    </Classification>
+                    <Classification classificationScheme="urn:uuid:f0306f51-975f-434e-a61c-c59651d33983" classifiedObject="urn:uuid:e3f0d69c-39f4-411e-b59f-3e43a0d4dea0" id="urn:uuid:df383e86-7583-4aec-ac9c-4ab49b37116e" lid="urn:uuid:df383e86-7583-4aec-ac9c-4ab49b37116e" nodeRepresentation="100.32002.1" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification">
+                        <Slot name="codingScheme">
+                            <ValueList>
+                                <Value>NCTIS Data Components</Value>
+                            </ValueList>
+                        </Slot>
+                        <Name>
+                            <LocalizedString value="Medicines View"/>
+                        </Name>
+                        <VersionInfo versionName="1"/>
+                    </Classification>
+                    <ExternalIdentifier id="urn:uuid:3133c396-dd8c-4fe0-b8ee-f4b9ebbd631d" identificationScheme="urn:uuid:58a6f841-87b3-4a3e-92fd-a8ffeff98427" lid="urn:uuid:3133c396-dd8c-4fe0-b8ee-f4b9ebbd631d" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="DOCUMENT_SYMBOLICID_01" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO">
+                        <Name>
+                            <LocalizedString value="XDSDocumentEntry.patientId"/>
+                        </Name>
+                        <VersionInfo versionName="1"/>
+                    </ExternalIdentifier>
+                    <ExternalIdentifier id="urn:uuid:d0f71d20-d02f-481a-93dc-ce27dfe9c9b7" identificationScheme="urn:uuid:2e82c1f6-a085-4c72-9da3-8640a32e42ab" lid="urn:uuid:d0f71d20-d02f-481a-93dc-ce27dfe9c9b7" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="DOCUMENT_SYMBOLICID_01" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="2.25.29902402522408113476214">
+                        <Name>
+                            <LocalizedString value="XDSDocumentEntry.uniqueId"/>
+                        </Name>
+                        <VersionInfo versionName="1"/>
+                    </ExternalIdentifier>
+                </ExtrinsicObject>
+                <ExtrinsicObject xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0"
+                    xmlns:ns1="urn:registry.docx.pcehr.au"
+                    xmlns:ns2="urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0"
+                    xmlns:ns4="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0" id="urn:uuid:4e4da2c4-1dfd-4e07-8cee-0248b7af872d" lid="urn:uuid:4e4da2c4-1dfd-4e07-8cee-0248b7af872d" mimeType="application/zip" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">
+                    <Slot name="creationTime">
+                        <ValueList>
+                            <Value>20240506231457</Value>
+                        </ValueList>
+                    </Slot>
+                    <Slot name="languageCode">
+                        <ValueList>
+                            <Value>en-AU</Value>
+                        </ValueList>
+                    </Slot>
+                    <Slot name="serviceStartTime">
+                        <ValueList>
+                            <Value>20240507</Value>
+                        </ValueList>
+                    </Slot>
+                    <Slot name="serviceStopTime">
+                        <ValueList>
+                            <Value>20240507</Value>
+                        </ValueList>
+                    </Slot>
+                    <Slot name="sourcePatientId">
+                        <ValueList>
+                            <Value>8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO</Value>
+                        </ValueList>
+                    </Slot>
+                    <Slot name="hash">
+                        <ValueList>
+                            <Value>da39a3ee5e6b4b0d3255bfef95601890afd80709</Value>
+                        </ValueList>
+                    </Slot>
+                    <Slot name="size">
+                        <ValueList>
+                            <Value>0</Value>
+                        </ValueList>
+                    </Slot>
+                    <Slot name="repositoryUniqueId">
+                        <ValueList>
+                            <Value>1.2.36.1.2001.1007.10.8003640002000159</Value>
+                        </ValueList>
+                    </Slot>
+                    <VersionInfo versionName="1"/>
+                    <Classification classificationScheme="urn:uuid:93606bcf-9494-43ec-9b4e-a7748d1a838d" classifiedObject="urn:uuid:4e4da2c4-1dfd-4e07-8cee-0248b7af872d" id="urn:uuid:4ee35962-7151-4acf-8d37-0dcf2bce7a65" lid="urn:uuid:4ee35962-7151-4acf-8d37-0dcf2bce7a65" nodeRepresentation="" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification">
+                        <Slot name="authorInstitution">
+                            <ValueList>
+                                <Value>My Health Record^^^^^^^^^1.2.36.1.2001.1007.1.8003640001000036</Value>
+                            </ValueList>
+                        </Slot>
+                        <Slot name="authorPerson">
+                            <ValueList>
+                                <Value>^^My Health Record^^^^&amp;1.2.36.1.2001.1007.20.8003640003000026&amp;ISO</Value>
+                            </ValueList>
+                        </Slot>
+                        <VersionInfo versionName="1"/>
+                    </Classification>
+                    <Classification classificationScheme="urn:uuid:41a5887f-8865-4c09-adf7-e362475b143a" classifiedObject="urn:uuid:4e4da2c4-1dfd-4e07-8cee-0248b7af872d" id="urn:uuid:8a4889a0-b2a4-49cc-9e7a-9bdc4e3acae9" lid="urn:uuid:8a4889a0-b2a4-49cc-9e7a-9bdc4e3acae9" nodeRepresentation="18761-7" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification">
+                        <Slot name="codingScheme">
+                            <ValueList>
+                                <Value>LOINC</Value>
+                            </ValueList>
+                        </Slot>
+                        <Name>
+                            <LocalizedString value="Transfer Summary"/>
+                        </Name>
+                        <VersionInfo versionName="1"/>
+                    </Classification>
+                    <Classification classificationScheme="urn:uuid:a09d5840-386c-46f2-b5ad-9c3699a4309d" classifiedObject="urn:uuid:4e4da2c4-1dfd-4e07-8cee-0248b7af872d" id="urn:uuid:982fb094-c1c8-4c22-939b-15cb85d84a30" lid="urn:uuid:982fb094-c1c8-4c22-939b-15cb85d84a30" nodeRepresentation="1.2.36.1.2001.1005.82" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification">
+                        <Slot name="codingScheme">
+                            <ValueList>
+                                <Value>PCEHR_FormatCodes</Value>
+                            </ValueList>
+                        </Slot>
+                        <Name>
+                            <LocalizedString value="Residential Care Transfer Overview"/>
+                        </Name>
+                        <VersionInfo versionName="1"/>
+                    </Classification>
+                    <Classification classificationScheme="urn:uuid:f33fb8ac-18af-42cc-ae0e-ed0b0bdb91e1" classifiedObject="urn:uuid:4e4da2c4-1dfd-4e07-8cee-0248b7af872d" id="urn:uuid:b730d089-3281-4e8e-8a5f-bbffb29a428c" lid="urn:uuid:b730d089-3281-4e8e-8a5f-bbffb29a428c" nodeRepresentation="7562" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification">
+                        <Slot name="codingScheme">
+                            <ValueList>
+                                <Value>ANZSIC</Value>
+                            </ValueList>
+                        </Slot>
+                        <Name>
+                            <LocalizedString value="Provision and administration of public health program"/>
+                        </Name>
+                        <VersionInfo versionName="1"/>
+                    </Classification>
+                    <Classification classificationScheme="urn:uuid:cccf5598-8b07-4b77-a05e-ae952c785ead" classifiedObject="urn:uuid:4e4da2c4-1dfd-4e07-8cee-0248b7af872d" id="urn:uuid:f1040e11-475c-4061-9ebb-ed418da68194" lid="urn:uuid:f1040e11-475c-4061-9ebb-ed418da68194" nodeRepresentation="7562-1" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification">
+                        <Slot name="codingScheme">
+                            <ValueList>
+                                <Value>ANZSIC</Value>
+                            </ValueList>
+                        </Slot>
+                        <Name>
+                            <LocalizedString value="Provision and administration of public health program"/>
+                        </Name>
+                        <VersionInfo versionName="1"/>
+                    </Classification>
+                    <Classification classificationScheme="urn:uuid:f0306f51-975f-434e-a61c-c59651d33983" classifiedObject="urn:uuid:4e4da2c4-1dfd-4e07-8cee-0248b7af872d" id="urn:uuid:38036c79-5f53-4ce4-b9cb-ae7707558527" lid="urn:uuid:38036c79-5f53-4ce4-b9cb-ae7707558527" nodeRepresentation="100.32047" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification">
+                        <Slot name="codingScheme">
+                            <ValueList>
+                                <Value>NCTIS Data Components</Value>
+                            </ValueList>
+                        </Slot>
+                        <Name>
+                            <LocalizedString value="Residential Care Transfer Overview"/>
+                        </Name>
+                        <VersionInfo versionName="1"/>
+                    </Classification>
+                    <ExternalIdentifier id="urn:uuid:24da6821-dc5a-4da1-a761-9999a59f39b8" identificationScheme="urn:uuid:58a6f841-87b3-4a3e-92fd-a8ffeff98427" lid="urn:uuid:24da6821-dc5a-4da1-a761-9999a59f39b8" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="DOCUMENT_SYMBOLICID_01" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="8003608333647477^^^&amp;1.2.36.1.2001.1003.0&amp;ISO">
+                        <Name>
+                            <LocalizedString value="XDSDocumentEntry.patientId"/>
+                        </Name>
+                        <VersionInfo versionName="1"/>
+                    </ExternalIdentifier>
+                    <ExternalIdentifier id="urn:uuid:6de09367-2617-488d-9c28-b2a5526d67d4" identificationScheme="urn:uuid:2e82c1f6-a085-4c72-9da3-8640a32e42ab" lid="urn:uuid:6de09367-2617-488d-9c28-b2a5526d67d4" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="DOCUMENT_SYMBOLICID_01" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Submitted" value="2.25.11256560530170513073796">
+                        <Name>
+                            <LocalizedString value="XDSDocumentEntry.uniqueId"/>
+                        </Name>
+                        <VersionInfo versionName="1"/>
+                    </ExternalIdentifier>
+                </ExtrinsicObject>
+            </ns3:RegistryObjectList>
+        </ns1:AdhocQueryResponse>
+    </env:Body>
+</env:Envelope>

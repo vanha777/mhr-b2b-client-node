@@ -37,7 +37,7 @@
         <ethnicGroupCode code="9" codeSystem="1.2.36.1.2001.1004.200.10012" codeSystemName="METeOR Indigenous Status" displayName="Not stated/inadequately described" />
         <ext:deceasedInd value="false" />
         <ext:asEntityIdentifier classCode="IDENT">
-          <ext:id root="1.2.36.1.2001.1003.0.8003608000311951" assigningAuthorityName="IHI" />
+          <ext:id root="1.2.36.1.2001.1003.0.8003608333647477" assigningAuthorityName="IHI" />
           <ext:assigningGeographicArea classCode="PLC">
             <ext:name>National Identifier</ext:name>
           </ext:assigningGeographicArea>
