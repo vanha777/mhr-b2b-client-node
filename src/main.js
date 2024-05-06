@@ -113,10 +113,10 @@ async function runServices() {
       // patient
       {
         id: "patient-001",
-        medicareNumber: "8003604570631431",
-        name: "Naomi KERR",
-        dob: "1994-09-20",
-        ihi: "8003608333647477"
+        medicareNumber: "5951139631",
+        name: "Merrilee JOHNS",
+        dob: "1982-06-10",
+        ihi: "8003608000311951"
       },
       // this is single document
       {
@@ -124,7 +124,7 @@ async function runServices() {
           "creationTime": "20240321",
           "serviceStartTime": "20240321",
           "serviceStopTime": "20240321",
-          "sourcePatientId": "8003608333647477^^^&1.2.36.1.2001.1003.0&ISO",
+          "sourcePatientId": "8003608000311951^^^&1.2.36.1.2001.1003.0&ISO",
           "hash": shasum.digest('base64'),
           "size": packageResult.byteLength,
           "name": "Residential Care Medication Chart",
@@ -143,8 +143,8 @@ async function runServices() {
           "authorSpecialty": "General Medical Practitioner",
           "class": {
             "code": "80565-5",
-            "codingScheme": "LOINC",
-            "displayName": "Medication Chart"
+            "codingScheme": "NCTIS Data Components",
+            "displayName": "Residential Care Medication Chart",
           },
           "format": {
             "codingScheme": "PCEHR_FormatCodes",
@@ -165,8 +165,8 @@ async function runServices() {
             "codingScheme": "NCTIS Data Components",
             "displayName": "Residential Care Medication Chart"
           },
-          "patientId": "8003608333647477",
-          "documentId": "1.2.36.2501047616.37544.18039.36495.1704104030363999" // documentId = CheckNullValue(cdaDocument.SelectSingleNode("/cda:ClinicalDocument/cda:id/@root", xnm));
+          "patientId": "8003608000311951",
+          "documentId": "1.2.36.2501047616.37544.18039.36495.17041040303639102" // documentId = CheckNullValue(cdaDocument.SelectSingleNode("/cda:ClinicalDocument/cda:id/@root", xnm));
         },
         package: packageResult,
       },
