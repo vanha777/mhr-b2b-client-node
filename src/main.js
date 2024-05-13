@@ -78,7 +78,7 @@ async function runServices() {
       }
     });
 
-    const existResult = await services.myHealthRecord.getDocumentList({
+    const existResult = await services.myHealthRecord.uploadDocument({
       product: {
         vendor: "StrongRoom AI",
         name: "StrongCare",
@@ -143,7 +143,7 @@ async function runServices() {
           "authorSpecialty": "General Medical Practitioner",
           "class": {
             "code": "80565-5",
-            "codingScheme": "NCTIS Data Components",
+            "codingScheme": "LOINC",
             "displayName": "Residential Care Medication Chart",
           },
           "format": {
@@ -166,7 +166,7 @@ async function runServices() {
             "displayName": "Residential Care Medication Chart"
           },
           "patientId": "8003608333647477",
-          "documentId": "1.2.36.2501047616.37544.18039.36495.17041040303639102" // documentId = CheckNullValue(cdaDocument.SelectSingleNode("/cda:ClinicalDocument/cda:id/@root", xnm));
+          "documentId": "1.2.36.2501047616.37544.18039.36495.17041040303639115" // documentId = CheckNullValue(cdaDocument.SelectSingleNode("/cda:ClinicalDocument/cda:id/@root", xnm));
         },
         package: packageResult,
       },
