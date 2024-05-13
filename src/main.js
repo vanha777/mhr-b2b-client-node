@@ -166,7 +166,7 @@ async function runServices() {
             "displayName": "Residential Care Medication Chart"
           },
           "patientId": "8003608333647477",
-          "documentId": "1.2.36.2501047616.37544.18039.36495.17041040303639115" // documentId = CheckNullValue(cdaDocument.SelectSingleNode("/cda:ClinicalDocument/cda:id/@root", xnm));
+          "documentId": "1.2.36.2501047616.37544.18039.36495.17041040303639121" // documentId = CheckNullValue(cdaDocument.SelectSingleNode("/cda:ClinicalDocument/cda:id/@root", xnm));
         },
         package: packageResult,
       },
