@@ -6,7 +6,7 @@
   <templateId root="1.2.36.1.2001.1001.100.1002.218" extension="1.1" />
   <templateId root="1.2.36.1.2001.1001.100.1002.32046" extension="1.0" />
   <templateId extension="1.0" root="1.2.36.1.2001.1001.100.149" />
-  <id root="1.2.36.2501047616.37544.18039.36495.17041040303639130" />
+  <id root="1.2.36.2501047616.37544.18039.36495.17041040303639132" />
   <code code="100.32046" codeSystem="1.2.36.1.2001.1001.101" codeSystemName="NCTIS Data Components" displayName="Medication Chart" />
   <title>Residential Care Medication Chart</title>
   <effectiveTime value="20240321" />
@@ -21,23 +21,23 @@
     <patientRole classCode="PAT">
       <id root="09D3396D-6345-4C1C-A9FE-7756C0E4BAFA" />
       <addr use="H">
-        <streetAddressLine>17 Elenore Cnr</streetAddressLine>
-        <city>Old Cooranga</city>
-        <state>QLD</state>
-        <postalCode>4626</postalCode>
+        <streetAddressLine>130 Tarpeian Est</streetAddressLine>
+        <city>Lake Plains</city>
+        <state>SA</state>
+        <postalCode>5255</postalCode>
       </addr>
       <telecom use="H" value="tel:0499999999" />
       <patient>
         <name use="L">
-          <given>Melody</given>
-          <family>GAYNOR</family>
+          <given>Merrilee</given>
+          <family>JOHNS</family>
         </name>
         <administrativeGenderCode code="N" codeSystem="2.16.840.1.113883.13.68" codeSystemName="AS 5017-2006 Health Care Client Identifier Sex" displayName="Not Stated/Inadequately Described" />
-        <birthTime value="19550207" />
+        <birthTime value="19820610" />
         <ethnicGroupCode code="9" codeSystem="1.2.36.1.2001.1004.200.10012" codeSystemName="METeOR Indigenous Status" displayName="Not stated/inadequately described" />
         <ext:deceasedInd value="false" />
         <ext:asEntityIdentifier classCode="IDENT">
-          <ext:id root="1.2.36.1.2001.1003.0.8003608166980706" assigningAuthorityName="IHI" />
+          <ext:id root="1.2.36.1.2001.1003.0.8003608000311951" assigningAuthorityName="IHI" />
           <ext:assigningGeographicArea classCode="PLC">
             <ext:name>National Identifier</ext:name>
           </ext:assigningGeographicArea>
