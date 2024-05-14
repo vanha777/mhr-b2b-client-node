@@ -789,6 +789,10 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 			return `<ExternalIdentifier id="${item.id}" identificationScheme="${item.scheme}" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="DOCUMENT_SYMBOLICID_01" value="${typeof item.value === 'string' ? document.metadata[item.value] : document.metadata[item.value.value][item.value.subvalue]}">${item.names.map(name => processName(name, document)).join("")}</ExternalIdentifier>`;
 		};
 
+		let processExternalIdentifierSubmissionSet = (item, document, index) => {
+			return `<ExternalIdentifier id="${item.id}" identificationScheme="${item.scheme}" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:ExternalIdentifier" registryObject="SUBSET_SYMBOLICID_01" value="${typeof item.value === 'string' ? document.metadata[item.value] : document.metadata[item.value.value][item.value.subvalue]}">${item.names.map(name => processName(name, document)).join("")}</ExternalIdentifier>`;
+		};
+
 		let stableExtrinsicObjectMetadata = extrinsicObjectStructure.map((item, index) => {
 			if (item.type === 'slot') {
 				return { item: item, value: processSlot(item, document), type: "processSlot" };
@@ -798,7 +802,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 				return { item: item, value: processClassification(item, document, index), type: "classification" };
 			} else if (item.type === "externalIdentifier") {
 				return { item: item.type, value: processExternalIdentifier(item, document, index), type: "externalIdentifier" };
-			}
+			} 
 			else {
 
 			}
@@ -814,25 +818,25 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 			} else if (item.type === "classification") {
 				return { item: item, value: processClassification(item, document, index), type: "classification" };
 			} else if (item.type === "externalIdentifier") {
-				return { item: item.type, value: processExternalIdentifier(item, document, index), type: "externalIdentifier" };
+				return { item: item.type, value: processExternalIdentifierSubmissionSet(item, document, index), type: "externalIdentifier" };
 			} else {
 				return { item: item, value: "", type: "else" };
 			}
 		});
 		// upload
-		let request = signRequest(
-			buildUnsignedB2BRequest(
-				buildHeader(product, user, organisation, patient, "urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b"),
-				`<ProvideAndRegisterDocumentSetRequest xmlns="urn:ihe:iti:xds-b:2007"><SubmitObjectsRequest xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0"><RegistryObjectList xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0"><ExtrinsicObject id="DOCUMENT_SYMBOLICID_01" mimeType="application/zip" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">${stableExtrinsicObjectMetadata.map(item => item.value).join('')}</ExtrinsicObject><RegistryPackage id="SUBSET_SYMBOLICID_01" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:RegistryPackage">${registryPackageMetadata.map(item => item.value).join('')}</RegistryPackage><Classification classificationNode="urn:uuid:a54d6aa5-d40d-43f9-88c5-b4633d873bdd" classifiedObject="SUBSET_SYMBOLICID_01" id="cl10" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" /><Association associationType="urn:oasis:names:tc:ebxml-regrep:AssociationType:HasMember" id="as01" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Association" sourceObject="SUBSET_SYMBOLICID_01" targetObject="DOCUMENT_SYMBOLICID_01"><Slot name="SubmissionSetStatus"><ValueList><Value>Original</Value></ValueList></Slot></Association></RegistryObjectList></SubmitObjectsRequest><Document id="DOCUMENT_SYMBOLICID_01">${document.package.toString('base64')}</Document></ProvideAndRegisterDocumentSetRequest>`
-			), organisation
-		);
-		//supersede
 		// let request = signRequest(
 		// 	buildUnsignedB2BRequest(
 		// 		buildHeader(product, user, organisation, patient, "urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b"),
-		// 		`<ProvideAndRegisterDocumentSetRequest xmlns="urn:ihe:iti:xds-b:2007"><SubmitObjectsRequest xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0"><RegistryObjectList xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0"><ExtrinsicObject id="DOCUMENT_SYMBOLICID_01" mimeType="application/zip" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">${stableExtrinsicObjectMetadata.map(item =>                item.value).join('')}</ExtrinsicObject><RegistryPackage id="DOCUMENT_SYMBOLICID_01" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:RegistryPackage">                ${registryPackageMetadata.map(item => item.value).join('')}</RegistryPackage><Classification classificationNode="urn:uuid:a54d6aa5-d40d-43f9-88c5-b4633d873bdd" classifiedObject="DOCUMENT_SYMBOLICID_01" id="cl10" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" /><Association associationType="urn:oasis:names:tc:ebxml-regrep:AssociationType:HasMember" id="as01" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Association" sourceObject="SUBSET_SYMBOLICID_01" targetObject="DOCUMENT_SYMBOLICID_01"><Slot name="SubmissionSetStatus"><ValueList><Value>Original</Value></ValueList></Slot></Association><Association id="as02" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Association" associationType="urn:ihe:iti:2007:AssociationType:RPLC" sourceObject="DOCUMENT_SYMBOLICID_01" targetObject="1.2.36.2250765283.8173.17322.48409.205351618934179"><Name><LocalizedString value="Replace Document" /></Name></Association></RegistryObjectList></SubmitObjectsRequest><Document id="DOCUMENT_SYMBOLICID_01">${document.package.toString('base64')}</Document></ProvideAndRegisterDocumentSetRequest>`
+		// 		`<ProvideAndRegisterDocumentSetRequest xmlns="urn:ihe:iti:xds-b:2007"><SubmitObjectsRequest xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0"><RegistryObjectList xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0"><ExtrinsicObject id="DOCUMENT_SYMBOLICID_01" mimeType="application/zip" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">${stableExtrinsicObjectMetadata.map(item => item.value).join('')}</ExtrinsicObject><RegistryPackage id="SUBSET_SYMBOLICID_01" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:RegistryPackage">${registryPackageMetadata.map(item => item.value).join('')}</RegistryPackage><Classification classificationNode="urn:uuid:a54d6aa5-d40d-43f9-88c5-b4633d873bdd" classifiedObject="SUBSET_SYMBOLICID_01" id="cl10" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" /><Association associationType="urn:oasis:names:tc:ebxml-regrep:AssociationType:HasMember" id="as01" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Association" sourceObject="SUBSET_SYMBOLICID_01" targetObject="DOCUMENT_SYMBOLICID_01"><Slot name="SubmissionSetStatus"><ValueList><Value>Original</Value></ValueList></Slot></Association></RegistryObjectList></SubmitObjectsRequest><Document id="DOCUMENT_SYMBOLICID_01">${document.package.toString('base64')}</Document></ProvideAndRegisterDocumentSetRequest>`
 		// 	), organisation
 		// );
+		//supersede
+		let request = signRequest(
+			buildUnsignedB2BRequest(
+				buildHeader(product, user, organisation, patient, "urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b"),
+				`<ProvideAndRegisterDocumentSetRequest xmlns="urn:ihe:iti:xds-b:2007"><SubmitObjectsRequest xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0"><RegistryObjectList xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0"><ExtrinsicObject id="DOCUMENT_SYMBOLICID_01" mimeType="application/zip" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1" status="urn:oasis:names:tc:ebxml-regrep:StatusType:Approved">${stableExtrinsicObjectMetadata.map(item => item.value).join('')}</ExtrinsicObject><RegistryPackage id="SUBSET_SYMBOLICID_01" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:RegistryPackage">${registryPackageMetadata.map(item => item.value).join('')}</RegistryPackage><Classification classificationNode="urn:uuid:a54d6aa5-d40d-43f9-88c5-b4633d873bdd" classifiedObject="SUBSET_SYMBOLICID_01" id="cl10" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Classification" /><Association associationType="urn:oasis:names:tc:ebxml-regrep:AssociationType:HasMember" id="as01" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Association" sourceObject="SUBSET_SYMBOLICID_01" targetObject="DOCUMENT_SYMBOLICID_01"><Slot name="SubmissionSetStatus"><ValueList><Value>Original</Value></ValueList></Slot></Association><Association id="as02" objectType="urn:oasis:names:tc:ebxml-regrep:ObjectType:RegistryObject:Association" associationType="urn:ihe:iti:2007:AssociationType:RPLC" sourceObject="DOCUMENT_SYMBOLICID_01" targetObject="1.2.36.2501047616.37544.18039.36495.17041040303639129"><Name><LocalizedString value="Replace Document" /></Name></Association></RegistryObjectList></SubmitObjectsRequest><Document id="DOCUMENT_SYMBOLICID_01">${document.package.toString('base64')}</Document></ProvideAndRegisterDocumentSetRequest>`
+			), organisation
+		);
 
 		let packageReference = guid();
 
