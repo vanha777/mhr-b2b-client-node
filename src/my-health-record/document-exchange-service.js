@@ -32,7 +32,7 @@ const Busboy = require('busboy');
 
 
 //todo: support other filter types such as serviceStartDate and XDSDocumentEntryStatus i.e. approved, etc
-let getDocumentList = ({ product, user, organisation }, patient, options) => {
+let getDocumentList = ({ product, user, organisation }, patient, options, adhoc_query_id) => {
 
 	let documentTypeFilter = "";
 
@@ -54,23 +54,33 @@ let getDocumentList = ({ product, user, organisation }, patient, options) => {
 
 	// depend on query -> it can be by ClassCode or TypeCode
 
-	// if (options.documentTypes && options.documentTypes.length > 0) {
-	// 	documentTypeFilter = `
-	// 		<Slot name="$XDSDocumentEntryClassCode">
-	// 			<ValueList>
-	// 				${options.documentTypes.map(documentType => `<Value>('${documentType}')</Value>`).join('')}
-	// 			</ValueList>
-	// 		</Slot>
-	// 	`;
-	// }
-
-	documentTypeFilter = `
+	if (options.documentTypes && options.documentTypes.length > 0) {
+		documentTypeFilter = `
 			<Slot name="$XDSDocumentEntryTypeCode">
 				<ValueList>
-					<Value>('100.32046^^NCTIS Data Components')</Value>
+					${options.documentTypes.map(documentType => `<Value>('${documentType}')</Value>`).join('')}
 				</ValueList>
 			</Slot>
 		`;
+	}
+
+	if (options.documentClass && options.documentClass.length > 0) {
+		documentTypeFilter = `
+			<Slot name="$XDSDocumentEntryClassCode">
+				<ValueList>
+					${options.documentClass.map(documentType => `<Value>('${documentType}')</Value>`).join('')}
+				</ValueList>
+			</Slot>
+		`;
+	}
+
+	// documentTypeFilter = `
+	// 		<Slot name="$XDSDocumentEntryTypeCode">
+	// 			<ValueList>
+	// 				<Value>('100.32046^^NCTIS Data Components')</Value>
+	// 			</ValueList>
+	// 		</Slot>
+	// 	`;
 
 	return new Promise((resolve, reject) => {
 		try {
@@ -80,7 +90,7 @@ let getDocumentList = ({ product, user, organisation }, patient, options) => {
 						buildHeader(product, user, organisation, patient, "urn:ihe:iti:2007:RegistryStoredQuery"),
 						`	<AdhocQueryRequest xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0">
 							<ResponseOption returnComposedObjects="true" returnType="LeafClass"/>
-							<AdhocQuery id="urn:uuid:14d4debf-8f97-4251-9a74-a90016b0af0d" xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0">
+							<AdhocQuery id="${adhoc_query_id}" xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0">
 								<Slot name="$XDSDocumentEntryPatientId">
 									<ValueList>
 										<Value>'${patient.ihi}^^^&amp;1.2.36.1.2001.1003.0&amp;ISO'</Value>
@@ -88,7 +98,7 @@ let getDocumentList = ({ product, user, organisation }, patient, options) => {
 								</Slot>
 								<Slot name="$XDSDocumentEntryStatus">
 									<ValueList>
-										<Value>('urn:oasis:names:tc:ebxml-regrep:StatusType:Approved')</Value>
+										<Value>('urn:oasis:names:tc:ebxml-regrep:StatusType:${options.status}')</Value>
 									</ValueList>
 								</Slot>
 								${documentTypeFilter}
@@ -101,13 +111,13 @@ let getDocumentList = ({ product, user, organisation }, patient, options) => {
 					organisation
 				),
 				(error, response, body) => {
-					fs.writeFile("./testResponse/Test 165 Response.xml", body, function (err) {
+					fs.writeFile("./testResponse/getDocumentList_Response.xml", body, function (err) {
 						if (err) {
 							return console.log(err);
 						}
 					});
 
-					fs.writeFile("./testRequest/Test 165 Request.xml", response.request.body, function (err) {
+					fs.writeFile("./testRequest/getDocumentList_Request.xml", response.request.body, function (err) {
 						if (err) {
 							return console.log(err);
 						}
@@ -117,6 +127,7 @@ let getDocumentList = ({ product, user, organisation }, patient, options) => {
 					if (xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='AdhocQueryResponse']").getAttribute('status').value() === "urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Failure") {
 						resolve({
 							response: {
+								errors: true,
 								code: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='AdhocQueryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute('errorCode').value(),
 								message: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='AdhocQueryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute('codeContext').value(),
 							},
@@ -802,7 +813,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 				return { item: item, value: processClassification(item, document, index), type: "classification" };
 			} else if (item.type === "externalIdentifier") {
 				return { item: item.type, value: processExternalIdentifier(item, document, index), type: "externalIdentifier" };
-			} 
+			}
 			else {
 
 			}

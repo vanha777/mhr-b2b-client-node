@@ -1,7 +1,7 @@
 const services = require('./index.js');
 const fs = require('fs');
 
-let hpio = "8003624900038396";
+let hpio = "8003623233372670";
 // let hpio = "8003624900038396";
 let privatePem = fs.readFileSync("./sample/entities/certificates/fac_sign_nash_org_with_attributes.private.pem");
 let publicPem = fs.readFileSync("./sample/entities/certificates/fac_sign_nash_org_with_attributes.public.pem");
@@ -12,7 +12,7 @@ const shasum = require('crypto').createHash('sha1');
 const filePath = './doc.xml';
 const attachmentPath = './NCFU.pdf';
 
-async function runServices() {
+async function runUploadDocument() {
   try {
 
     let package_data = await fs.promises.readFile(filePath);
@@ -209,6 +209,209 @@ async function runServices() {
   }
 }
 
+async function runDoesPCEHRExist(patient, organisation) {
+  try {
+    const existResult = await services.myHealthRecord.doesPCEHRExist({
+      product: {
+        vendor: "StrongRoom AI",
+        name: "StrongCare",
+        version: "1.0",
+        id: "4991012131",
+        clientSystemType: "CSP",
+        platform: "CSP"
+      },
+      user: {
+        IdType: "RA",
+        id: "49910121312",
+        name: [
+          {
+            user: "L",
+            family: "FORD",
+            given: ["Maisie"]
+          }
+        ],
+        hpii: "8003611566713495"
+        // hpio: ""
+      },
+      // organisation: {
+      //   name: "Strong Room",
+      //   id: "4991012131",
+      //   contact: "info@cityhospital.com",
+      //   privatePem,
+      //   publicPem,
+      //   ca,
+      //   hpio,
+      // }
+      organisation: {
+        name: organisation && organisation.name ? organisation.name : "Strong Room",
+        id: "4991012131",
+        contact: "info@cityhospital.com",
+        privatePem,
+        publicPem,
+        ca,
+        hpio: organisation && organisation.hpio ? organisation.name : hpio,
+      }
+    },
+      // patient
+      patient
+      // {
+      //   id: "patient-001",
+      //   medicareNumber: "4951653701",
+      //   name: "Melody GAYNOR",
+      //   dob: "1955-02-07",
+      //   ihi: "8003608166980706"
+      // }
+    );
+
+    console.log('Result:', existResult);
+    return existResult;
+
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }
+}
+
+async function runGainPCEHRAccess(patient, organisation, accessType, accessCode) {
+  try {
+    const existResult = await services.myHealthRecord.gainAccess({
+      product: {
+        vendor: "StrongRoom AI",
+        name: "StrongCare",
+        version: "1.0",
+        id: "4991012131",
+        clientSystemType: "CSP",
+        platform: "CSP"
+      },
+      user: {
+        IdType: "RA",
+        id: "49910121312",
+        name: [
+          {
+            user: "L",
+            family: "FORD",
+            given: ["Maisie"]
+          }
+        ],
+        hpii: "8003611566713495"
+        // hpio: ""
+      },
+      // organisation: {
+      //   name: "Strong Room",
+      //   id: "4991012131",
+      //   contact: "info@cityhospital.com",
+      //   privatePem,
+      //   publicPem,
+      //   ca,
+      //   hpio,
+      // }
+      organisation: {
+        name: organisation && organisation.name ? organisation.name : "Strong Room",
+        id: "4991012131",
+        contact: "info@cityhospital.com",
+        privatePem,
+        publicPem,
+        ca,
+        hpio: organisation && organisation.hpio ? organisation.name : hpio,
+      }
+    },
+      // patient
+      patient,
+      accessType ? accessType : "noAccessCode",
+      accessCode ? accessCode : ""
+      // {
+      //   id: "patient-001",
+      //   medicareNumber: "4951653701",
+      //   name: "Melody GAYNOR",
+      //   dob: "1955-02-07",
+      //   ihi: "8003608166980706"
+      // }
+    );
+
+    console.log('Result:', existResult);
+    return existResult;
+
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }
+}
+
+//runGetDocumentList
+async function runGetDocumentList(patient, organisation, adhoc_query_id, documentTypes, documentClass, status, timeFrom, timeTo) {
+  try {
+
+    const existResult = await services.myHealthRecord.getDocumentList({
+      product: {
+        vendor: "StrongRoom AI",
+        name: "StrongCare",
+        version: "1.0",
+        id: "4991012131",
+        clientSystemType: "CSP",
+        platform: "CSP"
+      },
+      user: {
+        IdType: "RA",
+        id: "49910121312",
+        name: [
+          {
+            user: "L",
+            family: "FORD",
+            given: ["Maisie"]
+          }
+        ],
+        hpii: "8003611566713495"
+        // hpio: ""
+      },
+      organisation: {
+        name: organisation && organisation.name ? organisation.name : "Strong Room",
+        id: "4991012131",
+        contact: "info@cityhospital.com",
+        privatePem,
+        publicPem,
+        ca,
+        hpio: organisation && organisation.hpio ? organisation.name : hpio,
+      }
+    },
+      // patient
+      patient,
+      // Options to query document List
+      {
+        status: status || "Approved",
+        serviceStopTimeTo: timeTo ? new Date(timeTo) : new Date(),
+        serviceStopTimeFrom: timeFrom ? new Date(timeFrom) : new Date('2024-01-01'),
+        documentTypes,
+        documentClass
+      },
+      adhoc_query_id && adhoc_query_id !== null ? adhoc_query_id : "urn:uuid:14d4debf-8f97-4251-9a74-a90016b0af0d"
+    );
+
+    console.log('Result:', existResult);
+    return existResult;
+
+    // const accessResult = await services.gainAccess(/* parameters */);
+    // console.log('gainAccess result:', accessResult);
+
+    // const docListResult = await services.getDocumentList(/* parameters */);
+    // console.log('getDocumentList result:', docListResult);
+
+    // const documentResult = await services.getDocument(/* parameters */);
+    // console.log('getDocument result:', documentResult);
+
+    // const uploadResult = await services.uploadDocument(/* parameters */);
+    // console.log('uploadDocument result:', uploadResult);
+
+    // const viewResult = await services.getView(/* parameters */);
+    // console.log('getView result:', viewResult);
+
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }
+}
 // Run the function
 // runServices();
-module.exports = runServices;
+module.exports = {
+  runUploadDocument,
+  runDoesPCEHRExist,
+  runGainPCEHRAccess,
+  runGetDocumentList
+  // anotherFunction
+};
