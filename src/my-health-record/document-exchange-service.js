@@ -101,13 +101,13 @@ let getDocumentList = ({ product, user, organisation }, patient, options) => {
 					organisation
 				),
 				(error, response, body) => {
-					fs.writeFile("./Test 165 Response.xml", body, function (err) {
+					fs.writeFile("./testResponse/Test 165 Response.xml", body, function (err) {
 						if (err) {
 							return console.log(err);
 						}
 					});
 
-					fs.writeFile("./Test 165 Request.xml", response.request.body, function (err) {
+					fs.writeFile("./testRequest/Test 165 Request.xml", response.request.body, function (err) {
 						if (err) {
 							return console.log(err);
 						}
@@ -373,13 +373,13 @@ let getDocument = ({ product, user, organisation }, patient, document) => {
 								return;
 							}
 
-							fs.writeFile("./Test 43 Response.xml", body, function (err) {
+							fs.writeFile("./testResponse/Test 43 Response.xml", body, function (err) {
 								if (err) {
 									return console.log(err);
 								}
 							});
 
-							fs.writeFile("./Test 43 Request.xml", httpResponse.request.body, function (err) {
+							fs.writeFile("./testRequest/Test 43 Request.xml", httpResponse.request.body, function (err) {
 								if (err) {
 									return console.log(err);
 								}
@@ -840,7 +840,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 
 		let packageReference = guid();
 
-		fs.writeFile("./Test 40 Request.xml", request, function (err) {
+		fs.writeFile("./testRequest/Test 40 Request.xml", request, function (err) {
 			if (err) {
 				return console.log(err);
 			}
@@ -864,7 +864,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 
 				const xmlContent = extractXmlContent(body);
 
-				fs.writeFile("./Test 40 Response.xml", xmlContent, function (err) {
+				fs.writeFile("./testResponse/Test 40 Response.xml", xmlContent, function (err) {
 					if (err) {
 						return console.log(err);
 					}

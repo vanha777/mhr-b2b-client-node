@@ -1,7 +1,7 @@
 const services = require('./index.js');
 const fs = require('fs');
 
-let hpio = "8003623233372670";
+let hpio = "8003624900038396";
 // let hpio = "8003624900038396";
 let privatePem = fs.readFileSync("./sample/entities/certificates/fac_sign_nash_org_with_attributes.private.pem");
 let publicPem = fs.readFileSync("./sample/entities/certificates/fac_sign_nash_org_with_attributes.public.pem");
@@ -72,7 +72,7 @@ async function runServices() {
 
     // console.log('Result:', packageResult);
 
-    fs.writeFile("./cda_package.zip", packageResult, function (err) {
+    fs.writeFile("./testPackage/cda_package.zip", packageResult, function (err) {
       if (err) {
         return console.log(err);
       }
@@ -113,10 +113,10 @@ async function runServices() {
       // patient
       {
         id: "patient-001",
-        medicareNumber: "5951139631",
-        name: "Merrilee JOHNS",
-        dob: "1982-06-10",
-        ihi: "8003608000311951"
+        medicareNumber: "4951653701",
+        name: "Melody GAYNOR",
+        dob: "1955-02-07",
+        ihi: "8003608166980706"
       },
       // this is single document
       {
@@ -124,15 +124,15 @@ async function runServices() {
           "creationTime": "20240321",
           "serviceStartTime": "20240321",
           "serviceStopTime": "20240321",
-          "sourcePatientId": "8003608000311951^^^&1.2.36.1.2001.1003.0&ISO",
+          "sourcePatientId": "8003608166980706^^^&1.2.36.1.2001.1003.0&ISO",
           "hash": shasum.digest('base64'),
           "size": packageResult.byteLength,
           "name": "Residential Care Medication Chart",
           "repositoryUniqueId": "1.2.36.1.2001.1007.10.8003640002000050",
           "authorInstitution": {
-            "authorInstitution": "Strong Room^^^^^^^^^1.2.36.1.2001.1003.0.8003623233372670",
+            "authorInstitution": "Strong Room^^^^^^^^^1.2.36.1.2001.1003.0.8003624900038396",
             "organizationName": "Strong Room",
-            "organizationIdentifier": "1.2.36.1.2001.1003.0.8003623233372670"
+            "organizationIdentifier": "1.2.36.1.2001.1003.0.8003624900038396"
           },
           "authorPerson": {
             "authorPerson": "^FORD^Maisie^^^Ms^^^&1.2.36.1.2001.1003.0.8003611566713495&ISO",
@@ -165,7 +165,7 @@ async function runServices() {
             "codingScheme": "NCTIS Data Components",
             "displayName": "Residential Care Medication Chart"
           },
-          "patientId": "8003608000311951",
+          "patientId": "8003608166980706",
           "documentId": "1.2.36.2501047616.37544.18039.36495.17041040303639132" // documentId = CheckNullValue(cdaDocument.SelectSingleNode("/cda:ClinicalDocument/cda:id/@root", xnm));
         },
         package: packageResult,
@@ -210,4 +210,5 @@ async function runServices() {
 }
 
 // Run the function
-runServices();
+// runServices();
+module.exports = runServices;

@@ -21,23 +21,23 @@
     <patientRole classCode="PAT">
       <id root="09D3396D-6345-4C1C-A9FE-7756C0E4BAFA" />
       <addr use="H">
-        <streetAddressLine>130 Tarpeian Est</streetAddressLine>
-        <city>Lake Plains</city>
-        <state>SA</state>
-        <postalCode>5255</postalCode>
+        <streetAddressLine>17 Elenore Cnr</streetAddressLine>
+        <city>Old Cooranga</city>
+        <state>QLD</state>
+        <postalCode>4626</postalCode>
       </addr>
       <telecom use="H" value="tel:0499999999" />
       <patient>
         <name use="L">
-          <given>Merrilee</given>
-          <family>JOHNS</family>
+          <given>Melody</given>
+          <family>GAYNOR</family>
         </name>
         <administrativeGenderCode code="N" codeSystem="2.16.840.1.113883.13.68" codeSystemName="AS 5017-2006 Health Care Client Identifier Sex" displayName="Not Stated/Inadequately Described" />
-        <birthTime value="19820610" />
+        <birthTime value="19550207" />
         <ethnicGroupCode code="9" codeSystem="1.2.36.1.2001.1004.200.10012" codeSystemName="METeOR Indigenous Status" displayName="Not stated/inadequately described" />
         <ext:deceasedInd value="false" />
         <ext:asEntityIdentifier classCode="IDENT">
-          <ext:id root="1.2.36.1.2001.1003.0.8003608000311951" assigningAuthorityName="IHI" />
+          <ext:id root="1.2.36.1.2001.1003.0.8003608166980706" assigningAuthorityName="IHI" />
           <ext:assigningGeographicArea classCode="PLC">
             <ext:name>National Identifier</ext:name>
           </ext:assigningGeographicArea>
@@ -79,7 +79,7 @@
               <wholeOrganization>
                 <name use="ORGL">Strong Room</name>
                 <ext:asEntityIdentifier classCode="IDENT">
-                  <ext:id root="1.2.36.1.2001.1003.0.8003623233372670" assigningAuthorityName="HPI-O" />
+                  <ext:id root="1.2.36.1.2001.1003.0.8003624900038396" assigningAuthorityName="HPI-O" />
                   <ext:assigningGeographicArea classCode="PLC">
                     <ext:name>National Identifier</ext:name>
                   </ext:assigningGeographicArea>
@@ -139,7 +139,7 @@
         <id root="E61669E6-2D08-4821-960D-9E93026DE979" />
         <name>Strong Room</name>
         <ext:asEntityIdentifier classCode="IDENT">
-          <ext:id root="1.2.36.1.2001.1003.0.8003623233372670" assigningAuthorityName="HPI-O" />
+          <ext:id root="1.2.36.1.2001.1003.0.8003624900038396" assigningAuthorityName="HPI-O" />
         </ext:asEntityIdentifier>
       </representedCustodianOrganization>
     </assignedCustodian>
@@ -179,7 +179,7 @@
               <wholeOrganization>
                 <name use="ORGL">Strong Room</name>
                 <ext:asEntityIdentifier classCode="IDENT">
-                  <ext:id root="1.2.36.1.2001.1003.0.8003623233372670" assigningAuthorityName="HPI-O" />
+                  <ext:id root="1.2.36.1.2001.1003.0.8003624900038396" assigningAuthorityName="HPI-O" />
                   <ext:assigningGeographicArea classCode="PLC">
                     <ext:name>National Identifier</ext:name>
                   </ext:assigningGeographicArea>
