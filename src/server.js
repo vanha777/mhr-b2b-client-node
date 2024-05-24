@@ -2,7 +2,7 @@
 
 // Import the express module
 const express = require('express');
-const { runUploadDocument, runDoesPCEHRExist, runGainPCEHRAccess, runGetDocumentList } = require('./main.js');
+const { runUploadDocument, runDoesPCEHRExist, runGainPCEHRAccess, runGetDocumentList,runGetDocument,runGetView } = require('./main.js');
 const bodyParser = require('body-parser');
 // Create an instance of express
 const app = express();
@@ -83,7 +83,40 @@ app.post('/get-document-list', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+app.post('/get-document', async (req, res) => {
+    try {
+        // console.log('this is request',req.body);
+        // Pass the required arguments to the runServices function
+        const { patient, organization, document } = req.body;
+        // Check if patient.ihi exists and has a length of exactly 16 digits
+        if (!patient || !patient.ihi || !/^\d{16}$/.test(patient.ihi)) {
+            return res.status(400).send('Invalid IHI number format used');
+        }
+        const result = await runGetDocument(patient, organization, document);
+        res.send(result);
+    } catch (error) {
+        console.error('An error occurred:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 // Start the server on port 3000
+app.post('/get-view', async (req, res) => {
+    try {
+        // console.log('this is request',req.body);
+        // Pass the required arguments to the runServices function
+        const { patient, organization, viewOptions } = req.body;
+        // Check if patient.ihi exists and has a length of exactly 16 digits
+        if (!patient || !patient.ihi || !/^\d{16}$/.test(patient.ihi)) {
+            return res.status(400).send('Invalid IHI number format used');
+        }
+        const result = await runGetView(patient, organization, viewOptions);
+        res.send(result);
+    } catch (error) {
+        console.error('An error occurred:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 app.listen(3030, () => {
     console.log('\x1b[36m%s\x1b[0m', 'StrongRoomAi MHR-mobule running on http://localhost:3030/');
 });

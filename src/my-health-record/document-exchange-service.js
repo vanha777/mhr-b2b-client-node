@@ -357,6 +357,7 @@ let getDocument = ({ product, user, organisation }, patient, document) => {
 						if (errorCode === 'PCEHR_ERROR_3002') {
 							reject({
 								response: {
+									errors:true,
 									code: errorCode,
 									message: errorMessage,
 									type: 'XDSRepositoryError'
@@ -365,6 +366,7 @@ let getDocument = ({ product, user, organisation }, patient, document) => {
 						} else {
 							resolve({
 								response: {
+									errors:true,
 									code: errorCode,
 									message: errorMessage
 								}
@@ -384,13 +386,13 @@ let getDocument = ({ product, user, organisation }, patient, document) => {
 								return;
 							}
 
-							fs.writeFile("./testResponse/Test 43 Response.xml", body, function (err) {
+							fs.writeFile("./testResponse/getDocument_Response.xml", body, function (err) {
 								if (err) {
 									return console.log(err);
 								}
 							});
 
-							fs.writeFile("./testRequest/Test 43 Request.xml", httpResponse.request.body, function (err) {
+							fs.writeFile("./testRequest/getDocument_Request.xml", httpResponse.request.body, function (err) {
 								if (err) {
 									return console.log(err);
 								}
@@ -401,6 +403,7 @@ let getDocument = ({ product, user, organisation }, patient, document) => {
 								let xmlDoc = libxmljs.parseXml(body);
 								resolve({
 									response: {
+										errors:true,
 										code: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RetrieveDocumentSetResponse']/*[local-name()='RegistryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute("errorCode").value(),
 										message: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RetrieveDocumentSetResponse']/*[local-name()='RegistryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute("codeContext").value(),
 									},
@@ -412,7 +415,7 @@ let getDocument = ({ product, user, organisation }, patient, document) => {
 							let parts = parseMultipart(body, boundary);
 
 							const cdafile = extractBinaryFile(parts[1]);
-							const outputPath = './xml/CDAPackage.zip';
+							const outputPath = './testPackage/CDAPackage.zip';
 							await saveFile(cdafile, outputPath);
 							resolve({ ...document, outputPath });
 

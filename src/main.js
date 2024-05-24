@@ -406,12 +406,142 @@ async function runGetDocumentList(patient, organisation, adhoc_query_id, documen
     console.error('An error occurred:', error);
   }
 }
+//runGetDocument
+async function runGetDocument(patient, organisation, document) {
+  try {
+
+    const existResult = await services.myHealthRecord.getDocument({
+      product: {
+        vendor: "StrongRoom AI",
+        name: "StrongCare",
+        version: "1.0",
+        id: "4991012131",
+        clientSystemType: "CSP",
+        platform: "CSP"
+      },
+      user: {
+        IdType: "RA",
+        id: "49910121312",
+        name: [
+          {
+            user: "L",
+            family: "FORD",
+            given: ["Maisie"]
+          }
+        ],
+        hpii: "8003611566713495"
+        // hpio: ""
+      },
+      organisation: {
+        name: organisation && organisation.name ? organisation.name : "Strong Room",
+        id: "4991012131",
+        contact: "info@cityhospital.com",
+        privatePem,
+        publicPem,
+        ca,
+        hpio: organisation && organisation.hpio ? organisation.name : hpio,
+      }
+    },
+      // patient
+      patient,
+      // Options to query document List
+      document
+    );
+
+    console.log('Result:', existResult);
+    return existResult;
+
+    // const accessResult = await services.gainAccess(/* parameters */);
+    // console.log('gainAccess result:', accessResult);
+
+    // const docListResult = await services.getDocumentList(/* parameters */);
+    // console.log('getDocumentList result:', docListResult);
+
+    // const documentResult = await services.getDocument(/* parameters */);
+    // console.log('getDocument result:', documentResult);
+
+    // const uploadResult = await services.uploadDocument(/* parameters */);
+    // console.log('uploadDocument result:', uploadResult);
+
+    // const viewResult = await services.getView(/* parameters */);
+    // console.log('getView result:', viewResult);
+
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }
+}
+
+async function runGetView(patient, organisation, viewOptions) {
+  try {
+
+    const existResult = await services.myHealthRecord.getView({
+      product: {
+        vendor: "StrongRoom AI",
+        name: "StrongCare",
+        version: "1.0",
+        id: "4991012131",
+        clientSystemType: "CSP",
+        platform: "CSP"
+      },
+      user: {
+        IdType: "RA",
+        id: "49910121312",
+        name: [
+          {
+            user: "L",
+            family: "FORD",
+            given: ["Maisie"]
+          }
+        ],
+        hpii: "8003611566713495"
+        // hpio: ""
+      },
+      organisation: {
+        name: organisation && organisation.name ? organisation.name : "Strong Room",
+        id: "4991012131",
+        contact: "info@cityhospital.com",
+        privatePem,
+        publicPem,
+        ca,
+        hpio: organisation && organisation.hpio ? organisation.name : hpio,
+      }
+    },
+      // patient
+      patient,
+      // Options to query document List
+      viewOptions
+    );
+
+    console.log('Result:', existResult);
+    return existResult;
+
+    // const accessResult = await services.gainAccess(/* parameters */);
+    // console.log('gainAccess result:', accessResult);
+
+    // const docListResult = await services.getDocumentList(/* parameters */);
+    // console.log('getDocumentList result:', docListResult);
+
+    // const documentResult = await services.getDocument(/* parameters */);
+    // console.log('getDocument result:', documentResult);
+
+    // const uploadResult = await services.uploadDocument(/* parameters */);
+    // console.log('uploadDocument result:', uploadResult);
+
+    // const viewResult = await services.getView(/* parameters */);
+    // console.log('getView result:', viewResult);
+
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }
+}
 // Run the function
 // runServices();
 module.exports = {
   runUploadDocument,
   runDoesPCEHRExist,
   runGainPCEHRAccess,
-  runGetDocumentList
+  runGetDocumentList,
+  runGetDocument,
+  runGetView
   // anotherFunction
 };
