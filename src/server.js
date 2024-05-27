@@ -2,7 +2,7 @@
 
 // Import the express module
 const express = require('express');
-const { runUploadDocument, runDoesPCEHRExist, runGainPCEHRAccess, runGetDocumentList, runGetDocument, runGetView } = require('./main.js');
+const { runUploadDocument, runDoesPCEHRExist, runGainPCEHRAccess, runGetDocumentList, runGetDocument, runGetView, runRemoveDocument } = require('./main.js');
 const bodyParser = require('body-parser');
 // Create an instance of express
 const app = express();
@@ -13,13 +13,33 @@ app.get('/', (req, res) => {
 });
 app.post('/upload-document', async (req, res) => {
     try {
-        const { patient, supersede_document_id, organization } = req.body;
+        const { patient, supersede_document_id, template_id, organization } = req.body;
         // Check if patient.ihi exists and has a length of exactly 16 digits
         if (!patient || !patient.ihi || !/^\d{16}$/.test(patient.ihi)) {
             return res.status(400).send('Invalid IHI number format used');
         }
         // Pass the required arguments to the runServices function
-        const result = await runUploadDocument(patient, supersede_document_id, organization);
+        const result = await runUploadDocument(patient, supersede_document_id, template_id, organization);
+        if (result.errors) {
+            console.error('An error occurred:', result);
+            res.status(200).send(result);
+        } else {
+            res.send(result);
+        }
+    } catch (error) {
+        console.error('An error occurred:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+app.post('/remove-document', async (req, res) => {
+    try {
+        const { patient, remove_document_id, reasons, organization } = req.body;
+        // Check if patient.ihi exists and has a length of exactly 16 digits
+        if (!patient || !patient.ihi || !/^\d{16}$/.test(patient.ihi)) {
+            return res.status(400).send('Invalid IHI number format used');
+        }
+        // Pass the required arguments to the runServices function
+        const result = await runRemoveDocument(patient, remove_document_id,reasons, organization);
         if (result.errors) {
             console.error('An error occurred:', result);
             res.status(200).send(result);

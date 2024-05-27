@@ -24,8 +24,77 @@ function generateUniqueId() {
 }
 
 
+//runRemoveDocument
+async function runRemoveDocument(patient,remove_document_id, reasons, organisation) {
 
-async function runUploadDocument(patient, supersede_document_id, organisation) {
+  try {
+
+    const existResult = await services.myHealthRecord.removeDocument({
+      product: {
+        vendor: "StrongRoom AI",
+        name: "StrongCare",
+        version: "1.0",
+        id: "4991012131",
+        clientSystemType: "CSP",
+        platform: "CSP"
+      },
+      user: {
+        IdType: "RA",
+        id: "49910121312",
+        name: [
+          {
+            user: "L",
+            family: "FORD",
+            given: ["Maisie"]
+          }
+        ],
+        hpii: "8003611566713495"
+        // hpio: ""
+      },
+      organisation: {
+        name: organisation && organisation.name ? organisation.name : "Strong Room",
+        id: "4991012131",
+        contact: "info@cityhospital.com",
+        privatePem,
+        publicPem,
+        ca,
+        hpio: organisation && organisation.hpio ? organisation.hpio : hpio,
+      }
+    },
+      // patient
+      {
+        id: "patient-001",
+        medicareNumber: "4951653701",
+        name: patient.first_name + patient.last_name,
+        dob: patient.dob,
+        ihi: patient.ihi
+      },
+      remove_document_id,
+      reasons
+    );
+
+    // console.log('Result:', existResult);
+    return existResult;
+    // const accessResult = await services.gainAccess(/* parameters */);
+    // console.log('gainAccess result:', accessResult);
+
+    // const docListResult = await services.getDocumentList(/* parameters */);
+    // console.log('getDocumentList result:', docListResult);
+
+    // const documentResult = await services.getDocument(/* parameters */);
+    // console.log('getDocument result:', documentResult);
+
+    // const uploadResult = await services.uploadDocument(/* parameters */);
+    // console.log('uploadDocument result:', uploadResult);
+
+    // const viewResult = await services.getView(/* parameters */);
+    // console.log('getView result:', viewResult);
+
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }
+}
+async function runUploadDocument(patient, supersede_document_id, template_id, organisation) {
   const filePath = './doc.xml';
   const attachmentPath = './NCFU.pdf';
   try {
@@ -194,7 +263,8 @@ async function runUploadDocument(patient, supersede_document_id, organisation) {
         },
         package: packageResult,
       },
-      supersede_document_id
+      supersede_document_id,
+      template_id && template_id ? template_id : "1.2.36.1.2001.1006.1.32046.2"
     );
 
     // console.log('Result:', existResult);
@@ -553,6 +623,7 @@ module.exports = {
   runGainPCEHRAccess,
   runGetDocumentList,
   runGetDocument,
-  runGetView
+  runGetView,
+  runRemoveDocument
   // anotherFunction
 };

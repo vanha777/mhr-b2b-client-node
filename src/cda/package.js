@@ -25,6 +25,8 @@ let package = (patient, document_id, document, organisation, individual, attachm
 
 				document = document.replace(/{{organization_name}}/g, organisation.name);
 				document = document.replace(/{{hpio}}/g, organisation.hpio);
+
+				
 				//end.
 				shasum.update(document);
 				let signedPayloadDataId = "Id_" + guid();

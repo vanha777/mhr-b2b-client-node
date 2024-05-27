@@ -463,7 +463,7 @@ async function saveFile(data, path) {
 }
 
 
-let uploadDocument = ({ product, user, organisation }, patient, document, supersede_document_id) => {
+let uploadDocument = ({ product, user, organisation }, patient, document, supersede_document_id,template_id) => {
 
 	return new Promise((resolve, reject) => {
 
@@ -569,7 +569,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document, supers
 				scheme: "urn:uuid:a09d5840-386c-46f2-b5ad-9c3699a4309d",
 				// this is template for Special Letter
 				// nodeRepresentation: "1.2.36.1.2001.1006.1.16473.14", // this is template id
-				nodeRepresentation: "1.2.36.1.2001.1006.1.32046.2",
+				nodeRepresentation: template_id,
 				//1.2.36.1.2001.1006.2.2.327.1
 				//this is Resident Medication Chart
 				//1.2.36.1.2001.1006.1.32046.2
