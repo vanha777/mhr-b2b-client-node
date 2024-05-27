@@ -2,7 +2,7 @@ const services = require('./index.js');
 const fs = require('fs');
 
 let hpio = "8003623233372670";
-// let hpio = "8003624900038396";
+// let hpio = "8003623233372670";
 let privatePem = fs.readFileSync("./sample/entities/certificates/fac_sign_nash_org_with_attributes.private.pem");
 let publicPem = fs.readFileSync("./sample/entities/certificates/fac_sign_nash_org_with_attributes.public.pem");
 let ca = fs.readFileSync("./sample/entities/certificates/certificate_authorities//certificates_chain.pem");
@@ -117,7 +117,7 @@ async function runUploadDocument(patient, organisation) {
       //   medicareNumber: "4951653701",
       //   name: "Melody GAYNOR",
       //   dob: "1955-02-07",
-      //   ihi: "8003608166980706"
+      //   ihi: "8003608333647477"
       // },
       // this is single document
       {
@@ -125,15 +125,15 @@ async function runUploadDocument(patient, organisation) {
           "creationTime": "20240321",
           "serviceStartTime": "20240321",
           "serviceStopTime": "20240321",
-          "sourcePatientId": "8003608166980706^^^&1.2.36.1.2001.1003.0&ISO",
+          "sourcePatientId": "8003608333647477^^^&1.2.36.1.2001.1003.0&ISO",
           "hash": shasum.digest('base64'),
           "size": packageResult.byteLength,
           "name": "Residential Care Medication Chart",
           "repositoryUniqueId": "1.2.36.1.2001.1007.10.8003640002000050",
           "authorInstitution": {
-            "authorInstitution": "Strong Room^^^^^^^^^1.2.36.1.2001.1003.0.8003624900038396",
+            "authorInstitution": "Strong Room^^^^^^^^^1.2.36.1.2001.1003.0.8003623233372670",
             "organizationName": "Strong Room",
-            "organizationIdentifier": "1.2.36.1.2001.1003.0.8003624900038396"
+            "organizationIdentifier": "1.2.36.1.2001.1003.0.8003623233372670"
           },
           "authorPerson": {
             "authorPerson": "^FORD^Maisie^^^Ms^^^&1.2.36.1.2001.1003.0.8003611566713495&ISO",
@@ -166,8 +166,8 @@ async function runUploadDocument(patient, organisation) {
             "codingScheme": "NCTIS Data Components",
             "displayName": "Residential Care Medication Chart"
           },
-          "patientId": "8003608166980706",
-          "documentId": "1.2.36.2501047616.37544.18039.36495.17041040303639132" // documentId = CheckNullValue(cdaDocument.SelectSingleNode("/cda:ClinicalDocument/cda:id/@root", xnm));
+          "patientId": "8003608333647477",
+          "documentId": "1.2.36.2501047616.37544.18039.36495.17041040303639138" // documentId = CheckNullValue(cdaDocument.SelectSingleNode("/cda:ClinicalDocument/cda:id/@root", xnm));
         },
         package: packageResult,
       },
@@ -188,7 +188,8 @@ async function runUploadDocument(patient, organisation) {
       }
     );
 
-    console.log('Result:', existResult);
+    // console.log('Result:', existResult);
+    return existResult;
 
     // const accessResult = await services.gainAccess(/* parameters */);
     // console.log('gainAccess result:', accessResult);
@@ -260,7 +261,7 @@ async function runDoesPCEHRExist(patient, organisation) {
       //   medicareNumber: "4951653701",
       //   name: "Melody GAYNOR",
       //   dob: "1955-02-07",
-      //   ihi: "8003608166980706"
+      //   ihi: "8003608333647477"
       // }
     );
 
@@ -324,7 +325,7 @@ async function runGainPCEHRAccess(patient, organisation, accessType, accessCode)
       //   medicareNumber: "4951653701",
       //   name: "Melody GAYNOR",
       //   dob: "1955-02-07",
-      //   ihi: "8003608166980706"
+      //   ihi: "8003608333647477"
       // }
     );
 

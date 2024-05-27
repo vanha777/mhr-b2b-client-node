@@ -19,8 +19,13 @@ app.post('/upload-document', async (req, res) => {
             return res.status(400).send('Invalid IHI number format used');
         }
         // Pass the required arguments to the runServices function
-        await runUploadDocument(patient, organization,);
-        res.send('Services executed successfully');
+        const result = await runUploadDocument(patient, organization,);
+        if (result.errors) {
+            console.error('An error occurred:', result);
+            res.status(200).send(result);
+        } else {
+            res.send(result);
+        }
     } catch (error) {
         console.error('An error occurred:', error);
         res.status(500).send('Internal Server Error');

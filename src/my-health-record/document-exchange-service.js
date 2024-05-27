@@ -357,7 +357,7 @@ let getDocument = ({ product, user, organisation }, patient, document) => {
 						if (errorCode === 'PCEHR_ERROR_3002') {
 							reject({
 								response: {
-									errors:true,
+									errors: true,
 									code: errorCode,
 									message: errorMessage,
 									type: 'XDSRepositoryError'
@@ -366,7 +366,7 @@ let getDocument = ({ product, user, organisation }, patient, document) => {
 						} else {
 							resolve({
 								response: {
-									errors:true,
+									errors: true,
 									code: errorCode,
 									message: errorMessage
 								}
@@ -403,7 +403,7 @@ let getDocument = ({ product, user, organisation }, patient, document) => {
 								let xmlDoc = libxmljs.parseXml(body);
 								resolve({
 									response: {
-										errors:true,
+										errors: true,
 										code: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RetrieveDocumentSetResponse']/*[local-name()='RegistryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute("errorCode").value(),
 										message: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RetrieveDocumentSetResponse']/*[local-name()='RegistryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute("codeContext").value(),
 									},
@@ -854,7 +854,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 
 		let packageReference = guid();
 
-		fs.writeFile("./testRequest/Test 40 Request.xml", request, function (err) {
+		fs.writeFile("./testRequest/uploadDocument_Request.xml", request, function (err) {
 			if (err) {
 				return console.log(err);
 			}
@@ -878,43 +878,45 @@ let uploadDocument = ({ product, user, organisation }, patient, document) => {
 
 				const xmlContent = extractXmlContent(body);
 
-				fs.writeFile("./testResponse/Test 40 Response.xml", xmlContent, function (err) {
+				fs.writeFile("./testResponse/uploadDocument_Response.xml", xmlContent, function (err) {
 					if (err) {
 						return console.log(err);
 					}
 				});
 
-				return resolve({
-					result: "success",
-					message: "urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Success",
-				});
+				// return resolve({
+				// 	result: "success",
+				// 	message: "urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Success",
+				// });
 
 				// try {
 
-				// 	let xmlDoc = libxmljs.parseXml(httpResponse.headers["content-type"].includes("multipart") ? xop(httpResponse, body) : body.toString());
+				let xmlDoc = libxmljs.parseXml(xmlContent);
+				if (xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RegistryResponse']").getAttribute('status').value() === "urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Success") {
+					resolve({
+						response: {
+							result: 'success',
+							document: { ...document, status: 'uploaded' }
+						},
+					})
+				}
 
-				// 	if ("urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Success" === xmlDoc.get("//soap:Envelope/soap:Body/ebxmlRegRep3:RegistryResponse/@status", namespaces).value()) {
-				// 		resolve({
-				// 			result: 'success',
-				// 			document: { ...document, status: 'uploaded' }
-				// 		});
-				// 	} else {
-				// 		reject({
-				// 			result: "failed",
-				// 			registryErrorList: xmlDoc.get("//soap:Envelope/soap:Body/ebxmlRegRep3:RegistryResponse/ebxmlRegRep3:RegistryErrorList", namespaces).childNodes().map(node => {
-				// 				return {
-				// 					'codeContext': node.attr('codeContext').value(),
-				// 					'errorCode': node.attr('errorCode').value(),
-				// 					'severity': node.attr('severity').value(),
-				// 					'location': node.attr('location').value()
-				// 				}
-				// 			}),
-				// 			xmlContent
-				// 		});
-				// 	}
+				// if ("Success" === xmlDoc.get("//soap:Envelope/soap:Body/ebxmlRegRep3:RegistryResponse/@status", namespaces).value()) {
+				// 	resolve({
+				// 		result: 'success',
+				// 		document: { ...document, status: 'uploaded' }
+				// 	});
+				// } 
+				else {
+					resolve({
+						errors: true,
+						errorCode: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RegistryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute('errorCode').value(),
+						message: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RegistryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute('codeContext').value()
+					});
+				}
 				// } catch (error) {
 				// 	console.log(xmlContent);
-				// 	// let xmlDoc = libxmljs.parseXml(xmlContent);
+				// 	let xmlDoc = libxmljs.parseXml(xmlContent);
 				// 	// reject({
 				// 	// 	result: "error",
 				// 	// 	code: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RegistryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute("errorCode").value(),
