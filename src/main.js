@@ -1,20 +1,34 @@
 const services = require('./index.js');
 const fs = require('fs');
-
+let guid = require('uuid').v4;
 let hpio = "8003623233372670";
+let shasum = require('crypto');
 // let hpio = "8003623233372670";
 let privatePem = fs.readFileSync("./sample/entities/certificates/fac_sign_nash_org_with_attributes.private.pem");
 let publicPem = fs.readFileSync("./sample/entities/certificates/fac_sign_nash_org_with_attributes.public.pem");
 let ca = fs.readFileSync("./sample/entities/certificates/certificate_authorities//certificates_chain.pem");
 
-const shasum = require('crypto').createHash('sha1');
+function generateUniqueId() {
+  // Generate a UUID
+  const uuid = guid();
 
-const filePath = './doc.xml';
-const attachmentPath = './NCFU.pdf';
+  // Remove the hyphens from the UUID
+  const uuidWithoutHyphens = uuid.replace(/-/g, '');
 
-async function runUploadDocument(patient, organisation) {
+  // Convert the UUID to a large number by taking a slice of it
+  // The slice should be long enough to ensure uniqueness but within 17 digits
+  const uniqueId = parseInt(uuidWithoutHyphens.slice(0, 17), 16);
+
+  // Ensure the ID is a 17-digit number (this might need adjustment based on UUID structure)
+  return uniqueId.toString().padStart(17, '0');
+}
+
+
+
+async function runUploadDocument(patient, supersede_document_id, organisation) {
+  const filePath = './doc.xml';
+  const attachmentPath = './NCFU.pdf';
   try {
-
     let package_data = await fs.promises.readFile(filePath);
     let attachment = await fs.promises.readFile(attachmentPath);
     console.log("attached file: ", attachment);
@@ -24,17 +38,19 @@ async function runUploadDocument(patient, organisation) {
       .replace(/[-:T]/g, '')
       .slice(0, 14) + "00";
 
-    let documentObjectId = "36-2501047616-37544-18039-36495-170410403036301";
-
-    let documentId = '2.25.' + BigInt('0x' + documentObjectId.replace(/-/g, '')).toString()
-
-    console.log(documentId);
+    let documentObjectId = "1.2.36.2501047616.37544.18039.36495.{{unique_id}}";
+    let unique_id = generateUniqueId();
+    let documentId = documentObjectId.replace("{{unique_id}}", unique_id);
+    console.log("this is unique document_id ", documentId);
+    // console.log(documentId);
 
     // shasum.update(attachment);
 
     // console.log("Digest of the attachment: ", shasum.digest('base64'),)
 
     const packageResult = await services.cda.package(
+      patient,
+      documentId,
       package_data.toString(),
       {
         name: organisation && organisation.name ? organisation.name : "Strong Room",
@@ -67,9 +83,9 @@ async function runUploadDocument(patient, organisation) {
         }
       ]
     )
-
-    shasum.update(packageResult);
-
+    let hash = shasum.createHash('sha1');
+    hash.update(packageResult);
+    const digest = hash.digest('base64');
     // console.log('Result:', packageResult);
 
     fs.writeFile("./testPackage/cda_package.zip", packageResult, function (err) {
@@ -111,7 +127,13 @@ async function runUploadDocument(patient, organisation) {
       }
     },
       // patient
-      patient,
+      {
+        id: "patient-001",
+        medicareNumber: "4951653701",
+        name: patient.first_name + patient.last_name,
+        dob: patient.dob,
+        ihi: patient.ihi
+      },
       // {
       //   id: "patient-001",
       //   medicareNumber: "4951653701",
@@ -125,8 +147,8 @@ async function runUploadDocument(patient, organisation) {
           "creationTime": "20240321",
           "serviceStartTime": "20240321",
           "serviceStopTime": "20240321",
-          "sourcePatientId": "8003608333647477^^^&1.2.36.1.2001.1003.0&ISO",
-          "hash": shasum.digest('base64'),
+          "sourcePatientId": `${patient.ihi}^^^&1.2.36.1.2001.1003.0&ISO`,
+          "hash": digest,
           "size": packageResult.byteLength,
           "name": "Residential Care Medication Chart",
           "repositoryUniqueId": "1.2.36.1.2001.1007.10.8003640002000050",
@@ -166,31 +188,18 @@ async function runUploadDocument(patient, organisation) {
             "codingScheme": "NCTIS Data Components",
             "displayName": "Residential Care Medication Chart"
           },
-          "patientId": "8003608333647477",
-          "documentId": "1.2.36.2501047616.37544.18039.36495.17041040303639138" // documentId = CheckNullValue(cdaDocument.SelectSingleNode("/cda:ClinicalDocument/cda:id/@root", xnm));
+          "patientId": patient.ihi,
+          "documentId": documentId
+          // documentId = CheckNullValue(cdaDocument.SelectSingleNode("/cda:ClinicalDocument/cda:id/@root", xnm));
         },
         package: packageResult,
       },
-
-      // Options to query document List
-      {
-        serviceStopTimeTo: new Date(),
-        serviceStopTimeFrom: new Date(2024, '01', '01'),
-        documentTypes: [
-          // '60591-5^^LOINC',
-          // '57133-1^^LOINC',
-          // '51852-2^^LOINC',
-          // '18842-5^^LOINC',
-          // '34133-9^^LOINC',
-          // '100.17042^^NCTIS',
-          '100.32046^^NCTIS' // RCMC
-        ]
-      }
+      supersede_document_id
     );
 
     // console.log('Result:', existResult);
     return existResult;
-
+    return hash;
     // const accessResult = await services.gainAccess(/* parameters */);
     // console.log('gainAccess result:', accessResult);
 
