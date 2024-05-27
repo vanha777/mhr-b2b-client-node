@@ -12,7 +12,7 @@ const shasum = require('crypto').createHash('sha1');
 const filePath = './doc.xml';
 const attachmentPath = './NCFU.pdf';
 
-async function runUploadDocument() {
+async function runUploadDocument(patient, organisation) {
   try {
 
     let package_data = await fs.promises.readFile(filePath);
@@ -37,13 +37,13 @@ async function runUploadDocument() {
     const packageResult = await services.cda.package(
       package_data.toString(),
       {
-        name: "Strong Room",
+        name: organisation && organisation.name ? organisation.name : "Strong Room",
         id: "4991012131",
         contact: "info@cityhospital.com",
         privatePem,
         publicPem,
         ca,
-        hpio,
+        hpio: organisation && organisation.hpio ? organisation.hpio : hpio,
       },
       {
         IdType: "RA",
@@ -101,23 +101,24 @@ async function runUploadDocument() {
         // hpio: ""
       },
       organisation: {
-        name: "Strong Room",
+        name: organisation && organisation.name ? organisation.name : "Strong Room",
         id: "4991012131",
         contact: "info@cityhospital.com",
         privatePem,
         publicPem,
         ca,
-        hpio,
+        hpio: organisation && organisation.hpio ? organisation.hpio : hpio,
       }
     },
       // patient
-      {
-        id: "patient-001",
-        medicareNumber: "4951653701",
-        name: "Melody GAYNOR",
-        dob: "1955-02-07",
-        ihi: "8003608166980706"
-      },
+      patient,
+      // {
+      //   id: "patient-001",
+      //   medicareNumber: "4951653701",
+      //   name: "Melody GAYNOR",
+      //   dob: "1955-02-07",
+      //   ihi: "8003608166980706"
+      // },
       // this is single document
       {
         "metadata": {
@@ -249,7 +250,7 @@ async function runDoesPCEHRExist(patient, organisation) {
         privatePem,
         publicPem,
         ca,
-        hpio: organisation && organisation.hpio ? organisation.name : hpio,
+        hpio: organisation && organisation.hpio ? organisation.hpio : hpio,
       }
     },
       // patient
@@ -311,7 +312,7 @@ async function runGainPCEHRAccess(patient, organisation, accessType, accessCode)
         privatePem,
         publicPem,
         ca,
-        hpio: organisation && organisation.hpio ? organisation.name : hpio,
+        hpio: organisation && organisation.hpio ? organisation.hpio : hpio,
       }
     },
       // patient
@@ -368,7 +369,7 @@ async function runGetDocumentList(patient, organisation, adhoc_query_id, documen
         privatePem,
         publicPem,
         ca,
-        hpio: organisation && organisation.hpio ? organisation.name : hpio,
+        hpio: organisation && organisation.hpio ? organisation.hpio : hpio,
       }
     },
       // patient
@@ -439,7 +440,7 @@ async function runGetDocument(patient, organisation, document) {
         privatePem,
         publicPem,
         ca,
-        hpio: organisation && organisation.hpio ? organisation.name : hpio,
+        hpio: organisation && organisation.hpio ? organisation.hpio : hpio,
       }
     },
       // patient
@@ -503,7 +504,7 @@ async function runGetView(patient, organisation, viewOptions) {
         privatePem,
         publicPem,
         ca,
-        hpio: organisation && organisation.hpio ? organisation.name : hpio,
+        hpio: organisation && organisation.hpio ? organisation.hpio : hpio,
       }
     },
       // patient

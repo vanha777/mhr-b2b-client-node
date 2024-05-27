@@ -11,7 +11,9 @@ let package = (document, organisation, individual, attachments) => {
 		try {
 
 			if (typeof document === "string"){
+				//test
 
+				//end.
 				shasum.update(document);
 				let signedPayloadDataId = "Id_" + guid();
 			

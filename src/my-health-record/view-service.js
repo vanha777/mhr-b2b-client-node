@@ -241,20 +241,20 @@ let getView = ({ product, user, organisation }, patient, viewOptions) => {
 							if (type === "cda") {
 								resolve({ documentType: "view", viewType: viewOptions.view, viewVersion: viewVersion, attachmentFormat: "cdaPackage" });
 							}
-							// else if(type === "xml") {
+							// else if (type === "xml") {
 
-							// 	if (viewOptions.view === "pathology"){
+							// 	if (viewOptions.view === "pathology") {
 							// 		let pathologyResponse = libxmljs.parseXml(xop(response, body));
 							// 		let individualProfile = {
-							// 			ihiNumber: 			pathologyResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/pathView:pathologyReportViewResponse/pathView:viewMetadata/pathView:individualProfile/commonCoreElements:ihiNumber", namespaces).text(),
+							// 			ihiNumber: pathologyResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/pathView:pathologyReportViewResponse/pathView:viewMetadata/pathView:individualProfile/commonCoreElements:ihiNumber", namespaces).text(),
 							// 			individual: {
 							// 				name: {
-							// 					familyName: pathologyResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/pathView:pathologyReportViewResponse/pathView:viewMetadata/pathView:individualProfile/pathView:individual/commonCoreElements:name/commonCoreElements:familyName", 	namespaces).text(),
-							// 					givenName:	pathologyResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/pathView:pathologyReportViewResponse/pathView:viewMetadata/pathView:individualProfile/pathView:individual/commonCoreElements:name/commonCoreElements:givenName", 		namespaces).text(),
-							// 					usage:		pathologyResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/pathView:pathologyReportViewResponse/pathView:viewMetadata/pathView:individualProfile/pathView:individual/commonCoreElements:name/commonCoreElements:usage", 		namespaces).text(),
+							// 					familyName: pathologyResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/pathView:pathologyReportViewResponse/pathView:viewMetadata/pathView:individualProfile/pathView:individual/commonCoreElements:name/commonCoreElements:familyName", namespaces).text(),
+							// 					givenName: pathologyResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/pathView:pathologyReportViewResponse/pathView:viewMetadata/pathView:individualProfile/pathView:individual/commonCoreElements:name/commonCoreElements:givenName", namespaces).text(),
+							// 					usage: pathologyResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/pathView:pathologyReportViewResponse/pathView:viewMetadata/pathView:individualProfile/pathView:individual/commonCoreElements:name/commonCoreElements:usage", namespaces).text(),
 							// 				},
-							// 				sex: 			pathologyResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/pathView:pathologyReportViewResponse/pathView:viewMetadata/pathView:individualProfile/pathView:individual/commonCoreElements:sex", 								namespaces).text(),
-							// 				dateOfBirth: 	pathologyResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/pathView:pathologyReportViewResponse/pathView:viewMetadata/pathView:individualProfile/pathView:individual/commonCoreElements:dateOfBirth", 								namespaces).text()
+							// 				sex: pathologyResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/pathView:pathologyReportViewResponse/pathView:viewMetadata/pathView:individualProfile/pathView:individual/commonCoreElements:sex", namespaces).text(),
+							// 				dateOfBirth: pathologyResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/pathView:pathologyReportViewResponse/pathView:viewMetadata/pathView:individualProfile/pathView:individual/commonCoreElements:dateOfBirth", namespaces).text()
 							// 			}
 							// 		}
 							// 		let viewMetadata = {
@@ -263,57 +263,57 @@ let getView = ({ product, user, organisation }, patient, viewOptions) => {
 							// 		}
 
 
-							// 		if (viewMetadata.informationAvailable){
+							// 		if (viewMetadata.informationAvailable) {
 							// 			let pathologyReports = pathologyResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/pathView:pathologyReportViewResponse", namespaces)
 							// 				.childNodes()
 							// 				.filter(node => node.name() === "pathologyReport")
 							// 				.map(node => node.toString());
 
-							// 			async.map(pathologyReports, function(pathologyReport, callback){
-							// 				parser.parseString(pathologyReport, function(err, result) {
-							// 					if (err){
+							// 			async.map(pathologyReports, function (pathologyReport, callback) {
+							// 				parser.parseString(pathologyReport, function (err, result) {
+							// 					if (err) {
 							// 						callback(err)
-							// 					}else{
+							// 					} else {
 							// 						//Adjusting  the cardinality. To keep a consistent javascript object response.
 							// 						result.pathologyReport = Array.isArray(result.pathologyReport) ? result.pathologyReport : [result.pathologyReport]
 							// 						result.pathologyReport = result.pathologyReport.map(pathologyReport => {
-							// 							if (!Array.isArray(pathologyReport.pathologyTestResult)){
+							// 							if (!Array.isArray(pathologyReport.pathologyTestResult)) {
 							// 								pathologyReport.pathologyTestResult = [pathologyReport.pathologyTestResult];
 							// 							}
 
-							// 							pathologyReport.reportInformation.cdaEffectiveTime = pathologyReport.reportInformation.CDAeffectiveTime; 
+							// 							pathologyReport.reportInformation.cdaEffectiveTime = pathologyReport.reportInformation.CDAeffectiveTime;
 							// 							delete pathologyReport.reportInformation.CDAeffectiveTime;
 
 							// 							pathologyReport.documentMetadata = {
-							// 								"creationTime":			pathologyReport.reportInformation.cdaEffectiveTime,
-							// 								"serviceStartTime": 	pathologyReport.pathologyTestResult.map(testResult => testResult.specimenCollectionDate).reduce((accumulator, currentValue) => moment(accumulator).isBefore(moment(currentValue)) ? accumulator : currentValue),
-							// 								"serviceStopTime":		pathologyReport.pathologyTestResult.map(testResult => testResult.specimenCollectionDate).reduce((accumulator, currentValue) => moment(accumulator).isAfter(moment(currentValue)) ? accumulator : currentValue),
-							// 								"repositoryUniqueId":	pathologyReport.reportInformation.documentLink.substring(6, pathologyReport.reportInformation.documentLink.indexOf("/")),
+							// 								"creationTime": pathologyReport.reportInformation.cdaEffectiveTime,
+							// 								"serviceStartTime": pathologyReport.pathologyTestResult.map(testResult => testResult.specimenCollectionDate).reduce((accumulator, currentValue) => moment(accumulator).isBefore(moment(currentValue)) ? accumulator : currentValue),
+							// 								"serviceStopTime": pathologyReport.pathologyTestResult.map(testResult => testResult.specimenCollectionDate).reduce((accumulator, currentValue) => moment(accumulator).isAfter(moment(currentValue)) ? accumulator : currentValue),
+							// 								"repositoryUniqueId": pathologyReport.reportInformation.documentLink.substring(6, pathologyReport.reportInformation.documentLink.indexOf("/")),
 							// 								"authorInstitution": {
 							// 									"hl7": `${pathologyReport.clinicalDocumentAuthor.healthcareProviderOrganisationName}^^^^^^^^^1.2.36.1.2001.1003.0.${pathologyReport.clinicalDocumentAuthor.healthcareProviderOrganisationIdentifier}`,
 							// 									"organizationName": pathologyReport.clinicalDocumentAuthor.healthcareProviderOrganisationName,
-							// 									"organizationIdentifier": "1.2.36.1.2001.1003.0."+pathologyReport.clinicalDocumentAuthor.healthcareProviderOrganisationIdentifier
-							// 								  },
-							// 								  "authorPerson": {
-							// 									"hl7": 					`^${pathologyReport.clinicalDocumentAuthor.healthcareProviderName.familyName}^${pathologyReport.clinicalDocumentAuthor.healthcareProviderName.givenName ? pathologyReport.clinicalDocumentAuthor.healthcareProviderName.givenName : ""}^^^${pathologyReport.clinicalDocumentAuthor.healthcareProviderName.nameTitle ? pathologyReport.clinicalDocumentAuthor.healthcareProviderName.nameTitle : ""}^^^${pathologyReport.clinicalDocumentAuthor.healthcareProviderIdentifier ? "&"+pathologyReport.clinicalDocumentAuthor.healthcareProviderIdentifier+"&ISO" : ""}`,
-							// 									"familyName":			pathologyReport.clinicalDocumentAuthor.healthcareProviderName.familyName,
-							// 									"firstGivenName":		pathologyReport.clinicalDocumentAuthor.healthcareProviderName.givenName,
-							// 									"prefix":				pathologyReport.clinicalDocumentAuthor.healthcareProviderName.nameTitle,
-							// 									"assigningAuthority":	"&1.2.36.1.2001.1003.0."+pathologyReport.clinicalDocumentAuthor.healthcareProviderOrganisationIdentifier+"&ISO"
-							// 								  },
-							// 								  "authorSpecialty": pathologyReport.clinicalDocumentAuthor.healthcareProviderRole,
-							// 								  "class": {
+							// 									"organizationIdentifier": "1.2.36.1.2001.1003.0." + pathologyReport.clinicalDocumentAuthor.healthcareProviderOrganisationIdentifier
+							// 								},
+							// 								"authorPerson": {
+							// 									"hl7": `^${pathologyReport.clinicalDocumentAuthor.healthcareProviderName.familyName}^${pathologyReport.clinicalDocumentAuthor.healthcareProviderName.givenName ? pathologyReport.clinicalDocumentAuthor.healthcareProviderName.givenName : ""}^^^${pathologyReport.clinicalDocumentAuthor.healthcareProviderName.nameTitle ? pathologyReport.clinicalDocumentAuthor.healthcareProviderName.nameTitle : ""}^^^${pathologyReport.clinicalDocumentAuthor.healthcareProviderIdentifier ? "&" + pathologyReport.clinicalDocumentAuthor.healthcareProviderIdentifier + "&ISO" : ""}`,
+							// 									"familyName": pathologyReport.clinicalDocumentAuthor.healthcareProviderName.familyName,
+							// 									"firstGivenName": pathologyReport.clinicalDocumentAuthor.healthcareProviderName.givenName,
+							// 									"prefix": pathologyReport.clinicalDocumentAuthor.healthcareProviderName.nameTitle,
+							// 									"assigningAuthority": "&1.2.36.1.2001.1003.0." + pathologyReport.clinicalDocumentAuthor.healthcareProviderOrganisationIdentifier + "&ISO"
+							// 								},
+							// 								"authorSpecialty": pathologyReport.clinicalDocumentAuthor.healthcareProviderRole,
+							// 								"class": {
 							// 									"codingScheme": "NCTIS Data Components",
 							// 									"code": "Pathology Report"
-							// 								  },
-							// 								  "patientId": `${individualProfile.ihiNumber}^^^&1.2.36.1.2001.1003.0&ISO`,
-							// 								  "documentId": pathologyReport.reportInformation.documentId
+							// 								},
+							// 								"patientId": `${individualProfile.ihiNumber}^^^&1.2.36.1.2001.1003.0&ISO`,
+							// 								"documentId": pathologyReport.reportInformation.documentId
 							// 							};
 
-							// 							if (!pathologyReport.documentMetadata.authorPerson.firstGivenName){
+							// 							if (!pathologyReport.documentMetadata.authorPerson.firstGivenName) {
 							// 								delete pathologyReport.documentMetadata.authorPerson.firstGivenName
 							// 							}
-							// 							if (!pathologyReport.documentMetadata.authorPerson.prefix){
+							// 							if (!pathologyReport.documentMetadata.authorPerson.prefix) {
 							// 								delete pathologyReport.documentMetadata.authorPerson.prefix
 							// 							}
 							// 							return pathologyReport;
@@ -321,35 +321,35 @@ let getView = ({ product, user, organisation }, patient, viewOptions) => {
 							// 						callback(null, result);
 							// 					}
 							// 				});
-							// 			}, function(err, pathologyReports) {
-							// 				if (err){
+							// 			}, function (err, pathologyReports) {
+							// 				if (err) {
 							// 					reject();
-							// 				}else{
+							// 				} else {
 							// 					resolve({
 							// 						viewMetadata,
 							// 						pathologyReports,
 							// 					});
 							// 				}
 							// 			});
-							// 		}else{
+							// 		} else {
 							// 			resolve({
 							// 				viewMetadata,
 							// 				pathologyReports: []
 							// 			});
 							// 		}
-							// 	}else if (viewOptions.view === "diagnosticImaging"){
+							// 	} else if (viewOptions.view === "diagnosticImaging") {
 							// 		let diagnosticImagingResponse = libxmljs.parseXml(xop(response, body));
 
 							// 		let individualProfile = {
-							// 			ihiNumber: 			diagnosticImagingResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/diView:diagnosticImagingReportViewResponse/diView:viewMetadata/diView:individualProfile/commonCoreElements:ihiNumber", namespaces).text(),
+							// 			ihiNumber: diagnosticImagingResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/diView:diagnosticImagingReportViewResponse/diView:viewMetadata/diView:individualProfile/commonCoreElements:ihiNumber", namespaces).text(),
 							// 			individual: {
 							// 				name: {
-							// 					familyName: diagnosticImagingResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/diView:diagnosticImagingReportViewResponse/diView:viewMetadata/diView:individualProfile/diView:individual/commonCoreElements:name/commonCoreElements:familyName", 	namespaces).text(),
-							// 					givenName:	diagnosticImagingResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/diView:diagnosticImagingReportViewResponse/diView:viewMetadata/diView:individualProfile/diView:individual/commonCoreElements:name/commonCoreElements:givenName", 		namespaces).text(),
-							// 					usage:		diagnosticImagingResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/diView:diagnosticImagingReportViewResponse/diView:viewMetadata/diView:individualProfile/diView:individual/commonCoreElements:name/commonCoreElements:usage", 		namespaces).text(),
+							// 					familyName: diagnosticImagingResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/diView:diagnosticImagingReportViewResponse/diView:viewMetadata/diView:individualProfile/diView:individual/commonCoreElements:name/commonCoreElements:familyName", namespaces).text(),
+							// 					givenName: diagnosticImagingResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/diView:diagnosticImagingReportViewResponse/diView:viewMetadata/diView:individualProfile/diView:individual/commonCoreElements:name/commonCoreElements:givenName", namespaces).text(),
+							// 					usage: diagnosticImagingResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/diView:diagnosticImagingReportViewResponse/diView:viewMetadata/diView:individualProfile/diView:individual/commonCoreElements:name/commonCoreElements:usage", namespaces).text(),
 							// 				},
-							// 				sex: 			diagnosticImagingResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/diView:diagnosticImagingReportViewResponse/diView:viewMetadata/diView:individualProfile/diView:individual/commonCoreElements:sex", 								namespaces).text(),
-							// 				dateOfBirth: 	diagnosticImagingResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/diView:diagnosticImagingReportViewResponse/diView:viewMetadata/diView:individualProfile/diView:individual/commonCoreElements:dateOfBirth", 								namespaces).text()
+							// 				sex: diagnosticImagingResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/diView:diagnosticImagingReportViewResponse/diView:viewMetadata/diView:individualProfile/diView:individual/commonCoreElements:sex", namespaces).text(),
+							// 				dateOfBirth: diagnosticImagingResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/diView:diagnosticImagingReportViewResponse/diView:viewMetadata/diView:individualProfile/diView:individual/commonCoreElements:dateOfBirth", namespaces).text()
 							// 			}
 							// 		}
 							// 		let viewMetadata = {
@@ -357,118 +357,126 @@ let getView = ({ product, user, organisation }, patient, viewOptions) => {
 							// 			individualProfile
 							// 		}
 
-							// 		if (viewMetadata.informationAvailable){
+							// 		if (viewMetadata.informationAvailable) {
 							// 			let diagnosticImagingReports = diagnosticImagingResponse.get("//soap:Envelope/soap:Body/getView:getViewResponse/getView:view/getView:data/diView:diagnosticImagingReportViewResponse", namespaces)
 							// 				.childNodes()
 							// 				.filter(node => node.name() === "diagnosticImagingReport")
 							// 				.map(node => node.toString());
-							// 				async.map(diagnosticImagingReports, function(diagnosticImagingReport, callback){
-							// 					parser.parseString(diagnosticImagingReport, function(err, result) {
-							// 						if (err){
-							// 							callback(err)
-							// 						}else{
+							// 			async.map(diagnosticImagingReports, function (diagnosticImagingReport, callback) {
+							// 				parser.parseString(diagnosticImagingReport, function (err, result) {
+							// 					if (err) {
+							// 						callback(err)
+							// 					} else {
 
-							// 							//Adjusting  the cardinality. To keep a consistent javascript object response.
-							// 							if (!Array.isArray(result.diagnosticImagingReport)){
-							// 								result.diagnosticImagingReport = [result.diagnosticImagingReport];
+							// 						//Adjusting  the cardinality. To keep a consistent javascript object response.
+							// 						if (!Array.isArray(result.diagnosticImagingReport)) {
+							// 							result.diagnosticImagingReport = [result.diagnosticImagingReport];
+							// 						}
+							// 						result.diagnosticImagingReport = result.diagnosticImagingReport.map(diagnosticImagingReport => {
+
+							// 							if (!Array.isArray(diagnosticImagingReport.imagingExaminationResult)) {
+							// 								diagnosticImagingReport.imagingExaminationResult = [diagnosticImagingReport.imagingExaminationResult];
 							// 							}
-							// 							result.diagnosticImagingReport = result.diagnosticImagingReport.map(diagnosticImagingReport => {
 
-							// 								if (!Array.isArray(diagnosticImagingReport.imagingExaminationResult)){
-							// 									diagnosticImagingReport.imagingExaminationResult = [diagnosticImagingReport.imagingExaminationResult];
+							// 							diagnosticImagingReport.imagingExaminationResult.map(imagingExaminationResult => {
+							// 								if (imagingExaminationResult.anatomicalSiteDetails && (!Array.isArray(imagingExaminationResult.anatomicalSiteDetails))) {
+							// 									imagingExaminationResult.anatomicalSiteDetails = [imagingExaminationResult.anatomicalSiteDetails];
 							// 								}
 
-							// 								diagnosticImagingReport.imagingExaminationResult.map(imagingExaminationResult => {
-							// 									if (imagingExaminationResult.anatomicalSiteDetails  && (!Array.isArray(imagingExaminationResult.anatomicalSiteDetails))){
-							// 										imagingExaminationResult.anatomicalSiteDetails = [imagingExaminationResult.anatomicalSiteDetails];
-							// 									}
+							// 								if (imagingExaminationResult.anatomicalLocation && (!Array.isArray(imagingExaminationResult.anatomicalLocation))) {
+							// 									imagingExaminationResult.anatomicalLocation = [imagingExaminationResult.anatomicalLocation];
+							// 								}
+							// 								return imagingExaminationResult;
+							// 							});
 
-							// 									if (imagingExaminationResult.anatomicalLocation && (!Array.isArray(imagingExaminationResult.anatomicalLocation))){
-							// 										imagingExaminationResult.anatomicalLocation = [imagingExaminationResult.anatomicalLocation];
-							// 									}
-							// 									return imagingExaminationResult;
-							// 								});
-
-							// 								diagnosticImagingReport.reportInformation.cdaEffectiveTime = diagnosticImagingReport.reportInformation.CDAeffectiveTime; 
+							// 							diagnosticImagingReport.reportInformation.cdaEffectiveTime = diagnosticImagingReport.reportInformation.CDAeffectiveTime;
 
 							// 							diagnosticImagingReport.documentMetadata = {
-							// 								"creationTime":			diagnosticImagingReport.reportInformation.cdaEffectiveTime,
-							// 								"serviceStartTime": 	diagnosticImagingReport.imagingExaminationResult.map(testResult => testResult.imagingServiceDateTime).reduce((accumulator, currentValue) => moment(accumulator).isBefore(moment(currentValue)) ? accumulator : currentValue),
-							// 								"serviceStopTime":		diagnosticImagingReport.imagingExaminationResult.map(testResult => testResult.imagingServiceDateTime).reduce((accumulator, currentValue) => moment(accumulator).isAfter(moment(currentValue)) ? accumulator : currentValue),
-							// 								"repositoryUniqueId":	diagnosticImagingReport.reportInformation.documentLink.substring(6, diagnosticImagingReport.reportInformation.documentLink.indexOf("/")),
+							// 								"creationTime": diagnosticImagingReport.reportInformation.cdaEffectiveTime,
+							// 								"serviceStartTime": diagnosticImagingReport.imagingExaminationResult.map(testResult => testResult.imagingServiceDateTime).reduce((accumulator, currentValue) => moment(accumulator).isBefore(moment(currentValue)) ? accumulator : currentValue),
+							// 								"serviceStopTime": diagnosticImagingReport.imagingExaminationResult.map(testResult => testResult.imagingServiceDateTime).reduce((accumulator, currentValue) => moment(accumulator).isAfter(moment(currentValue)) ? accumulator : currentValue),
+							// 								"repositoryUniqueId": diagnosticImagingReport.reportInformation.documentLink.substring(6, diagnosticImagingReport.reportInformation.documentLink.indexOf("/")),
 							// 								"authorInstitution": {
-							// 								"hl7": `${diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderOrganisationName}^^^^^^^^^1.2.36.1.2001.1003.0.${diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderOrganisationIdentifier}`,
-							// 								"organizationName": diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderOrganisationName,
-							// 									"organizationIdentifier": "1.2.36.1.2001.1003.0."+diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderOrganisationIdentifier
-							// 								  },
-							// 								  "authorPerson": {
-							// 									"hl7": 					`^${diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderName.familyName}^${diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderName.givenName ? diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderName.givenName : ""}^^^${diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderName.nameTitle ? diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderName.nameTitle : ""}^^^${diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderIdentifier ? "&"+diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderIdentifier+"&ISO" : ""}`,
-							// 									"familyName":			diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderName.familyName,
-							// 									"firstGivenName":		diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderName.givenName,
-							// 									"prefix":				diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderName.nameTitle,
-							// 									"assigningAuthority":	"&1.2.36.1.2001.1003.0."+diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderOrganisationIdentifier+"&ISO"
-							// 								  },
-							// 								  "authorSpecialty": diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderRole,
-							// 								  "class": {
+							// 									"hl7": `${diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderOrganisationName}^^^^^^^^^1.2.36.1.2001.1003.0.${diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderOrganisationIdentifier}`,
+							// 									"organizationName": diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderOrganisationName,
+							// 									"organizationIdentifier": "1.2.36.1.2001.1003.0." + diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderOrganisationIdentifier
+							// 								},
+							// 								"authorPerson": {
+							// 									"hl7": `^${diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderName.familyName}^${diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderName.givenName ? diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderName.givenName : ""}^^^${diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderName.nameTitle ? diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderName.nameTitle : ""}^^^${diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderIdentifier ? "&" + diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderIdentifier + "&ISO" : ""}`,
+							// 									"familyName": diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderName.familyName,
+							// 									"firstGivenName": diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderName.givenName,
+							// 									"prefix": diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderName.nameTitle,
+							// 									"assigningAuthority": "&1.2.36.1.2001.1003.0." + diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderOrganisationIdentifier + "&ISO"
+							// 								},
+							// 								"authorSpecialty": diagnosticImagingReport.clinicalDocumentAuthor.healthcareProviderRole,
+							// 								"class": {
 							// 									"codingScheme": "NCTIS Data Components",
 							// 									"code": "Diagnostic Imaging Report"
-							// 								  },
-							// 								  "patientId": `${individualProfile.ihiNumber}^^^&1.2.36.1.2001.1003.0&ISO`,
-							// 								  "documentId": diagnosticImagingReport.reportInformation.documentId
+							// 								},
+							// 								"patientId": `${individualProfile.ihiNumber}^^^&1.2.36.1.2001.1003.0&ISO`,
+							// 								"documentId": diagnosticImagingReport.reportInformation.documentId
 							// 							};
 
 							// 							//remove elements that are optional in the schema
-							// 							if (!diagnosticImagingReport.documentMetadata.authorPerson.firstGivenName){
+							// 							if (!diagnosticImagingReport.documentMetadata.authorPerson.firstGivenName) {
 							// 								delete diagnosticImagingReport.documentMetadata.authorPerson.firstGivenName
 							// 							}
-							// 							if (!diagnosticImagingReport.documentMetadata.authorPerson.prefix){
+							// 							if (!diagnosticImagingReport.documentMetadata.authorPerson.prefix) {
 							// 								delete diagnosticImagingReport.documentMetadata.authorPerson.prefix
 							// 							}
 
 
-							// 								return diagnosticImagingReport;
+							// 							return diagnosticImagingReport;
 
-							// 							});
-
-
-							// 							callback(null, result);
-							// 						}
-							// 					});
-							// 				}, function(err, diagnosticImagingReports) {
-							// 					if (err){
-							// 						reject();
-							// 					}else{
-							// 						resolve({
-							// 							viewMetadata,
-							// 							diagnosticImagingReports,
 							// 						});
+
+
+							// 						callback(null, result);
 							// 					}
 							// 				});
+							// 			}, function (err, diagnosticImagingReports) {
+							// 				if (err) {
+							// 					reject();
+							// 				} else {
+							// 					resolve({
+							// 						viewMetadata,
+							// 						diagnosticImagingReports,
+							// 					});
+							// 				}
+							// 			});
 							// 		}
 
 							// 	}
-
-
-
-
 							// }
 
 						}
 					} catch (error) {
-						console.log("ERROR");
+						console.log("ERROR",);
 						fs.writeFile("./testResponse/getView_Response.xml", body, function (err) {
 							if (err) {
 								return console.log(err);
 							}
 						});
 						let xmlDoc = libxmljs.parseXml(body);
-						resolve({
-							response: {
-								errors: true,
-								code: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='getViewResponse']/*[local-name()='responseStatus']/*[local-name()='code']").text(),
-								message: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='getViewResponse']/*[local-name()='responseStatus']/*[local-name()='description']").text(),
-							},
-						})
+						let faultNode = xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='Fault']");
+						let fault = faultNode ? faultNode.text() : "";
+						if (fault != "") {
+							resolve({
+								response: {
+									errors: true,
+									code: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='Fault']/*[local-name()='Detail']/*[local-name()='standardError']/*[local-name()='errorCode']").text(),
+									message: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='Fault']/*[local-name()='Detail']/*[local-name()='standardError']/*[local-name()='message']").text(),
+								},
+							})
+						} else {
+							resolve({
+								response: {
+									errors: true,
+									code: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='getViewResponse']/*[local-name()='responseStatus']/*[local-name()='code']").text(),
+									message: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='getViewResponse']/*[local-name()='responseStatus']/*[local-name()='description']").text(),
+								},
+							})
+						}
 					}
 				}, { encoding: null }
 			)

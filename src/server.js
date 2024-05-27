@@ -2,7 +2,7 @@
 
 // Import the express module
 const express = require('express');
-const { runUploadDocument, runDoesPCEHRExist, runGainPCEHRAccess, runGetDocumentList,runGetDocument,runGetView } = require('./main.js');
+const { runUploadDocument, runDoesPCEHRExist, runGainPCEHRAccess, runGetDocumentList, runGetDocument, runGetView } = require('./main.js');
 const bodyParser = require('body-parser');
 // Create an instance of express
 const app = express();
@@ -13,8 +13,13 @@ app.get('/', (req, res) => {
 });
 app.post('/upload-document', async (req, res) => {
     try {
+        const { patient, organization, document } = req.body;
+        // Check if patient.ihi exists and has a length of exactly 16 digits
+        if (!patient || !patient.ihi || !/^\d{16}$/.test(patient.ihi)) {
+            return res.status(400).send('Invalid IHI number format used');
+        }
         // Pass the required arguments to the runServices function
-        await runUploadDocument(/* filePath, attachmentPath, privatePem, publicPem, ca, hpio */);
+        await runUploadDocument(patient, organization,);
         res.send('Services executed successfully');
     } catch (error) {
         console.error('An error occurred:', error);
