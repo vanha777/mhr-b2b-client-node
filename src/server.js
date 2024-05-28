@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
     res.send('Hello, World!');
 });
 app.post('/upload-document', async (req, res) => {
-    console.log("Client request ...")
+    console.log("Client request ...",req.body);
     try {
         const { patient, supersede_document_id, template_id, organization } = req.body;
         // Check if patient.ihi exists and has a length of exactly 16 digits
