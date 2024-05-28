@@ -2,16 +2,22 @@
 
 // Import the express module
 const express = require('express');
+const cors = require('cors');
 const { runUploadDocument, runDoesPCEHRExist, runGainPCEHRAccess, runGetDocumentList, runGetDocument, runGetView, runRemoveDocument } = require('./main.js');
 const bodyParser = require('body-parser');
 // Create an instance of express
 const app = express();
+// Allow requests from localhost:3000
+app.use(cors({
+    origin: 'http://localhost:3000'
+}));
 app.use(bodyParser.json());
 // Define a route handler for the root path
 app.get('/', (req, res) => {
     res.send('Hello, World!');
 });
 app.post('/upload-document', async (req, res) => {
+    console.log("Client request ...")
     try {
         const { patient, supersede_document_id, template_id, organization } = req.body;
         // Check if patient.ihi exists and has a length of exactly 16 digits
@@ -32,6 +38,7 @@ app.post('/upload-document', async (req, res) => {
     }
 });
 app.post('/remove-document', async (req, res) => {
+    console.log("Client request ...")
     try {
         const { patient, remove_document_id, reasons, organization } = req.body;
         // Check if patient.ihi exists and has a length of exactly 16 digits
@@ -52,6 +59,7 @@ app.post('/remove-document', async (req, res) => {
     }
 });
 app.post('/does-pcehr-exist', async (req, res) => {
+    console.log("Client request ...")
     try {
         // console.log('this is request',req.body);
         // Pass the required arguments to the runServices function
@@ -69,6 +77,7 @@ app.post('/does-pcehr-exist', async (req, res) => {
 });
 
 app.post('/gain-pcehr-access', async (req, res) => {
+    console.log("Client request ...")
     try {
         // console.log('this is request',req.body);
         // Pass the required arguments to the runServices function
@@ -98,6 +107,7 @@ app.post('/gain-pcehr-access', async (req, res) => {
 });
 
 app.post('/get-document-list', async (req, res) => {
+    console.log("Client request ...")
     try {
         // console.log('this is request',req.body);
         // Pass the required arguments to the runServices function
@@ -115,6 +125,7 @@ app.post('/get-document-list', async (req, res) => {
 });
 
 app.post('/get-document', async (req, res) => {
+    console.log("Client request ...")
     try {
         // console.log('this is request',req.body);
         // Pass the required arguments to the runServices function
@@ -132,6 +143,7 @@ app.post('/get-document', async (req, res) => {
 });
 // Start the server on port 3000
 app.post('/get-view', async (req, res) => {
+    console.log("Client request ...")
     try {
         // console.log('this is request',req.body);
         // Pass the required arguments to the runServices function

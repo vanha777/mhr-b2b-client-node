@@ -17,6 +17,7 @@
     "big-integer": "^1.6.52",
     "busboy": "^1.6.0",
     "chalk": "^2.4.1",
+    "cors": "^2.8.5",
     "express": "^4.19.2",
     "fur": "^7.0.7",
     "http-message-parser": "^0.0.32",
