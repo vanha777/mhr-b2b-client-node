@@ -463,7 +463,7 @@ async function saveFile(data, path) {
 }
 
 
-let uploadDocument = ({ product, user, organisation }, patient, document, supersede_document_id,template_id) => {
+let uploadDocument = ({ product, user, organisation }, patient, document, supersede_document_id, template_id) => {
 
 	return new Promise((resolve, reject) => {
 
@@ -916,9 +916,11 @@ let uploadDocument = ({ product, user, organisation }, patient, document, supers
 				// } 
 				else {
 					resolve({
-						errors: true,
-						errorCode: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RegistryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute('errorCode').value(),
-						message: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RegistryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute('codeContext').value()
+						response: {
+							errors: true,
+							code: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RegistryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute('errorCode').value(),
+							message: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RegistryResponse']/*[local-name()='RegistryErrorList']/*[local-name()='RegistryError']").getAttribute('codeContext').value()
+						}
 					});
 				}
 				// } catch (error) {

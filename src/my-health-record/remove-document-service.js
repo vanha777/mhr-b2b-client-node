@@ -42,6 +42,7 @@ let removeDocument = ({ product, user, organisation }, patient, remove_document_
 					let xmlDoc = libxmljs.parseXml(body);
 					resolve({
 						response: {
+							errors: true,
 							code: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='Fault']/*[local-name()='Detail']/*[local-name()='standardError']/*[local-name()='errorCode']").text(),
 							message: xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='Fault']/*[local-name()='Detail']/*[local-name()='standardError']/*[local-name()='message']").text()
 						},
@@ -70,10 +71,23 @@ let removeDocument = ({ product, user, organisation }, patient, remove_document_
 						reject(error);
 					} else {
 						let xmlDoc = libxmljs.parseXml(body);
-						resolve({
-							"code": xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='removeDocumentResponse']/*[local-name()='responseStatus']/*[local-name()='code']").text(),
-							"description": xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='removeDocumentResponse']/*[local-name()='responseStatus']/*[local-name()='description']").text(),
-						});
+						let code = xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='removeDocumentResponse']/*[local-name()='responseStatus']/*[local-name()='code']").text();
+						if (code.includes("ERROR")) {
+							resolve({
+								response: {
+									errors: true,
+									"code": xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='removeDocumentResponse']/*[local-name()='responseStatus']/*[local-name()='code']").text(),
+									"message": xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='removeDocumentResponse']/*[local-name()='responseStatus']/*[local-name()='description']").text(),
+								}
+
+							});
+						} else {
+							resolve({
+								"code": xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='removeDocumentResponse']/*[local-name()='responseStatus']/*[local-name()='code']").text(),
+								"description": xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='removeDocumentResponse']/*[local-name()='responseStatus']/*[local-name()='description']").text(),
+							});
+						}
+
 					}
 				}
 			}

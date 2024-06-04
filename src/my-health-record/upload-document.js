@@ -53,7 +53,7 @@ let uploadDocument = ({product, user, organisation}, patient, document) => {
 						});
 					
 				}else{
-					reject("Unsure on how to handle response paylaod. Content Type: " + httpResponse.headers["content-type"]);
+					reject("Unsure on how to handle response payload. Content Type: " + httpResponse.headers["content-type"]);
 				}
 			}
 
