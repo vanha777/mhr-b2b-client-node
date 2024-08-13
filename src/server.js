@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const app = express();
 // Allow requests from localhost:3000
 app.use(cors({
-    origin: 'http://localhost:3000'
+    origin: 'http://localhost:3030'
 }));
 app.use(bodyParser.json());
 // Define a route handler for the root path
@@ -159,6 +159,6 @@ app.post('/get-view', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-app.listen(3030, () => {
-    console.log('\x1b[36m%s\x1b[0m', 'StrongRoomAi MHR-mobule running on http://localhost:3030/');
+app.listen(3031, () => {
+    console.log('\x1b[36m%s\x1b[0m', 'StrongRoomAi MHR-mobule running on http://localhost:3031/');
 });
