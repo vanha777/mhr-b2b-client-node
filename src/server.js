@@ -19,13 +19,13 @@ app.get('/', (req, res) => {
 app.post('/upload-document', async (req, res) => {
     console.log("Client request ...",req.body);
     try {
-        const { patient, supersede_document_id, template_id, organization } = req.body;
+        const { patient, supersede_document_id, template_id, organization,document } = req.body;
         // Check if patient.ihi exists and has a length of exactly 16 digits
         if (!patient || !patient.ihi || !/^\d{16}$/.test(patient.ihi)) {
             return res.status(400).send('Invalid IHI number format used');
         }
         // Pass the required arguments to the runServices function
-        const result = await runUploadDocument(patient, supersede_document_id, template_id, organization);
+        const result = await runUploadDocument(patient, supersede_document_id, template_id, organization,document);
         if (result.errors) {
             console.error('An error occurred:', result);
             res.status(200).send(result);

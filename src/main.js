@@ -1,4 +1,5 @@
 const services = require('./index.js');
+const axios = require('axios'); // Import axios
 const fs = require('fs');
 let guid = require('uuid').v4;
 let hpio = "8003623233372670";
@@ -25,7 +26,7 @@ function generateUniqueId() {
 
 
 //runRemoveDocument
-async function runRemoveDocument(patient,remove_document_id, reasons, organisation) {
+async function runRemoveDocument(patient, remove_document_id, reasons, organisation) {
 
   try {
 
@@ -94,12 +95,24 @@ async function runRemoveDocument(patient,remove_document_id, reasons, organisati
     console.error('An error occurred:', error);
   }
 }
-async function runUploadDocument(patient, supersede_document_id, template_id, organisation) {
+async function downloadFile(url) {
+  try {
+    // Download the file and return it as a buffer
+    const response = await axios.get(url, { responseType: 'arraybuffer' });
+    return response.data;
+  } catch (error) {
+    throw new Error(`Failed to fetch file from URL: ${error.message}`);
+  }
+}
+async function runUploadDocument(patient, supersede_document_id, template_id, organisation, document) {
   const filePath = './doc.xml';
-  const attachmentPath = './NCFU.pdf';
+  // const attachmentPath = './NCFU.pdf';
+  const attachmentUrl = document;
+
   try {
     let package_data = await fs.promises.readFile(filePath);
-    let attachment = await fs.promises.readFile(attachmentPath);
+    // let attachment = await fs.promises.readFile(attachmentPath);
+    let attachment = await downloadFile(attachmentUrl);
     console.log("attached file: ", attachment);
 
     const now = new Date();

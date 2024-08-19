@@ -39,7 +39,7 @@ let getDocumentList = ({ product, user, organisation }, patient, options, adhoc_
 	let serviceStopTimeToFilter = options.serviceStopTimeTo ? `
 	<Slot name="$XDSDocumentEntryServiceStopTimeTo">
 		<ValueList>
-			<Value>${typeof options.serviceStopTimeTo === "string" ? options.serviceStopTimeTo : moment(options.serviceStopTimeTo).format("YYYYMMDD")}235959</Value>
+			<Value>${typeof options.serviceStopTimeTo === "string" ? options.serviceStopTimeTo : moment(options.serviceStopTimeTo).format("YYYYMMDD")}000000</Value>
 		</ValueList>
 	</Slot>` : "";
 
