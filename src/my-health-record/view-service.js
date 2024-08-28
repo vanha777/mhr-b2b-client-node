@@ -226,7 +226,7 @@ let getView = ({ product, user, organisation }, patient, viewOptions) => {
 
 						let cdafile = parts[1].slice(parts[1].indexOf("Content-Transfer-Encoding: binary") + 37, parts[1].indexOf("------=_") - 1);
 						// Convert the binary file to a base64 string
-						const base64Data = Buffer.from(cdafile).toString('base64');
+						const base64 = Buffer.from(cdafile).toString('base64');
 						const zip = new JSZip();
 						zip.file('file.zip', cdafile, { binary: true });
 						zip.generateNodeStream({ type: 'nodebuffer', streamFiles: true })
@@ -240,11 +240,11 @@ let getView = ({ product, user, organisation }, patient, viewOptions) => {
 							reject(error);
 						} else if (type === "cda") {
 							console.log("error here 0");
-							resolve({ documentType: "view", viewType: viewOptions.view, viewVersion: viewVersion, attachmentFormat: "zip",base64Data });
+							resolve({ documentType: "view", viewType: viewOptions.view, viewVersion: viewVersion, attachmentFormat: "zip",base64 });
 						}
 						else if (type === "xml") {
 							console.log("XML return");
-							resolve({ documentType: "view", viewType: viewOptions.view, viewVersion: viewVersion, attachmentFormat: "xml",base64Data });
+							resolve({ documentType: "view", viewType: viewOptions.view, viewVersion: viewVersion, attachmentFormat: "xml",base64 });
 							// if (viewOptions.view === "pathology") {
 							// 	let pathologyResponse = libxmljs.parseXml(xop(response, body));
 							// 	let individualProfile = {

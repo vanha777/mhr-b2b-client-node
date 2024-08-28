@@ -419,9 +419,9 @@ let getDocument = ({ product, user, organisation }, patient, document) => {
 							await saveFile(cdafile, outputPath);
 
 							// Convert the binary file to a base64 string
-							const base64DataZip = Buffer.from(cdafile).toString('base64');
+							const base64 = Buffer.from(cdafile).toString('base64');
 							// Resolve with the document, outputPath, and base64-encoded string
-							resolve({ ...document, outputPath, base64DataZip });
+							resolve({ ...document, outputPath, base64 });
 							// resolve({ ...document, outputPath });
 
 						} catch (parseError) {
