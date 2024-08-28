@@ -240,7 +240,7 @@ let getView = ({ product, user, organisation }, patient, viewOptions) => {
 							reject(error);
 						} else if (type === "cda") {
 							console.log("error here 0");
-							resolve({ documentType: "view", viewType: viewOptions.view, viewVersion: viewVersion, attachmentFormat: "cdaZipPackage",base64Data });
+							resolve({ documentType: "view", viewType: viewOptions.view, viewVersion: viewVersion, attachmentFormat: "zip",base64Data });
 						}
 						else if (type === "xml") {
 							console.log("XML return");
