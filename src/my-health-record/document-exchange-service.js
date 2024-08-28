@@ -417,7 +417,12 @@ let getDocument = ({ product, user, organisation }, patient, document) => {
 							const cdafile = extractBinaryFile(parts[1]);
 							const outputPath = './testPackage/CDAPackage.zip';
 							await saveFile(cdafile, outputPath);
-							resolve({ ...document, outputPath });
+
+							// Convert the binary file to a base64 string
+							const base64DataZip = Buffer.from(cdafile).toString('base64');
+							// Resolve with the document, outputPath, and base64-encoded string
+							resolve({ ...document, outputPath, base64DataZip });
+							// resolve({ ...document, outputPath });
 
 						} catch (parseError) {
 							console.error("Error processing response:", parseError);
