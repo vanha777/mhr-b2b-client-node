@@ -9,6 +9,12 @@
 *.userosscache
 *.sln.docstates
 
+# Ignore src/testRequest and all its contents
+src/testRequest/
+
+# Ignore src/testResponse and all its contents
+src/testResponse/
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
