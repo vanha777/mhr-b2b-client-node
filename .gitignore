@@ -15,6 +15,9 @@ src/testRequest/
 # Ignore src/testResponse and all its contents
 src/testResponse/
 
+# Ignore src/testPackage and all its contents
+src/testPackage/
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
