@@ -8,7 +8,7 @@
   <templateId extension="1.0" root="1.2.36.1.2001.1001.100.149" />
   <!-- <id root="1.2.36.2501047616.37544.18039.36495.17041040303639138" /> -->
   <id root="{{document_id}}" />
-  <code code="100.32046" codeSystem="1.2.36.1.2001.1001.101" codeSystemName="NCTIS Data Components" displayName="Medication Chart" />
+  <code code="100.32046" codeSystem="1.2.36.1.2001.1001.101" codeSystemName="NCTIS Data Components" displayName="Residential Care Medication Chart" />
   <title>Residential Care Medication Chart</title>
   <effectiveTime value="20240321" />
   <confidentialityCode nullFlavor="NA" />
@@ -57,7 +57,7 @@
         <city>Nehtaville</city>
         <state>QLD</state>
         <postalCode>5555</postalCode>
-        <additionalLocator>32568931</additionalLocator>
+        <additionalLocator>INV</additionalLocator>
         <country>Australia</country>
       </addr>
       <telecom use="WP" value="tel:0712341234" />
@@ -164,7 +164,7 @@
           <prefix>Dr.</prefix>
           <given>Allen</given>
           <family>Smith</family>
-          <suffix>Jr.</suffix>
+          <suffix>Jnr</suffix>
         </name>
         <!-- HPII based Employee Identifier -->
         <ext:asEntityIdentifier classCode="IDENT">
@@ -193,15 +193,15 @@
     </associatedEntity>
   </participant>
   <!-- Begin Encounter Period -->
-  <componentOf>
+  <!-- <componentOf>
     <encompassingEncounter>
       <effectiveTime xsi:type="IVL_TS">
-        <width value="3" unit="wk" />
+        <width value="3" unit="wk" /> -->
         <!-- <low value="201112141100+1000" />-->
-        <high value="20240321" />
+        <!-- <high value="20240321" />
       </effectiveTime>
     </encompassingEncounter>
-  </componentOf>
+  </componentOf> -->
   <!-- End Encounter Period -->
   <component>
     <structuredBody>
@@ -218,7 +218,7 @@
             <observationMedia ID="MM1" classCode="OBS" moodCode="EVN">
               <id root="79693654-3d41-4e12-90f6-2ea6e4c02896" />
               <value mediaType="application/pdf" integrityCheck="C0/XBGWcpUCHEldRxJ7fvGIPjQQ=">
-                <reference value="NCFU.pdf" />
+                <reference value="RCMC.pdf" />
               </value>
             </observationMedia>
           </entry>
