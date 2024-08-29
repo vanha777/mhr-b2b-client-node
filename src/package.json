@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@exact-realty/multipart-parser": "^1.0.13",
+    "adm-zip": "^0.5.15",
     "async": "^2.6.2",
     "atob": "^2.1.2",
     "axios": "^0.24.0",
@@ -19,6 +20,7 @@
     "chalk": "^2.4.1",
     "cors": "^2.8.5",
     "express": "^4.19.2",
+    "fs": "0.0.1-security",
     "fur": "^7.0.7",
     "http-message-parser": "^0.0.32",
     "https": "^1.0.0",
@@ -33,6 +35,7 @@
     "uuid": "^8.3.2",
     "ws.js": "^2.0.23",
     "xml-crypto": "^1.1.1",
-    "xml2js": "^0.4.19"
+    "xml2js": "^0.4.19",
+    "xslt-processor": "^3.0.1"
   }
 }

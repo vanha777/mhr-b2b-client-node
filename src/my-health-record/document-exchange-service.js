@@ -18,6 +18,12 @@ const moment = require('moment');
 let guid = require('uuid').v4;
 const JSZip = require('jszip');
 const fs = require('fs');
+const fs_promise = require('fs/promises');
+const AdmZip = require('adm-zip');
+const xml2js = require('xml2js');
+const xslt = require('xslt-processor')
+const fsSync = require('fs');
+const path = require('path');
 
 let processMimeMultipart = require('./mime-multipart').getAttachment;
 let xop = require('./mime-multipart').xop;
@@ -326,6 +332,110 @@ let getDocumentList = ({ product, user, organisation }, patient, options, adhoc_
 
 }
 
+async function convertCDAtoHTML(cdaPath) {
+	const cdaContent = fs.readFile(cdaPath, 'utf-8');
+	// const styleSheet = await fs.readFile('./cda-stylesheet.xsl', 'utf-8');
+	const htmlContent = xslt.xsltProcess(
+		xslt.xmlParse(cdaContent),
+		// xslt.xmlParse(styleSheet)
+	);
+	return htmlContent;
+}
+
+// async function unzipFile(zipPath) {
+//     console.log("Attempting to unzip file");
+//     console.log("Zip path:", zipPath);
+
+//     // Extract the directory from the zip file path
+//     const extractPath = path.dirname(zipPath);
+//     console.log("Extract path:", extractPath);
+
+//     // Check if the zip file exists
+//     if (!fs.existsSync(zipPath)) {
+//         throw new Error(`Zip file does not exist at path: ${zipPath}`);
+//     }
+
+//     try {
+//         // Read the zip file as a binary buffer using fs.promises
+//         const data = await fs_promise.readFile(zipPath);
+
+//         // Load the zip file using JSZip
+//         const zip = await JSZip.loadAsync(data);
+
+//         // Ensure the extraction path exists
+//         await fs_promise.mkdir(extractPath, { recursive: true });
+
+//         // Iterate over each file in the zip archive
+//         for (const [filename, file] of Object.entries(zip.files)) {
+//             const filePath = path.join(extractPath, filename);
+//             console.log("Processing file:", filePath);
+
+//             if (file.dir) {
+//                 // If it's a directory, create it
+//                 await fs_promise.mkdir(filePath, { recursive: true });
+//             } else {
+//                 // If it's a file, write it to the extraction path
+//                 const content = await file.async('nodebuffer');
+//                 await fs_promise.writeFile(filePath, content);
+//             }
+//         }
+
+//         console.log("Extraction complete");
+//     } catch (error) {
+//         console.error("Error processing response:", error);
+//         throw error; // Re-throw the error after logging it
+//     }
+// }
+
+async function unzipFile(zipPath, extractPath) {
+	console.log("Attempting to unzip file");
+	console.log("Zip path:", zipPath);
+
+	// Check if the zip file exists
+	if (!fs.existsSync(zipPath)) {
+		throw new Error(`Zip file does not exist at path: ${zipPath}`);
+	}
+
+	try {
+		// Read the zip file as a binary buffer using fs.promises
+		const data = await fs_promise.readFile(zipPath);
+
+		// Load the zip file using JSZip
+		const zip = await JSZip.loadAsync(data);
+
+		// Ensure the extraction path exists
+		await fs_promise.mkdir(extractPath, { recursive: true });
+
+		// Iterate over each file in the zip archive
+		for (const [filename, file] of Object.entries(zip.files)) {
+			const filePath = path.join(extractPath, filename);
+			console.log("Processing file:", filePath);
+
+			if (file.dir) {
+				// If it's a directory, create it
+				await fs_promise.mkdir(filePath, { recursive: true });
+			} else {
+				// If it's a file, write it to the extraction path
+				const content = await file.async('nodebuffer');
+				await fs_promise.writeFile(filePath, content);
+
+				// Check if the extracted file is another zip
+				if (filename.endsWith('.zip')) {
+					console.log(`Found nested zip file: ${filename}`);
+					// Unzip the nested zip file in its own directory
+					const nestedExtractPath = path.join(extractPath, path.basename(filename, '.zip'));
+					await unzipFile(filePath, nestedExtractPath);
+				}
+			}
+		}
+
+		console.log("Extraction complete");
+	} catch (error) {
+		console.error("Error processing response:", error);
+		throw error; // Re-throw the error after logging it
+	}
+}
+
 
 let getDocument = ({ product, user, organisation }, patient, document) => {
 	return new Promise((resolve, reject) => {
@@ -418,10 +528,28 @@ let getDocument = ({ product, user, organisation }, patient, document) => {
 							const outputPath = './testPackage/CDAPackage.zip';
 							await saveFile(cdafile, outputPath);
 
-							// Convert the binary file to a base64 string
-							const base64 = Buffer.from(cdafile).toString('base64');
+							// Unzip the file
+							const extractPath = './testPackage/';
+							await unzipFile(outputPath, extractPath);
+
+							const filePath = './testPackage/file/IHE_XDM/SUBSET01/NCFU.pdf';
+							// Read the PDF file as a binary buffer
+							const fileBuffer = await fs.promises.readFile(filePath);
+
+							// Encode the buffer to base64
+							const base64 = fileBuffer.toString('base64');
+							// const base64 = Buffer.from(htmlContent).toString('base64');
+
+							// Navigate to IHE_XDM/SUBSET01 and convert CDA_ROOT.XML to HTML
+							// const cdaPath = path.join(extractPath, 'IHE_XDM', 'SUBSET01', 'NCFU.pdf');
+							// console.log("this is cdaPath", cdaPath);
+							// const htmlContent = await convertCDAtoHTML(cdaPath);
+
+							// Convert HTML to base64
+							// const base64 = Buffer.from(htmlContent).toString('base64');
+
 							// Resolve with the document, outputPath, and base64-encoded string
-							resolve({ ...document, outputPath, base64 });
+							resolve({ ...document, outputPath,base64 });
 							// resolve({ ...document, outputPath });
 
 						} catch (parseError) {
@@ -455,16 +583,35 @@ function extractBinaryFile(part) {
 	return part.slice(part.indexOf("Content-Transfer-Encoding: binary") + 37, part.indexOf("------=_") - 1);
 }
 
+// async function saveFile(data, path) {
+// 	const fs = require('fs');
+// 	const JSZip = require('jszip');
+// 	const zip = new JSZip();
+// 	zip.file('file.zip', data, { binary: true });
+// 	await zip.generateNodeStream({ type: 'nodebuffer', streamFiles: true })
+// 		.pipe(fs.createWriteStream(path))
+// 		.on('finish', () => {
+// 			console.log('Zip file created successfully');
+// 		});
+// }
+
 async function saveFile(data, path) {
-	const fs = require('fs');
-	const JSZip = require('jszip');
 	const zip = new JSZip();
 	zip.file('file.zip', data, { binary: true });
-	await zip.generateNodeStream({ type: 'nodebuffer', streamFiles: true })
-		.pipe(fs.createWriteStream(path))
-		.on('finish', () => {
-			console.log('Zip file created successfully');
-		});
+
+	// Return a promise that resolves when the stream finishes
+	return new Promise((resolve, reject) => {
+		zip.generateNodeStream({ type: 'nodebuffer', streamFiles: true })
+			.pipe(fs.createWriteStream(path))
+			.on('finish', () => {
+				console.log('Zip file created successfully');
+				resolve(); // Resolve the promise when done
+			})
+			.on('error', (err) => {
+				console.error('Error creating zip file:', err);
+				reject(err); // Reject the promise on error
+			});
+	});
 }
 
 
