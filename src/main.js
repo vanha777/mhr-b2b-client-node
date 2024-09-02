@@ -121,8 +121,8 @@ async function runUploadDocument(patient, supersede_document_id, template_id, or
       .slice(0, 14) + "00";
 
     // let documentObjectId = "1.2.36.2501047616.37544.18039.36495.{{unique_id}}";
-    let documentObjectId = "1.2.36.1.2001.1005.11.{{unique_id}}";
-    //1.2.36.1.2001.1005.11
+    // let documentObjectId = "1.2.36.1.2001.1005.11.{{unique_id}}";
+    let documentObjectId = "1.2.36.1.2001.1005.{{unique_id}}";
     let unique_id = generateUniqueId();
     let documentId = documentObjectId.replace("{{unique_id}}", unique_id);
     console.log("this is unique document_id ", documentId);
