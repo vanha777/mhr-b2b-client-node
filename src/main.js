@@ -4,6 +4,7 @@ const fs = require('fs');
 let guid = require('uuid').v4;
 let hpio = "8003623233372670";
 let shasum = require('crypto');
+const crypto = require('crypto');
 // let hpio = "8003623233372670";
 let privatePem = fs.readFileSync("./sample/entities/certificates/fac_sign_nash_org_with_attributes.private.pem");
 let publicPem = fs.readFileSync("./sample/entities/certificates/fac_sign_nash_org_with_attributes.public.pem");
@@ -113,7 +114,11 @@ async function runUploadDocument(patient, supersede_document_id, template_id, or
     let package_data = await fs.promises.readFile(filePath);
     // let attachment = await fs.promises.readFile(attachmentPath);
     let attachment = await downloadFile(attachmentUrl);
-    console.log("attached file: ", attachment);
+    // Step 2: Calculate SHA-1 hash
+    const sha1Hash = crypto.createHash('sha1').update(attachment).digest();
+    // Step 3: Encode the hash in base64
+    const documentHash = sha1Hash.toString('base64');
+    console.log("attached file hash: ", documentHash);
 
     const now = new Date();
     const formattedDate = now.toISOString()
@@ -165,7 +170,7 @@ async function runUploadDocument(patient, supersede_document_id, template_id, or
           "filename": "NCFU.pdf",
           "buffer": attachment
         }
-      ]
+      ],documentHash
     )
     let hash = shasum.createHash('sha1');
     hash.update(packageResult);

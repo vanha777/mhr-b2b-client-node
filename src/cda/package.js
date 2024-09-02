@@ -5,7 +5,7 @@ const SignedXml = require('xml-crypto').SignedXml;
 let JSZip = require("jszip");
 
 let concat = (set, value) => `${set}${value}`;
-let package = (patient, document_id, document, organisation, individual, attachments) => {
+let package = (patient, document_id, document, organisation, individual, attachments,document_hash) => {
 	return new Promise((resolve, reject) => {
 
 		try {
@@ -13,6 +13,7 @@ let package = (patient, document_id, document, organisation, individual, attachm
 			if (typeof document === "string") {
 				//test
 				document = document.replace("{{document_id}}", document_id);
+				document = document.replace("{{document_hash}}", document_hash);
 
 				document = document.replace("{{first_name}}", patient.first_name);
 				document = document.replace("{{last_name}}", patient.last_name);
