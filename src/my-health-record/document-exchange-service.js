@@ -1095,7 +1095,8 @@ let uploadDocument = ({ product, user, organisation }, patient, document, supers
 module.exports = {
 	getDocumentList,
 	getDocument,
-	uploadDocument
+	uploadDocument,
+	unzipFile
 };
 
 

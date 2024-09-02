@@ -218,7 +218,7 @@
             <observationMedia ID="MM1" classCode="OBS" moodCode="EVN">
               <id root="79693654-3d41-4e12-90f6-2ea6e4c02896" />
               <value mediaType="application/pdf" integrityCheck="C0/XBGWcpUCHEldRxJ7fvGIPjQQ=">
-                <reference value="RCMC.pdf" />
+                <reference value="NCFU.pdf" />
               </value>
             </observationMedia>
           </entry>

@@ -23,6 +23,7 @@ const JSZip = require('jszip');
 
 let stripPrefix = require("xml2js").processors.stripPrefix;
 let xml2js = require('xml2js');
+const unzipFile = require('./document-exchange-service').unzipFile;
 
 var parser = new xml2js.Parser({ explicitArray: false, async: true, ignoreAttrs: true, tagNameProcessors: [stripPrefix] });
 let processMimeMultipart = require('./mime-multipart').getAttachment;
@@ -227,24 +228,36 @@ let getView = ({ product, user, organisation }, patient, viewOptions) => {
 						let cdafile = parts[1].slice(parts[1].indexOf("Content-Transfer-Encoding: binary") + 37, parts[1].indexOf("------=_") - 1);
 						// Convert the binary file to a base64 string
 						const base64 = Buffer.from(cdafile).toString('base64');
-						const zip = new JSZip();
-						zip.file('file.zip', cdafile, { binary: true });
-						zip.generateNodeStream({ type: 'nodebuffer', streamFiles: true })
-							.pipe(fs.createWriteStream('./testPackage/CDAPackage.zip'))
-							.on('finish', () => {
-								console.log('Zip file created successfully');
-							});
+
+
 
 						if (error) {
 							console.log("error here 0");
 							reject(error);
 						} else if (type === "cda") {
-							console.log("error here 0");
-							resolve({ documentType: "view", viewType: viewOptions.view, viewVersion: viewVersion, attachmentFormat: "zip",base64 });
+							console.log("cda");
+							const zip = new JSZip();
+							zip.file('file.zip', cdafile, { binary: true });
+							zip.generateNodeStream({ type: 'nodebuffer', streamFiles: true })
+								.pipe(fs.createWriteStream('./testPackage/CDAPackage.zip'))
+								.on('finish', async () => {
+									console.log('Zip file created successfully');
+									const extractedPath = "./testPackage/";
+									const zipPath = "./testPackage/CDAPackage.zip";
+									await unzipFile(zipPath, extractedPath);
+
+									const xmlPath = "./testPackage/file/IHE_XDM\\SUBSET01\\CDA_ROOT";
+									const xslPath = "./sample/style2.xsl"
+									// read dom and tranform into html
+									resolve({ documentType: "view", viewType: viewOptions.view, viewVersion: viewVersion, attachmentFormat: "zip", base64 });
+								});
+
+
+							resolve({ documentType: "view", viewType: viewOptions.view, viewVersion: viewVersion, attachmentFormat: "zip", base64 });
 						}
 						else if (type === "xml") {
 							console.log("XML return");
-							resolve({ documentType: "view", viewType: viewOptions.view, viewVersion: viewVersion, attachmentFormat: "xml",base64 });
+							resolve({ documentType: "view", viewType: viewOptions.view, viewVersion: viewVersion, attachmentFormat: "xml", base64 });
 							// if (viewOptions.view === "pathology") {
 							// 	let pathologyResponse = libxmljs.parseXml(xop(response, body));
 							// 	let individualProfile = {
