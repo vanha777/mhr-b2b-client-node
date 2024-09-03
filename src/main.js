@@ -510,7 +510,6 @@ async function runGetDocumentList(patient, organisation, adhoc_query_id, documen
 //runGetDocument
 async function runGetDocument(patient, organisation, document) {
   try {
-
     const existResult = await services.myHealthRecord.getDocument({
       product: {
         vendor: "StrongRoom AI",

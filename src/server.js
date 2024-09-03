@@ -153,6 +153,8 @@ app.post('/get-view', async (req, res) => {
             return res.status(400).send('Invalid IHI number format used');
         }
         const result = await runGetView(patient, organization, viewOptions);
+        console.log("this is result",result);
+        res.set('Content-Type', 'text/plain; charset=utf-8');
         res.send(result);
     } catch (error) {
         console.error('An error occurred:', error);

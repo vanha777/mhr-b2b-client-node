@@ -24,7 +24,8 @@ const JSZip = require('jszip');
 let stripPrefix = require("xml2js").processors.stripPrefix;
 let xml2js = require('xml2js');
 const unzipFile = require('./document-exchange-service').unzipFile;
-
+const { XmlParser, Xslt } = require('xslt-processor');
+const { DOMParser, XMLSerializer } = require('xmldom');
 var parser = new xml2js.Parser({ explicitArray: false, async: true, ignoreAttrs: true, tagNameProcessors: [stripPrefix] });
 let processMimeMultipart = require('./mime-multipart').getAttachment;
 
@@ -228,9 +229,6 @@ let getView = ({ product, user, organisation }, patient, viewOptions) => {
 						let cdafile = parts[1].slice(parts[1].indexOf("Content-Transfer-Encoding: binary") + 37, parts[1].indexOf("------=_") - 1);
 						// Convert the binary file to a base64 string
 						const base64 = Buffer.from(cdafile).toString('base64');
-
-
-
 						if (error) {
 							console.log("error here 0");
 							reject(error);
@@ -246,14 +244,46 @@ let getView = ({ product, user, organisation }, patient, viewOptions) => {
 									const zipPath = "./testPackage/CDAPackage.zip";
 									await unzipFile(zipPath, extractedPath);
 
-									const xmlPath = "./testPackage/file/IHE_XDM\\SUBSET01\\CDA_ROOT";
-									const xslPath = "./sample/style2.xsl"
+									const xmlPath = "./testPackage/file/IHE_XDM\\SUBSET01\\CDA_ROOT.xml";
+
+									// Read XML and XSL files
+									const xmlContent = fs.readFileSync(xmlPath, 'utf8').replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
+
+									// Base64 encode the XSL content
+									const xslPath = "./sample/styleBase64.xml"
+									const xslContent = fs.readFileSync(xslPath, 'utf8');
+									// Concatenate the XSL and XML content
+									const combinedContent = `${xslContent}${xmlContent}`;
+									const base64 = Buffer.from(combinedContent).toString('base64');
+									resolve(base64);
+									// console.log("debug 0");
+									// Parse the XML document
+									// const xmlDoc = new DOMParser().parseFromString(xmlWithEmbeddedXsl, 'text/xml');
+									// Instantiate XmlParser
+									// const xmlParser = new XmlParser();
+									// console.log("debug 1");
+									// Parse XML and XSL
+									// const xmlDoc = xmlParser.xmlParse(xmlContent);
+									// const xslDoc = xmlParser.xmlParse(xslContent);
+									// console.log("debug 2");
+									// Perform XSLT transformation
+									// const xslt = new Xslt();
+									// xslt.outputMethod = 'html';
+									// console.log("debug 3");
+									// const htmlString = await xslt.xsltProcess(
+									// 	xmlDoc
+									// );
+									// console.log("debug 4 ", htmlString);
+									// Save the transformed HTML
+									// fs.writeFileSync('./testPackage/transformed.html', htmlString);
+									// console.log("debug 5");
+									// console.log('XML transformed to HTML successfully');
 									// read dom and tranform into html
-									resolve({ documentType: "view", viewType: viewOptions.view, viewVersion: viewVersion, attachmentFormat: "zip", base64 });
+									// resolve({ documentType: "view", viewType: viewOptions.view, viewVersion: viewVersion, attachmentFormat: "zip", base64 });
 								});
 
 
-							resolve({ documentType: "view", viewType: viewOptions.view, viewVersion: viewVersion, attachmentFormat: "zip", base64 });
+							// resolve({ documentType: "view", viewType: viewOptions.view, viewVersion: viewVersion, attachmentFormat: "zip", base64 });
 						}
 						else if (type === "xml") {
 							console.log("XML return");
