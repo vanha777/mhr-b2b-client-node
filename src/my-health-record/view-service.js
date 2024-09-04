@@ -233,7 +233,7 @@ let getView = ({ product, user, organisation }, patient, viewOptions) => {
 							console.log("error here 0");
 							reject(error);
 						} else if (type === "cda") {
-							console.log("cda");
+							console.log("cda Return");
 							const zip = new JSZip();
 							zip.file('file.zip', cdafile, { binary: true });
 							zip.generateNodeStream({ type: 'nodebuffer', streamFiles: true })
@@ -286,8 +286,14 @@ let getView = ({ product, user, organisation }, patient, viewOptions) => {
 							// resolve({ documentType: "view", viewType: viewOptions.view, viewVersion: viewVersion, attachmentFormat: "zip", base64 });
 						}
 						else if (type === "xml") {
+
+							const xslPath = "./sample/styleBase64.xml"
+							const xslContent = fs.readFileSync(xslPath, 'utf8');
+							const xmlContent = cdafile;
+							const combinedContent = `${xslContent}${xmlContent}`;
+							const base64 = Buffer.from(combinedContent).toString('base64');
 							console.log("XML return");
-							resolve({ documentType: "view", viewType: viewOptions.view, viewVersion: viewVersion, attachmentFormat: "xml", base64 });
+							resolve(base64);
 							// if (viewOptions.view === "pathology") {
 							// 	let pathologyResponse = libxmljs.parseXml(xop(response, body));
 							// 	let individualProfile = {

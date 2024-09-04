@@ -532,24 +532,72 @@ let getDocument = ({ product, user, organisation }, patient, document) => {
 							const extractPath = './testPackage/';
 							await unzipFile(outputPath, extractPath);
 
+							// const filePath = './testPackage/file/IHE_XDM/SUBSET01/NCFU.pdf';
+							// const filePath2 = './testPackage/file/CDA/CDADoc/CDA_ROOT.XML';
+							// // Read the PDF file as a binary buffer
+							// // const fileBuffer = await fs.promises.readFile(filePath);
+							// const xslPath = "./sample/styleBase64.xml"
+							// const xslContent = fs.readFileSync(xslPath, 'utf8');
+
+							// let fileBuffer;
+							// let base64String;
+							// try {
+							// 	// Try to read NCFU.pdf
+							// 	fileBuffer = await fs.promises.readFile(filePath);
+							// 	let base64 = fileBuffer.toString('base64');
+							// 	base64String = base64;
+							// } catch (error) {
+							// 	console.log('NCFU.pdf not found, using CDA_ROOT.XML instead');
+							// 	// If NCFU.pdf is not found, read CDA_ROOT.XML
+							// 	fileBuffer = await fs.promises.readFile(filePath2);
+							// 	let combined = `${xslContent}${fileBuffer}`;
+							// 	base64String = combined.toString('base64');
+
+							// }
+
 							const filePath = './testPackage/file/IHE_XDM/SUBSET01/NCFU.pdf';
-							// Read the PDF file as a binary buffer
-							const fileBuffer = await fs.promises.readFile(filePath);
+							const filePath2 = './testPackage/file/CDA/CDADoc/CDA_ROOT.XML';
+							const filePath3 = './testPackage/file/IHE_XDM\\SUBSET01\\CDA_ROOT.XML';
+							const xslPath = "./sample/styleBase64.xml";
+							const xslContent = await fs.promises.readFile(xslPath, 'utf8');
+							try {
+								console.log('NCFU.pdf found');
+								// Try to read NCFU.pdf
+								let fileBuffer = await fs.promises.readFile(filePath);
+								const base64 = fileBuffer.toString('base64');
+								var base64String = `data:application/pdf;base64,${base64}`;
+							} catch (error) {
+								try {
+									console.log('NCFU.pdf not found, using CDA_ROOT.XML 1 instead');
 
-							// Encode the buffer to base64
-							const base64 = fileBuffer.toString('base64');
-							// const base64 = Buffer.from(htmlContent).toString('base64');
+									// If NCFU.pdf is not found, read CDA_ROOT.XML
+									const fileBuffer = await fs.promises.readFile(filePath2, 'utf8');
+									const content = fileBuffer.replace('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>', '');
+									let combinedContent = `${xslContent}${content}`;
+									const base64 = Buffer.from(combinedContent).toString('base64');
+									base64String = `data:text/xml;base64,${base64}`;
+								} catch (error) {
+									console.log('NCFU.pdf not found, using CDA_ROOT.XML 2 instead');
 
-							// Navigate to IHE_XDM/SUBSET01 and convert CDA_ROOT.XML to HTML
-							// const cdaPath = path.join(extractPath, 'IHE_XDM', 'SUBSET01', 'NCFU.pdf');
-							// console.log("this is cdaPath", cdaPath);
-							// const htmlContent = await convertCDAtoHTML(cdaPath);
+									// If NCFU.pdf is not found, read CDA_ROOT.XML
+									const fileBuffer = await fs.promises.readFile(filePath3, 'utf8');
+									const content = fileBuffer.replace('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>', '');
+									let combinedContent = `${xslContent}${content}`;
+									const base64 = Buffer.from(combinedContent).toString('base64');
+									base64String = `data:text/xml;base64,${base64}`;
+								}
+							}
 
-							// Convert HTML to base64
-							// const base64 = Buffer.from(htmlContent).toString('base64');
-
+							// uncomment these when debugging to inspect zip folder ortherwise enable for production !
+							// Clean up: delete the entire ./testPackage/file folder after processing
+							try {
+								await fs.promises.rmdir("./testPackage/file", { recursive: true });
+								console.log('Folder deleted');
+							} catch (error) {
+								console.error('Failed to delete the folder:', error.message);
+							}
 							// Resolve with the document, outputPath, and base64-encoded string
-							resolve({ ...document, outputPath,base64 });
+							resolve({ ...document, outputPath, base64String });
 							// resolve({ ...document, outputPath });
 
 						} catch (parseError) {
