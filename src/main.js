@@ -485,7 +485,7 @@ async function runGetDocumentList(patient, organisation, adhoc_query_id, documen
       adhoc_query_id && adhoc_query_id !== null ? adhoc_query_id : "urn:uuid:14d4debf-8f97-4251-9a74-a90016b0af0d"
     );
 
-    console.log('Result:', existResult);
+    // console.log('Result:', existResult);
     return existResult;
 
     // const accessResult = await services.gainAccess(/* parameters */);

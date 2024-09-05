@@ -39,8 +39,8 @@ const Busboy = require('busboy');
 
 //todo: support other filter types such as serviceStartDate and XDSDocumentEntryStatus i.e. approved, etc
 let getDocumentList = ({ product, user, organisation }, patient, options, adhoc_query_id) => {
-
 	let documentTypeFilter = "";
+	let documentClassFilter = "";
 
 	let serviceStopTimeToFilter = options.serviceStopTimeTo ? `
 	<Slot name="$XDSDocumentEntryServiceStopTimeTo">
@@ -71,10 +71,10 @@ let getDocumentList = ({ product, user, organisation }, patient, options, adhoc_
 	}
 
 	if (options.documentClass && options.documentClass.length > 0) {
-		documentTypeFilter = `
+		documentClassFilter = `
 			<Slot name="$XDSDocumentEntryClassCode">
 				<ValueList>
-					${options.documentClass.map(documentType => `<Value>('${documentType}')</Value>`).join('')}
+					${options.documentClass.map(documentClass => `<Value>('${documentClass}')</Value>`).join('')}
 				</ValueList>
 			</Slot>
 		`;
@@ -97,19 +97,22 @@ let getDocumentList = ({ product, user, organisation }, patient, options, adhoc_
 						`	<AdhocQueryRequest xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0">
 							<ResponseOption returnComposedObjects="true" returnType="LeafClass"/>
 							<AdhocQuery id="${adhoc_query_id}" xmlns="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0">
+								${documentTypeFilter}
+								${documentClassFilter}
+								${serviceStopTimeFromFilter}
+								${serviceStopTimeToFilter}
 								<Slot name="$XDSDocumentEntryPatientId">
 									<ValueList>
 										<Value>'${patient.ihi}^^^&amp;1.2.36.1.2001.1003.0&amp;ISO'</Value>
 									</ValueList>
 								</Slot>
+								
 								<Slot name="$XDSDocumentEntryStatus">
 									<ValueList>
 										<Value>('urn:oasis:names:tc:ebxml-regrep:StatusType:${options.status}')</Value>
 									</ValueList>
 								</Slot>
-								${documentTypeFilter}
-								${serviceStopTimeFromFilter}
-								${serviceStopTimeToFilter}
+							
 							</AdhocQuery>
 						</AdhocQueryRequest">
 					`
