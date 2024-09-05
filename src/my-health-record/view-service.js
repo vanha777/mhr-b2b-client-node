@@ -255,7 +255,8 @@ let getView = ({ product, user, organisation }, patient, viewOptions) => {
 									// Concatenate the XSL and XML content
 									const combinedContent = `${xslContent}${xmlContent}`;
 									const base64 = Buffer.from(combinedContent).toString('base64');
-									resolve(base64);
+									let base64String = `data:text/xml;base64,${base64}`;
+									resolve(base64String);
 									// console.log("debug 0");
 									// Parse the XML document
 									// const xmlDoc = new DOMParser().parseFromString(xmlWithEmbeddedXsl, 'text/xml');
@@ -292,8 +293,9 @@ let getView = ({ product, user, organisation }, patient, viewOptions) => {
 							const xmlContent = cdafile;
 							const combinedContent = `${xslContent}${xmlContent}`;
 							const base64 = Buffer.from(combinedContent).toString('base64');
+							let base64String = `data:text/xml;base64,${base64}`;
 							console.log("XML return");
-							resolve(base64);
+							resolve(base64String);
 							// if (viewOptions.view === "pathology") {
 							// 	let pathologyResponse = libxmljs.parseXml(xop(response, body));
 							// 	let individualProfile = {

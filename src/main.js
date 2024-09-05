@@ -612,7 +612,7 @@ async function runGetView(patient, organisation, viewOptions) {
       viewOptions
     );
 
-    console.log('Result:', existResult);
+    // console.log('Result:', existResult);
     return existResult;
 
     // const accessResult = await services.gainAccess(/* parameters */);
