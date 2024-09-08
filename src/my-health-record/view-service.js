@@ -60,7 +60,7 @@ let toArray = (value) => {
 
 
 let getView = ({ product, user, organisation }, patient, viewOptions) => {
-
+	let xslPath = '';
 	if (!patient.ihi || patient.ihi === "") {
 		return new Promise((resolve, reject) => {
 			resolve({
@@ -73,7 +73,7 @@ let getView = ({ product, user, organisation }, patient, viewOptions) => {
 	let uri, dataType, viewVersion, type;
 	let viewParametersXml = "";
 	if (viewOptions.view === "hro") {
-
+		xslPath = "./sample/styleBase64_2.xml";
 		// throw Error("HRO not yet supported by library");
 		uri = "HealthRecordOverview/1.0";
 		viewVersion = viewOptions.version ? viewOptions.version : "1.1";
@@ -89,6 +89,7 @@ let getView = ({ product, user, organisation }, patient, viewOptions) => {
 		// 	viewParametersXml = `<q1:clinicalSynopsisLength>0</q1:clinicalSynopsisLength>`;
 		// }
 	} else if (viewOptions.view === "medicare") {
+		xslPath = "./sample/styleBase64.xml";
 		uri = "MedicareOverview/1.0";
 		viewVersion = viewOptions.version ? viewOptions.version : "1.1";
 		dataType = "medicareOverview";
@@ -98,6 +99,7 @@ let getView = ({ product, user, organisation }, patient, viewOptions) => {
 
 
 	} else if (viewOptions.view === "pdv") {
+		xslPath = "./sample/styleBase64_3.xml";
 		uri = "PrescriptionAndDispenseView/1.0";
 		viewVersion = viewOptions.version ? viewOptions.version : "1.0";
 		dataType = "prescriptionAndDispenseView";
@@ -105,6 +107,7 @@ let getView = ({ product, user, organisation }, patient, viewOptions) => {
 		viewParametersXml = `<q1:fromDate>${viewOptions.from_date}</q1:fromDate>
 		<q1:toDate>${viewOptions.end_date}</q1:toDate>`;
 	} else if (viewOptions.view === "pathology") {
+		xslPath = "./sample/styleBase64_2.xml";
 		uri = "PathologyReportView/1.0";
 		viewVersion = viewOptions.version ? viewOptions.version : "1.0";
 		dataType = "pathologyReportView";
@@ -113,6 +116,7 @@ let getView = ({ product, user, organisation }, patient, viewOptions) => {
 		<q1:toDate>${viewOptions.end_date}</q1:toDate>`;
 
 	} else if (viewOptions.view === "diagnosticImaging") {
+		xslPath = "./sample/styleBase64_2.xml";
 		uri = "DiagnosticImagingReportView/1.0";
 		viewVersion = viewOptions.version ? viewOptions.version : "1.0";
 		dataType = "diagnosticImagingReportView";
@@ -228,7 +232,7 @@ let getView = ({ product, user, organisation }, patient, viewOptions) => {
 
 						let cdafile = parts[1].slice(parts[1].indexOf("Content-Transfer-Encoding: binary") + 37, parts[1].indexOf("------=_") - 1);
 						// Convert the binary file to a base64 string
-						const base64 = Buffer.from(cdafile).toString('base64');
+						// const base64 = Buffer.from(cdafile).toString('base64');
 						if (error) {
 							console.log("error here 0");
 							reject(error);
@@ -250,7 +254,7 @@ let getView = ({ product, user, organisation }, patient, viewOptions) => {
 									const xmlContent = fs.readFileSync(xmlPath, 'utf8').replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
 
 									// Base64 encode the XSL content
-									const xslPath = "./sample/styleBase64.xml"
+									// const xslPath = "./sample/styleBase64.xml"
 									const xslContent = fs.readFileSync(xslPath, 'utf8');
 									// Concatenate the XSL and XML content
 									const combinedContent = `${xslContent}${xmlContent}`;
@@ -287,13 +291,15 @@ let getView = ({ product, user, organisation }, patient, viewOptions) => {
 							// resolve({ documentType: "view", viewType: viewOptions.view, viewVersion: viewVersion, attachmentFormat: "zip", base64 });
 						}
 						else if (type === "xml") {
-
-							const xslPath = "./sample/styleBase64.xml"
+							console.log("0");
 							const xslContent = fs.readFileSync(xslPath, 'utf8');
-							const xmlContent = cdafile;
+							const xmlContent = cdafile.toString('utf8').replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
+							console.log("0",xmlContent);
+							console.log("2");
 							const combinedContent = `${xslContent}${xmlContent}`;
 							const base64 = Buffer.from(combinedContent).toString('base64');
 							let base64String = `data:text/xml;base64,${base64}`;
+							console.log("3");
 							console.log("XML return");
 							resolve(base64String);
 							// if (viewOptions.view === "pathology") {
