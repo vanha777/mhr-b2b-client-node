@@ -496,8 +496,8 @@ async function runGetDocumentList(patient, organisation, adhoc_query_id, documen
       // Options to query document List
       {
         status: status || "Approved",
-        serviceStopTimeTo: timeTo ? new Date(timeTo) : currentDate,
-        serviceStopTimeFrom: timeFrom ? new Date(timeFrom) : subtractMonths(currentDate, 6),
+        serviceStopTimeTo: timeTo ? new Date(timeTo) : '',
+        serviceStopTimeFrom: timeFrom ? new Date(timeFrom) : '',
         documentTypes,
         documentClass
       },
