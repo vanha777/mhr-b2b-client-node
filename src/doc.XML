@@ -10,7 +10,7 @@
   <id root="{{document_id}}" />
   <code code="100.32046" codeSystem="1.2.36.1.2001.1001.101" codeSystemName="NCTIS Data Components" displayName="Residential Care Medication Chart" />
   <title>Residential Care Medication Chart</title>
-  <effectiveTime value="20240321" />
+  <effectiveTime value="{{time}}" />
   <confidentialityCode nullFlavor="NA" />
   <languageCode code="en-AU" />
   <setId root="C438EF1E-5125-4DB5-8E7E-CE30AD046A41" />
@@ -48,7 +48,7 @@
   </recordTarget>
   <!-- End recordTarget -->
   <author>
-    <time value="20240321" />
+    <time value="{{time}}" />
     <assignedAuthor>
       <id root="3A151B56-AF80-492B-8901-A8F16EF144E4" />
       <code code="253111" codeSystem="2.16.840.1.113883.13.62" codeSystemName="1220.0 - ANZSCO - Australian and New Zealand Standard Classification of Occupations, First Edition, 2006" displayName="General Medical Practitioner" />

@@ -5,9 +5,18 @@ const SignedXml = require('xml-crypto').SignedXml;
 let JSZip = require("jszip");
 
 let concat = (set, value) => `${set}${value}`;
-let package = (patient, document_id, document, organisation, individual, attachments,document_hash) => {
+let package = (patient, document_id, document, organisation, individual, attachments, document_hash) => {
 	return new Promise((resolve, reject) => {
 
+		const currentDate = new Date();
+
+		// Function to format the date as YYYYMMDD
+		const formatDate = (date) => {
+			const year = date.getFullYear();
+			const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based, so we add 1
+			const day = String(date.getDate()).padStart(2, '0');
+			return `${year}${month}${day}`;
+		};
 		try {
 
 			if (typeof document === "string") {
@@ -27,7 +36,9 @@ let package = (patient, document_id, document, organisation, individual, attachm
 				document = document.replace(/{{organization_name}}/g, organisation.name);
 				document = document.replace(/{{hpio}}/g, organisation.hpio);
 
-				
+				document = document.replace(/{{time}}/g,formatDate(currentDate));
+
+
 				//end.
 				shasum.update(document);
 				let signedPayloadDataId = "Id_" + guid();

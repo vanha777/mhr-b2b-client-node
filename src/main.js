@@ -170,7 +170,7 @@ async function runUploadDocument(patient, supersede_document_id, template_id, or
           "filename": "NCFU.pdf",
           "buffer": attachment
         }
-      ],documentHash
+      ], documentHash
     )
     let hash = shasum.createHash('sha1');
     hash.update(packageResult);
@@ -182,6 +182,16 @@ async function runUploadDocument(patient, supersede_document_id, template_id, or
         return console.log(err);
       }
     });
+
+    const currentDate = new Date();
+
+    // Function to format the date as YYYYMMDD
+    const formatDate = (date) => {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based, so we add 1
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}${month}${day}`;
+    };
 
     const existResult = await services.myHealthRecord.uploadDocument({
       product: {
@@ -233,9 +243,9 @@ async function runUploadDocument(patient, supersede_document_id, template_id, or
       // this is single document
       {
         "metadata": {
-          "creationTime": "20240321",
-          "serviceStartTime": "20240321",
-          "serviceStopTime": "20240321",
+          "creationTime": formatDate(currentDate),
+          "serviceStartTime": formatDate(currentDate),
+          "serviceStopTime": formatDate(currentDate),
           "sourcePatientId": `${patient.ihi}^^^&1.2.36.1.2001.1003.0&ISO`,
           "hash": digest,
           "size": packageResult.byteLength,
@@ -438,6 +448,15 @@ async function runGainPCEHRAccess(patient, organisation, accessType, accessCode)
 
 //runGetDocumentList
 async function runGetDocumentList(patient, organisation, adhoc_query_id, documentTypes, documentClass, status, timeFrom, timeTo) {
+  // Get the current date
+  const currentDate = new Date();
+
+  // Function to subtract 6 months from the current date
+  const subtractMonths = (date, months) => {
+    const newDate = new Date(date);
+    newDate.setMonth(newDate.getMonth() - months);
+    return newDate;
+  };
   try {
 
     const existResult = await services.myHealthRecord.getDocumentList({
@@ -477,8 +496,8 @@ async function runGetDocumentList(patient, organisation, adhoc_query_id, documen
       // Options to query document List
       {
         status: status || "Approved",
-        serviceStopTimeTo: timeTo ? new Date(timeTo) : new Date(),
-        serviceStopTimeFrom: timeFrom ? new Date(timeFrom) : new Date('2024-01-01'),
+        serviceStopTimeTo: timeTo ? new Date(timeTo) : currentDate,
+        serviceStopTimeFrom: timeFrom ? new Date(timeFrom) : subtractMonths(currentDate, 6),
         documentTypes,
         documentClass
       },
