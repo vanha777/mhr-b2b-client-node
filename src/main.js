@@ -374,7 +374,7 @@ async function runDoesPCEHRExist(patient, organisation) {
       // }
     );
 
-    console.log('Result:', existResult);
+    // console.log('Result:', existResult);
     return existResult;
 
   } catch (error) {
@@ -438,7 +438,7 @@ async function runGainPCEHRAccess(patient, organisation, accessType, accessCode)
       // }
     );
 
-    console.log('Result:', existResult);
+    // console.log('Result:', existResult);
     return existResult;
 
   } catch (error) {
@@ -567,7 +567,7 @@ async function runGetDocument(patient, organisation, document) {
       document
     );
 
-    console.log('Result:', existResult);
+    // console.log('Result:', existResult);
     return existResult;
 
     // const accessResult = await services.gainAccess(/* parameters */);

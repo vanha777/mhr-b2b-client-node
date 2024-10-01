@@ -73,7 +73,9 @@ let executeRequest = (organisation, urlPath, payload, responseHandler, options) 
 			'Host':					endpoint
 		}
 	};
-
+	//debug
+	console.log("this is fixedOptions ",fixedOptions.url);
+	//end.
 	const httpsAgent = new https.Agent({
 		cert: organisation.publicPem,
 		key: organisation.privatePem,

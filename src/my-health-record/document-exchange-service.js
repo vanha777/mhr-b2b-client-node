@@ -142,8 +142,8 @@ let getDocumentList = ({ product, user, organisation }, patient, options, adhoc_
 							},
 						})
 					}
-					console.log("Request: \n", response.request.body);
-					console.log("Response: \n", body);
+					// console.log("Request: \n", response.request.body);
+					// console.log("Response: \n", body);
 
 					//end.
 					if (error) {
@@ -593,12 +593,12 @@ let getDocument = ({ product, user, organisation }, patient, document) => {
 
 							// uncomment these when debugging to inspect zip folder ortherwise enable for production !
 							// Clean up: delete the entire ./testPackage/file folder after processing
-							try {
-								await fs.promises.rmdir("./testPackage/file", { recursive: true });
-								console.log('Folder deleted');
-							} catch (error) {
-								console.error('Failed to delete the folder:', error.message);
-							}
+							// try {
+							// 	await fs.promises.rmdir("./testPackage/file", { recursive: true });
+							// 	console.log('Folder deleted');
+							// } catch (error) {
+							// 	console.error('Failed to delete the folder:', error.message);
+							// }
 							// Resolve with the document, outputPath, and base64-encoded string
 							resolve({ ...document, outputPath, base64String });
 							// resolve({ ...document, outputPath });
@@ -669,7 +669,8 @@ async function saveFile(data, path) {
 let uploadDocument = ({ product, user, organisation }, patient, document, supersede_document_id, template_id) => {
 
 	return new Promise((resolve, reject) => {
-
+		//debug
+		console.log("this is here 0 ......");
 		let extrinsicObjectStructure = [
 			{
 				type: 'slot',
@@ -875,7 +876,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document, supers
 			}
 
 		];
-
+		console.log("this is here 1 ......");
 		let registryPackage = [
 			{
 				type: 'slot',
@@ -980,7 +981,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document, supers
 					JSON.stringify(item);
 			}
 		}
-
+		console.log("this is here 2 ......");
 		let processName = (item, document) => {
 			if (item.source === 'metadata') {
 				return `<Name><LocalizedString value="${document.metadata[item.name]}"/></Name>`;
@@ -1025,7 +1026,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document, supers
 			}
 		});
 
-
+		console.log("this is here 3 ......");
 		let registryPackageMetadata = registryPackage.map((item, index) => {
 			if (item.type === 'slot') {
 				return { item: item, value: processSlot(item, document), type: "processSlot" };
@@ -1069,7 +1070,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document, supers
 				return console.log(err);
 			}
 		});
-
+		console.log("this is here 4 ......");
 		const extractXmlContent = (body) => {
 			// Regular expression to find content between <env:Envelope> and </env:Envelope>
 			const xmlContentRegex = /<env:Envelope[\s\S]*<\/env:Envelope>/;
@@ -1100,7 +1101,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document, supers
 				// });
 
 				// try {
-
+					console.log("this is here 5 ......");
 				let xmlDoc = libxmljs.parseXml(xmlContent);
 				if (xmlDoc.get("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RegistryResponse']").getAttribute('status').value() === "urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Success") {
 					resolve({
@@ -1118,6 +1119,7 @@ let uploadDocument = ({ product, user, organisation }, patient, document, supers
 				// 	});
 				// } 
 				else {
+					console.log("this is here 6 ......");
 					resolve({
 						response: {
 							errors: true,
