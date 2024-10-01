@@ -559,19 +559,22 @@ let getDocument = ({ product, user, organisation }, patient, document) => {
 							// }
 
 							const filePath = './testPackage/file/IHE_XDM/SUBSET01/NCFU.pdf';
+							const fold = './testPackage/file/IHE_XDM/SUBSET01/';
 							const filePath2 = './testPackage/file/CDA/CDADoc/CDA_ROOT.XML';
+							const fold2 = './testPackage/file/CDA/CDADoc/';
 							const filePath3 = './testPackage/file/IHE_XDM\\SUBSET01\\CDA_ROOT.XML';
+							const fold3 = './testPackage/file/';
 							const xslPath = "./sample/styleBase64.xml";
 							const xslContent = await fs.promises.readFile(xslPath, 'utf8');
 							try {
-								console.log('NCFU.pdf found');
+								console.log('detect IHE_XDM/SUBSET1');
 								// Try to read NCFU.pdf
 								let fileBuffer = await fs.promises.readFile(filePath);
 								const base64 = fileBuffer.toString('base64');
 								var base64String = `data:application/pdf;base64,${base64}`;
 							} catch (error) {
 								try {
-									console.log('NCFU.pdf not found, using CDA_ROOT.XML 1 instead');
+									console.log('detect CDA/CDADoc');
 
 									// If NCFU.pdf is not found, read CDA_ROOT.XML
 									const fileBuffer = await fs.promises.readFile(filePath2, 'utf8');
@@ -579,8 +582,34 @@ let getDocument = ({ product, user, organisation }, patient, document) => {
 									let combinedContent = `${xslContent}${content}`;
 									const base64 = Buffer.from(combinedContent).toString('base64');
 									base64String = `data:text/xml;base64,${base64}`;
+									
+									// Write base64String to CDA_ROOT.txt
+									const fold2 = './testPackage/file/CDA/CDADoc/';
+									const outputPath = path.join(fold2, 'CDA_ROOT.txt');
+									await fs.promises.writeFile(outputPath, base64String);
+
+									// Zip the CDADoc folder
+									const zipOutputPath = './testPackage/file/CDA/CDADoc.zip';
+									const zip = new JSZip();
+									
+									// Read all files in the CDADoc folder
+									const files = await fs.promises.readdir(fold2);
+									for (const file of files) {
+										const filePath = path.join(fold2, file);
+										const fileContent = await fs.promises.readFile(filePath);
+										zip.file(file, fileContent);
+									}
+
+									// Generate the zip file
+									const zipContent = await zip.generateAsync({ type: 'nodebuffer' });
+									await fs.promises.writeFile(zipOutputPath, zipContent);
+
+									// Update base64String with the zipped content
+									const zipBuffer = await fs.promises.readFile(zipOutputPath);
+									base64String = zipBuffer.toString('base64');
+									// resolve({ bytes: zipBuffer });
 								} catch (error) {
-									console.log('NCFU.pdf not found, using CDA_ROOT.XML 2 instead');
+									console.log('detect flat CDA_ROOT.xml');
 
 									// If NCFU.pdf is not found, read CDA_ROOT.XML
 									const fileBuffer = await fs.promises.readFile(filePath3, 'utf8');
@@ -593,12 +622,12 @@ let getDocument = ({ product, user, organisation }, patient, document) => {
 
 							// uncomment these when debugging to inspect zip folder ortherwise enable for production !
 							// Clean up: delete the entire ./testPackage/file folder after processing
-							// try {
-							// 	await fs.promises.rmdir("./testPackage/file", { recursive: true });
-							// 	console.log('Folder deleted');
-							// } catch (error) {
-							// 	console.error('Failed to delete the folder:', error.message);
-							// }
+							try {
+								await fs.promises.rmdir("./testPackage/file", { recursive: true });
+								console.log('Folder deleted');
+							} catch (error) {
+								console.error('Failed to delete the folder:', error.message);
+							}
 							// Resolve with the document, outputPath, and base64-encoded string
 							resolve({ ...document, outputPath, base64String });
 							// resolve({ ...document, outputPath });
