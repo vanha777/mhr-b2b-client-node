@@ -578,7 +578,7 @@ let getDocument = ({ product, user, organisation }, patient, document) => {
 
 									// If NCFU.pdf is not found, read CDA_ROOT.XML
 									const fileBuffer = await fs.promises.readFile(filePath2, 'utf8');
-									const content = fileBuffer.replace('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>', '');
+									const content = fileBuffer.replace('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>', ' ');
 									let combinedContent = `${xslContent}${content}`;
 									const base64 = Buffer.from(combinedContent).toString('base64');
 									base64String = `data:text/xml;base64,${base64}`;
